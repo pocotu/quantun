@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 4: Diseño y Ejecución de Benchmarking - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase4.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-flask"></i> FASE 4</h1>
+                <p>Diseño y Ejecución de la Batería de Pruebas (Benchmarking)</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 66.67%"></div>
+                </div>
+                <span>4 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid de dos columnas -->
+            <div class="two-column-grid">
+                
+                <!-- Columna Izquierda: Escenarios y Configuraciones -->
+                <section class="scenarios-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-sitemap"></i> 4.1 Escenarios y Configuraciones</h2>
+                        <span class="scenario-badge"><i class="fas fa-cogs"></i> MATRIZ DE PRUEBAS</span>
+                    </div>
+                    
+                    <!-- Layout Horizontal Compacto -->
+                    <div class="scenarios-compact-layout">
+                        
+                        <!-- Escenarios en horizontal -->
+                        <div class="scenarios-horizontal">
+                            <h3><i class="fas fa-layer-group"></i> Escenarios</h3>
+                            <div class="scenario-cards-grid">
+                                <div class="scenario-card tls">
+                                    <div class="scenario-icon-compact"><i class="fas fa-handshake"></i><span>A</span></div>
+                                    <div class="scenario-info">
+                                        <h4>TLS Handshake</h4>
+                                        <p>E2E TLS 1.3</p>
+                                        <div class="mini-tags">
+                                            <span><i class="fas fa-server"></i>C-S</span>
+                                            <span><i class="fas fa-clock"></i>E2E</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="scenario-card crypto">
+                                    <div class="scenario-icon-compact"><i class="fas fa-signature"></i><span>B</span></div>
+                                    <div class="scenario-info">
+                                        <h4>Firma Digital</h4>
+                                        <p>Primitivas crypto</p>
+                                        <div class="mini-tags">
+                                            <span><i class="fas fa-key"></i>Key</span>
+                                            <span><i class="fas fa-pen"></i>Sign</span>
+                                            <span><i class="fas fa-check"></i>Ver</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AVX2 Toggle compacto -->
+                        <div class="avx2-compact">
+                            <h3><i class="fas fa-microchip"></i> Hardware</h3>
+                            <div class="avx2-mini-toggle">
+                                <div class="mini-option enabled"><i class="fas fa-bolt"></i> AVX2 ON</div>
+                                <span class="vs-mini">vs</span>
+                                <div class="mini-option disabled"><i class="fas fa-ban"></i> AVX2 OFF</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matriz de Configuraciones Optimizada -->
+                    <div class="config-matrix-optimized">
+                        <h3><i class="fas fa-table"></i> Matriz de Configuraciones</h3>
+                        <div class="config-table-compact">
+                            <div class="config-header">
+                                <span>Escenario</span>
+                                <span>Config</span>
+                                <span>Intercambio</span>
+                                <span>Firma</span>
+                            </div>
+                            <div class="config-row tls-baseline">
+                                <span class="scenario-label">TLS</span>
+                                <span class="config-name">Classical</span>
+                                <span class="algo">ECDHE-X25519</span>
+                                <span class="algo">ECDSA-P256</span>
+                            </div>
+                            <div class="config-row tls-pqc">
+                                <span class="scenario-label">TLS</span>
+                                <span class="config-name">Hybrid</span>
+                                <span class="algo pqc">x25519_kyber768</span>
+                                <span class="algo">ECDSA-P256</span>
+                            </div>
+                            <div class="config-row sig-baseline">
+                                <span class="scenario-label">Firma</span>
+                                <span class="config-name">Classical</span>
+                                <span class="algo na">—</span>
+                                <span class="algo">ECDSA-P256</span>
+                            </div>
+                            <div class="config-row sig-pqc">
+                                <span class="scenario-label">Firma</span>
+                                <span class="config-name">PQC</span>
+                                <span class="algo na">—</span>
+                                <span class="algo pqc">ML-DSA-65</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna Derecha: Métricas de Rendimiento -->
+                <section class="metrics-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chart-line"></i> 4.2 Métricas de Rendimiento</h2>
+                        <span class="metrics-badge"><i class="fas fa-stopwatch"></i> MULTIFACÉTICO</span>
+                    </div>
+                    
+                    <!-- Matriz Compacta de Métricas -->
+                    <div class="metrics-matrix">
+                        <div class="matrix-row header">
+                            <span>Categoría</span>
+                            <span>Métrica Principal</span>
+                            <span>Herramienta</span>
+                            <span>Unidad</span>
+                        </div>
+                        
+                        <div class="matrix-row latency">
+                            <span class="category-icon"><i class="fas fa-clock"></i> Latencia</span>
+                            <span class="metric-main">TLS Handshake + Crypto Ops</span>
+                            <span class="tool-compact">openssl s_time</span>
+                            <span class="unit">ms</span>
+                        </div>
+                        
+                        <div class="matrix-row computational">
+                            <span class="category-icon"><i class="fas fa-microchip"></i> CPU</span>
+                            <span class="metric-main">Cycles + Instructions</span>
+                            <span class="tool-compact">perf stat</span>
+                            <span class="unit">count</span>
+                        </div>
+                        
+                        <div class="matrix-row memory">
+                            <span class="category-icon"><i class="fas fa-memory"></i> Memoria</span>
+                            <span class="metric-main">RSS Peak</span>
+                            <span class="tool-compact">time -v</span>
+                            <span class="unit">kB</span>
+                        </div>
+                        
+                        <div class="matrix-row network">
+                            <span class="category-icon"><i class="fas fa-network-wired"></i> Red</span>
+                            <span class="metric-main">Packet Sizes</span>
+                            <span class="tool-compact">tcpdump</span>
+                            <span class="unit">bytes</span>
+                        </div>
+                        
+                        <div class="matrix-row storage">
+                            <span class="category-icon"><i class="fas fa-hdd"></i> Storage</span>
+                            <span class="metric-main">Key + Sig Sizes</span>
+                            <span class="tool-compact">ls -l</span>
+                            <span class="unit">bytes</span>
+                        </div>
+                    </div>
+
+                    <!-- Enfoque de Medición -->
+                    <div class="measurement-focus">
+                        <h3><i class="fas fa-target"></i> Enfoque de Medición</h3>
+                        <div class="focus-grid">
+                            <div class="focus-item">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Operación criptográfica pura</span>
+                            </div>
+                            <div class="focus-item">
+                                <i class="fas fa-ban"></i>
+                                <span>Excluir I/O y hashing</span>
+                            </div>
+                            <div class="focus-item">
+                                <i class="fas fa-memory"></i>
+                                <span>Pre-carga en memoria</span>
+                            </div>
+                            <div class="focus-item">
+                                <i class="fas fa-stopwatch"></i>
+                                <span>Timer preciso por función</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Simulación de Red + Protocolo - Grid de dos columnas -->
+            <div class="two-column-grid">
+                
+                <!-- Columna Izquierda: Simulación de Red -->
+                <section class="network-simulation">
+                    <div class="card-header">
+                        <h2><i class="fas fa-globe"></i> 4.3 Simulación de Red</h2>
+                        <span class="simulation-badge"><i class="fas fa-flask"></i> tc + netem</span>
+                    </div>
+                    
+                    <!-- Condiciones Compactas -->
+                    <div class="network-matrix">
+                        <div class="network-row header">
+                            <span>Tipo</span>
+                            <span>Valores de Prueba</span>
+                            <span>Escenario</span>
+                        </div>
+                        
+                        <div class="network-row latency">
+                            <span class="condition-type"><i class="fas fa-clock"></i> RTT</span>
+                            <span class="values">0ms | 30ms | 80ms | 150ms</span>
+                            <span class="scenario">Local → Satélite</span>
+                        </div>
+                        
+                        <div class="network-row loss">
+                            <span class="condition-type"><i class="fas fa-exclamation-triangle"></i> Loss</span>
+                            <span class="values">0.1% | 1% | 3%</span>
+                            <span class="scenario">Excelente → Deficiente</span>
+                        </div>
+                        
+                        <div class="network-row mtu">
+                            <span class="condition-type"><i class="fas fa-compress-arrows-alt"></i> MTU</span>
+                            <span class="values">1500 | 1400 | 576</span>
+                            <span class="scenario">Ethernet → Mínimo</span>
+                        </div>
+                    </div>
+
+                    <!-- Comando de Configuración -->
+                    <div class="command-compact">
+                        <div class="cmd-header">
+                            <i class="fas fa-terminal"></i>
+                            <span>Configuración tc/netem</span>
+                        </div>
+                        <div class="cmd-content">
+                            <code>tc qdisc add dev eth0 root netem delay 80ms loss 1%</code>
+                            <button class="copy-cmd" onclick="copyCommand(this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hipótesis Crítica Compacta -->
+                    <div class="hypothesis-compact">
+                        <div class="hypothesis-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="hypothesis-text">
+                            <h4>Hipótesis: Efecto No Lineal</h4>
+                            <p>PQC (2+ paquetes) >> Penalización clásica (1 paquete) bajo pérdida de red</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna Derecha: Protocolo de Ejecución -->
+                <section class="execution-protocol">
+                    <div class="card-header">
+                        <h2><i class="fas fa-play-circle"></i> 4.4 Protocolo de Ejecución</h2>
+                        <span class="protocol-badge"><i class="fas fa-cogs"></i> N=1,000</span>
+                    </div>
+                    
+                    <!-- Pipeline de Ejecución -->
+                    <div class="execution-pipeline">
+                        <div class="pipeline-step warmup">
+                            <div class="step-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                                <span>1</span>
+                            </div>
+                            <div class="step-info">
+                                <h4>Warm-up</h4>
+                                <p>5-10 ejecuciones para estabilizar cachés</p>
+                            </div>
+                        </div>
+                        
+                        <div class="pipeline-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        
+                        <div class="pipeline-step execution">
+                            <div class="step-icon">
+                                <i class="fas fa-sync"></i>
+                                <span>2</span>
+                            </div>
+                            <div class="step-info">
+                                <h4>Ejecución Automatizada</h4>
+                                <p>Scripts shell para N=1,000 repeticiones</p>
+                            </div>
+                        </div>
+                        
+                        <div class="pipeline-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        
+                        <div class="pipeline-step logging">
+                            <div class="step-icon">
+                                <i class="fas fa-file-csv"></i>
+                                <span>3</span>
+                            </div>
+                            <div class="step-info">
+                                <h4>Registro CSV</h4>
+                                <p>config,condition,metric,timestamp</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estadísticas de Salida -->
+                    <div class="output-stats">
+                        <h3><i class="fas fa-chart-bar"></i> Análisis Estadístico</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Muestra</span>
+                                <span class="stat-value">N=1,000</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Confianza</span>
+                                <span class="stat-value">95%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Métricas</span>
+                                <span class="stat-value">μ ± σ, percentiles</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Validación</span>
+                                <span class="stat-value">Normalidad + outliers</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" onclick="prevPhase()">
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 4 de 6
+            </div>
+            <button class="nav-btn next" onclick="nextPhase()">
+                Siguiente
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase4.js"></script>
+</body>
+</html>

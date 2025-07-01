@@ -1,0 +1,699 @@
+/* Variables y Reset */
+:root {
+    --primary: #1e3a8a;        /* Azul profesional oscuro */
+    --secondary: #1e40af;      /* Azul corporativo */
+    --accent: #3b82f6;         /* Azul moderno */
+    --accent-dark: #1d4ed8;    /* Azul profundo */
+    --success: #059669;        /* Verde profesional */
+    --warning: #d97706;        /* Naranja corporativo */
+    --danger: #dc2626;         /* Rojo profesional */
+    --info: #0ea5e9;           /* Azul información */
+    --dark: #1f2937;           /* Gris oscuro profesional */
+    --gray: #6b7280;           /* Gris medio profesional */
+    --light-gray: #f3f4f6;     /* Gris claro */
+    --border: #e5e7eb;         /* Borde gris claro */
+    --white: #ffffff;
+    
+    /* Specific colors for Phase 3 */
+    --tls-blue: #0ea5e9;
+    --dilithium-purple: #7c3aed;
+    --code-green: #059669;
+    --api-orange: #ea580c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 8px;
+}
+
+/* Header Styles */
+.phase-header {
+    background: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.back-btn {
+    background: var(--light-gray);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gray);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.back-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.phase-info h1 {
+    color: var(--dark);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phase-info h1 i {
+    color: var(--code-green);
+}
+
+.phase-info p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.progress-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+.progress-indicator span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+}
+
+/* Main Grid */
+.main-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+}
+
+/* Two Column Grid for Use Cases */
+.two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* Card Base Styles */
+.objective-card,
+.use-case-card,
+.methodology-card {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Badges */
+.objective-badge {
+    background: var(--success);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.case-badge {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: white;
+}
+
+.case-badge.tls {
+    background: var(--tls-blue);
+}
+
+.case-badge.dilithium {
+    background: var(--dilithium-purple);
+}
+
+.methodology-badge {
+    background: var(--warning);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Objective Section */
+.objective-content {
+    padding: 8px 0;
+}
+
+.objective-points {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.point-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    background: var(--light-gray);
+    border-radius: 6px;
+}
+
+.point-item i {
+    color: var(--success);
+    font-size: 1rem;
+}
+
+.point-item span {
+    font-size: 0.85rem;
+    color: var(--dark);
+}
+
+/* Implementation Sections */
+.implementation-section {
+    margin-bottom: 12px;
+}
+
+.implementation-section h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Step Flow */
+.step-flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.step-mini {
+    background: var(--light-gray);
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.step-mini i {
+    color: var(--primary);
+}
+
+.step-flow .fas.fa-arrow-right {
+    color: var(--gray);
+    font-size: 0.8rem;
+}
+
+/* Config Blocks */
+.config-block {
+    background: var(--dark);
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 8px;
+}
+
+.config-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    color: var(--light-gray);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.config-content code,
+.cmd-example code {
+    color: #10b981;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+/* Certificate Process */
+.cert-process {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.cert-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--light-gray);
+    padding: 8px;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.cert-step i {
+    color: var(--tls-blue);
+    font-size: 1.2rem;
+}
+
+.cert-info h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.cert-info small {
+    color: var(--gray);
+    font-size: 0.7rem;
+}
+
+/* Critical Design Note */
+.critical-design {
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.critical-design i {
+    color: var(--danger);
+    font-size: 1rem;
+}
+
+.critical-design span {
+    font-size: 0.8rem;
+    color: var(--dark);
+}
+
+/* Nginx Config */
+.nginx-config {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.config-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--light-gray);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.config-item i {
+    color: var(--tls-blue);
+}
+
+/* UI Simple */
+.ui-simple {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--light-gray);
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.ui-simple i {
+    color: var(--code-green);
+}
+
+/* Key Generation */
+.key-gen {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.key-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--light-gray);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    flex: 1;
+}
+
+.key-item i {
+    color: var(--dilithium-purple);
+}
+
+.cmd-example {
+    background: var(--dark);
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+/* API Endpoints */
+.api-endpoints {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.endpoint {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.endpoint-header i {
+    color: var(--api-orange);
+}
+
+.method {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+}
+
+.method.post {
+    background: var(--api-orange);
+}
+
+.endpoint-flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.flow-step {
+    background: var(--light-gray);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.flow-step i {
+    color: var(--dilithium-purple);
+}
+
+.endpoint-flow .fas.fa-arrow-right {
+    color: var(--gray);
+    font-size: 0.7rem;
+}
+
+/* Implementation Note */
+.implementation-note {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.implementation-note i {
+    color: var(--info);
+}
+
+.implementation-note span {
+    font-size: 0.8rem;
+    color: var(--dark);
+}
+
+/* UI Forms */
+.ui-forms {
+    display: flex;
+    gap: 10px;
+}
+
+.form-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--light-gray);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    flex: 1;
+}
+
+.form-item i {
+    color: var(--dilithium-purple);
+}
+
+/* Methodology Section */
+.methodology-content {
+    padding: 8px 0;
+}
+
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.method-point {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: var(--light-gray);
+    border-radius: 6px;
+}
+
+.method-point i {
+    color: var(--warning);
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.point-content h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+}
+
+.point-content p {
+    font-size: 0.8rem;
+    color: var(--gray);
+    line-height: 1.4;
+}
+
+/* Footer */
+.phase-footer {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: var(--light-gray);
+    color: var(--gray);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.phase-indicator {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+    
+    .phase-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .phase-info h1 {
+        font-size: 1.4rem;
+    }
+    
+    .progress-bar {
+        width: 120px;
+    }
+    
+    .main-grid {
+        gap: 15px;
+    }
+    
+    .two-column-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .objective-card,
+    .use-case-card,
+    .methodology-card {
+        padding: 15px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .step-flow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cert-process {
+        flex-direction: column;
+    }
+    
+    .nginx-config {
+        gap: 8px;
+    }
+    
+    .key-gen {
+        flex-direction: column;
+    }
+    
+    .ui-forms {
+        flex-direction: column;
+    }
+    
+    .methodology-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .phase-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .endpoint-flow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

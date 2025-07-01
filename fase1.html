@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 1: Fundamentos Teóricos - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-book-open"></i> FASE 1</h1>
+                <p>Fundamentos Teóricos y Estado del Arte</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 16.66%"></div>
+                </div>
+                <span>1 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid de dos columnas para optimizar espacio -->
+            <div class="two-column-layout">
+                
+                <!-- Columna Izquierda: Amenaza Cuántica -->
+                <section class="threat-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-exclamation-triangle"></i> 1.1 Amenaza Cuántica</h2>
+                        <span class="urgency-badge"><i class="fas fa-bolt"></i> CRÍTICO</span>
+                    </div>
+                    
+                    <!-- Algoritmos -->
+                    <div class="algorithms-grid">
+                        <!-- Shor -->
+                        <div class="algo-card shor-card">
+                            <div class="algo-header">
+                                <i class="fas fa-atom"></i>
+                                <h3>Algoritmo de Shor</h3>
+                                <span class="threat-critical"><i class="fas fa-skull"></i> FATAL</span>
+                            </div>
+                            <div class="algo-flow">
+                                <div class="step">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <span>Reducción Clásica</span>
+                                </div>
+                                <i class="fas fa-arrow-right"></i>
+                                <div class="step">
+                                    <i class="fas fa-wave-square"></i>
+                                    <span>QFT Cuántica</span>
+                                </div>
+                            </div>
+                            <div class="impact-targets">
+                                <div class="target">
+                                    <i class="fas fa-key"></i>
+                                    <span>RSA</span>
+                                    <div class="status-broken"><i class="fas fa-times"></i></div>
+                                </div>
+                                <div class="target">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <span>ECC</span>
+                                    <div class="status-broken"><i class="fas fa-times"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grover -->
+                        <div class="algo-card grover-card">
+                            <div class="algo-header">
+                                <i class="fas fa-search"></i>
+                                <h3>Algoritmo de Grover</h3>
+                                <span class="threat-moderate"><i class="fas fa-exclamation"></i> DEBILITA</span>
+                            </div>
+                            <div class="complexity-reduction">
+                                <div class="complexity-item">
+                                    <span>O(2<sup>k</sup>)</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <span>O(2<sup>k/2</sup>)</span>
+                                </div>
+                            </div>
+                            <div class="aes-grid">
+                                <div class="aes-item vulnerable">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>AES-128</span>
+                                    <div class="security-level">
+                                        <span class="before">128</span> → <span class="after">64</span>
+                                    </div>
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="aes-item secure">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>AES-256</span>
+                                    <div class="security-level">
+                                        <span class="before">256</span> → <span class="after">128</span>
+                                    </div>
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HNDL -->
+                    <div class="hndl-section">
+                        <h3><i class="fas fa-hourglass-half"></i> Harvest Now, Decrypt Later</h3>
+                        <div class="hndl-flow">
+                            <div class="hndl-step">
+                                <i class="fas fa-download"></i>
+                                <span>Cosechar</span>
+                            </div>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="hndl-step">
+                                <i class="fas fa-clock"></i>
+                                <span>Esperar CRQC</span>
+                            </div>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="hndl-step">
+                                <i class="fas fa-unlock"></i>
+                                <span>Descifrar</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna Derecha: Ecosistema OQS -->
+                <section class="oqs-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-code"></i> 1.3 Ecosistema OQS</h2>
+                        <span class="arch-badge"><i class="fas fa-arrow-up"></i> Arquitectura Mejorada</span>
+                    </div>
+                    
+                    <div class="stack-horizontal">
+                        <div class="stack-item nginx">
+                            <i class="fas fa-server"></i>
+                            <h4>Nginx</h4>
+                            <p>Servidor web</p>
+                        </div>
+                        <i class="fas fa-arrow-right stack-arrow"></i>
+                        
+                        <div class="stack-item openssl">
+                            <i class="fas fa-lock"></i>
+                            <h4>OpenSSL 3.x</h4>
+                            <p>Motor TLS/SSL</p>
+                        </div>
+                        <i class="fas fa-arrow-right stack-arrow"></i>
+                        
+                        <div class="stack-item provider">
+                            <i class="fas fa-plug"></i>
+                            <h4>oqs-provider</h4>
+                            <p>Puente PQC</p>
+                        </div>
+                        <i class="fas fa-arrow-right stack-arrow"></i>
+                        
+                        <div class="stack-item liboqs">
+                            <i class="fas fa-cogs"></i>
+                            <h4>liboqs</h4>
+                            <p>Implementaciones</p>
+                        </div>
+                    </div>
+
+                    <div class="improvement-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Desacopla PQC del protocolo TLS/SSL → Mayor mantenibilidad y seguridad</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sección completa ancha: Estándares NIST -->
+            <section class="nist-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-shield-alt"></i> 1.2 Estándares NIST</h2>
+                    <div class="timeline-mini">
+                        <span><i class="fas fa-rocket"></i> 2016</span>
+                        <span><i class="fas fa-trophy"></i> 2022</span>
+                        <span><i class="fas fa-certificate"></i> 2024</span>
+                    </div>
+                </div>
+                
+                <div class="standards-row">
+                    <!-- ML-KEM -->
+                    <div class="standard-card ml-kem">
+                        <div class="standard-header">
+                            <i class="fas fa-key"></i>
+                            <h4>ML-KEM</h4>
+                            <span class="fips">203</span>
+                        </div>
+                        <div class="standard-body">
+                            <div class="feature-tags">
+                                <span><i class="fas fa-cog"></i> KEM</span>
+                                <span><i class="fas fa-cube"></i> TLS</span>
+                            </div>
+                            <div class="param-chips">
+                                <span>512</span><span>768</span><span>1024</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ML-DSA -->
+                    <div class="standard-card ml-dsa">
+                        <div class="standard-header">
+                            <i class="fas fa-signature"></i>
+                            <h4>ML-DSA</h4>
+                            <span class="fips">204</span>
+                        </div>
+                        <div class="standard-body">
+                            <div class="feature-tags">
+                                <span><i class="fas fa-pen-fancy"></i> Firmas</span>
+                                <span><i class="fas fa-clock"></i> Variable</span>
+                            </div>
+                            <div class="param-chips">
+                                <span>44</span><span>65</span><span>87</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLH-DSA -->
+                    <div class="standard-card slh-dsa">
+                        <div class="standard-header">
+                            <i class="fas fa-hashtag"></i>
+                            <h4>SLH-DSA</h4>
+                            <span class="fips">205</span>
+                        </div>
+                        <div class="standard-body">
+                            <div class="feature-tags">
+                                <span><i class="fas fa-tree"></i> Hash</span>
+                                <span><i class="fas fa-infinity"></i> Stateless</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estrategia Híbrida -->
+                <div class="hybrid-strategy">
+                    <h3><i class="fas fa-layer-group"></i> Estrategia Híbrida</h3>
+                    <div class="hybrid-flow">
+                        <div class="crypto-component classical">
+                            <i class="fas fa-history"></i>
+                            <span>Clásico</span>
+                        </div>
+                        <i class="fas fa-plus"></i>
+                        <div class="crypto-component pqc">
+                            <i class="fas fa-atom"></i>
+                            <span>PQC</span>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                        <div class="crypto-result">
+                            <i class="fas fa-shield-virus"></i>
+                            <span>Seguro</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" disabled>
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 1 de 6
+            </div>
+            <button class="nav-btn next" onclick="nextPhase()">
+                Siguiente
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase1.js"></script>
+</body>
+</html>

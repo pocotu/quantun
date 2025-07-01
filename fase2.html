@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 2: Diseño y Configuración del Entorno - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-cogs"></i> FASE 2</h1>
+                <p>Diseño y Configuración del Entorno de Laboratorio Reproducible</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33.33%"></div>
+                </div>
+                <span>2 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid de dos columnas para optimizar espacio -->
+            <div class="two-column-grid">
+                
+                <!-- Columna Izquierda: Principios Arquitectónicos -->
+                <section class="architecture-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cube"></i> 2.1 Principios Arquitectónicos</h2>
+                        <span class="principle-badge"><i class="fas fa-shield-alt"></i> AISLAMIENTO</span>
+                    </div>
+                    
+                    <!-- Docker Strategy -->
+                    <div class="docker-section">
+                        <h3><i class="fab fa-docker"></i> Estrategia de Contenerización</h3>
+                        <div class="docker-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-lock"></i>
+                                <span>Control Variables</span>
+                                <small>Entorno determinista</small>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-code"></i>
+                                <span>Entorno como Código</span>
+                                <small>Dockerfile declarativo</small>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Reproducibilidad</span>
+                                <small>Resultados verificables</small>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Orquestación</span>
+                                <small>docker-compose</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Base Environment -->
+                    <div class="base-env">
+                        <h3><i class="fas fa-server"></i> Especificación del Entorno Base</h3>
+                        <div class="env-specs">
+                            <div class="spec-card os">
+                                <i class="fab fa-ubuntu"></i>
+                                <h4>Ubuntu 22.04 LTS</h4>
+                                <div class="spec-tags">
+                                    <span>Soporte amplio</span>
+                                    <span>Cadena moderna</span>
+                                    <span>Literatura PQC</span>
+                                </div>
+                            </div>
+                            <div class="spec-card tools">
+                                <i class="fas fa-tools"></i>
+                                <h4>Cadena de Compilación</h4>
+                                <div class="tool-list">
+                                    <span><i class="fas fa-hammer"></i> build-essential</span>
+                                    <span><i class="fab fa-git-alt"></i> git</span>
+                                    <span><i class="fas fa-cog"></i> cmake</span>
+                                    <span><i class="fas fa-bolt"></i> ninja-build</span>
+                                    <span><i class="fas fa-file-code"></i> perl</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna Derecha: Pila Criptográfica -->
+                <section class="crypto-stack-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-layer-group"></i> 2.2 Pila Criptográfica PQC</h2>
+                        <span class="version-badge"><i class="fas fa-tag"></i> Compatibilidad Crítica</span>
+                    </div>
+                    
+                    <!-- Stack Diagram -->
+                    <div class="stack-diagram">
+                        <div class="stack-layer app">
+                            <i class="fas fa-globe"></i>
+                            <div class="layer-content">
+                                <h4>Aplicación Web (Nginx)</h4>
+                                <small>--with-openssl=...</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-arrow-down stack-arrow"></i>
+                        
+                        <div class="stack-layer ssl">
+                            <i class="fas fa-lock"></i>
+                            <div class="layer-content">
+                                <h4>OpenSSL 3.x Personalizado</h4>
+                                <small>Motor Criptográfico y TLS</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-arrow-down stack-arrow"></i>
+                        
+                        <div class="stack-layer-dual">
+                            <div class="provider-classic">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Clásico</span>
+                                <small>default.so</small>
+                            </div>
+                            <div class="provider-pqc">
+                                <i class="fas fa-atom"></i>
+                                <span>PQC Provider</span>
+                                <small>oqs-provider.so</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-arrow-down stack-arrow"></i>
+                        
+                        <div class="stack-layer lib">
+                            <i class="fas fa-book"></i>
+                            <div class="layer-content">
+                                <h4>liboqs.so</h4>
+                                <small>Kyber, Dilithium, etc.</small>
+                            </div>
+                        </div>
+                        <i class="fas fa-arrow-down stack-arrow"></i>
+                        
+                        <div class="stack-layer base">
+                            <i class="fab fa-linux"></i>
+                            <div class="layer-content">
+                                <h4>Ubuntu 22.04 LTS</h4>
+                                <small>Sistema Base</small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Build Steps - Sección completa ancha -->
+            <section class="build-section">
+                <div class="card-header">
+                    <h2><i class="fas fa-hammer"></i> Proceso de Construcción</h2>
+                </div>
+                
+                <div class="steps-row">
+                    <!-- Step 1 -->
+                    <div class="step-card step1">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h4>OpenSSL 3.x</h4>
+                        </div>
+                        <div class="step-content">
+                            <div class="commands">
+                                <span><i class="fab fa-git-alt"></i> Clone 3.2.1</span>
+                                <span><i class="fas fa-cog"></i> ./config --prefix</span>
+                                <span><i class="fas fa-hammer"></i> make -j$(nproc)</span>
+                            </div>
+                            <div class="path">/opt/openssl-pqc</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card step2">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h4>liboqs</h4>
+                        </div>
+                        <div class="step-content">
+                            <div class="commands">
+                                <span><i class="fab fa-git-alt"></i> Clone 0.10.0</span>
+                                <span><i class="fas fa-cog"></i> cmake -GNinja</span>
+                                <span><i class="fas fa-bolt"></i> ninja install</span>
+                            </div>
+                            <div class="flags">
+                                <span>-DBUILD_SHARED_LIBS=ON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card step3">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h4>oqs-provider</h4>
+                        </div>
+                        <div class="step-content">
+                            <div class="commands">
+                                <span><i class="fab fa-git-alt"></i> Clone 0.6.0</span>
+                                <span><i class="fas fa-link"></i> Link OpenSSL</span>
+                                <span><i class="fas fa-plug"></i> Install module</span>
+                            </div>
+                            <div class="critical">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>-DOPENSSL_ROOT_DIR</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card step4">
+                        <div class="step-header">
+                            <span class="step-number">4</span>
+                            <h4>Configuración</h4>
+                        </div>
+                        <div class="step-content">
+                            <div class="config-items">
+                                <span><i class="fas fa-file-alt"></i> openssl.cnf</span>
+                                <span><i class="fas fa-toggle-on"></i> Activar provider</span>
+                                <span><i class="fas fa-check"></i> Verificar carga</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Critical Note -->
+                <div class="critical-note">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div class="note-content">
+                        <h4>Detalle Crítico de Metodología</h4>
+                        <p>Nginx debe vincularse contra el <strong>código fuente</strong> de OpenSSL (--with-openssl=&lt;ruta&gt;), no solo la biblioteca instalada. El directorio fuente debe retenerse post-compilación.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" onclick="prevPhase()">
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 2 de 6
+            </div>
+            <button class="nav-btn next" onclick="nextPhase()">
+                Siguiente
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase2.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 3: Implementación del Prototipo - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-code"></i> FASE 3</h1>
+                <p>Implementación del Prototipo de Aplicación Web</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+                <span>3 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid de dos columnas para los casos de uso -->
+            <div class="two-column-grid">
+                
+                <!-- Columna Izquierda: Caso de Uso 1 - TLS Kyber -->
+                <section class="use-case-card tls-case">
+                    <div class="card-header">
+                        <h2><i class="fas fa-shield-alt"></i> 3.1 Caso de Uso 1: TLS-Kyber</h2>
+                        <span class="case-badge tls"><i class="fas fa-lock"></i> CONFIDENCIALIDAD</span>
+                    </div>
+                    
+                    <!-- Nginx Compilation -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-server"></i> 3.1.1 Compilación Nginx PQC</h3>
+                        <div class="step-flow">
+                            <div class="step-mini">
+                                <i class="fas fa-download"></i>
+                                <span>Descargar v1.25.x</span>
+                            </div>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="step-mini">
+                                <i class="fas fa-cog"></i>
+                                <span>Configure SSL</span>
+                            </div>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="step-mini">
+                                <i class="fas fa-hammer"></i>
+                                <span>Compile & Install</span>
+                            </div>
+                        </div>
+                        
+                        <div class="config-block">
+                            <div class="config-header">
+                                <i class="fas fa-terminal"></i>
+                                <span>Comando Clave</span>
+                            </div>
+                            <div class="config-content">
+                                <code>./configure --prefix=/opt/nginx-pqc<br>
+                                --with-http_ssl_module<br>
+                                --with-openssl=/usr/src/openssl</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificate Management -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-certificate"></i> 3.1.2 Gestión de Certificados</h3>
+                        <div class="cert-process">
+                            <div class="cert-step">
+                                <i class="fas fa-building"></i>
+                                <div class="cert-info">
+                                    <h4>Crear CA</h4>
+                                    <small>Autoridad autofirmada</small>
+                                </div>
+                            </div>
+                            <div class="cert-step">
+                                <i class="fas fa-id-card"></i>
+                                <div class="cert-info">
+                                    <h4>Certificado Servidor</h4>
+                                    <small>Firmado con ECDSA</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="critical-design">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Decisión Crítica:</strong> Certificado clásico para aislar KEM performance</span>
+                        </div>
+                    </div>
+
+                    <!-- Nginx Config -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-cogs"></i> 3.1.3 Configuración Server Block</h3>
+                        <div class="nginx-config">
+                            <div class="config-item">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Puerto 443 SSL</span>
+                            </div>
+                            <div class="config-item">
+                                <i class="fas fa-key"></i>
+                                <span>ssl_ecdh_curve: x25519_kyber768</span>
+                            </div>
+                            <div class="config-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>TLSv1.3 Only</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Interface -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-desktop"></i> 3.1.4 Interfaz de Usuario</h3>
+                        <div class="ui-simple">
+                            <i class="fas fa-file-code"></i>
+                            <span>index.html mínimo para handshake TLS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna Derecha: Caso de Uso 2 - Dilithium -->
+                <section class="use-case-card dilithium-case">
+                    <div class="card-header">
+                        <h2><i class="fas fa-pen-fancy"></i> 3.2 Caso de Uso 2: Dilithium</h2>
+                        <span class="case-badge dilithium"><i class="fas fa-signature"></i> AUTENTICIDAD</span>
+                    </div>
+                    
+                    <!-- Key Generation -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-key"></i> 3.2.1 Generación de Claves PQC</h3>
+                        <div class="key-gen">
+                            <div class="key-item">
+                                <i class="fas fa-lock"></i>
+                                <span>dilithium_priv.key</span>
+                            </div>
+                            <div class="key-item">
+                                <i class="fas fa-unlock"></i>
+                                <span>dilithium_pub.crt</span>
+                            </div>
+                        </div>
+                        <div class="cmd-example">
+                            <code>/opt/openssl-pqc/bin/openssl req -x509 -new -newkey dilithium3</code>
+                        </div>
+                    </div>
+
+                    <!-- Backend Implementation -->
+                    <div class="implementation-section">
+                        <h3><i class="fab fa-python"></i> 3.2.2 Backend FastAPI</h3>
+                        <div class="api-endpoints">
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <i class="fas fa-pen"></i>
+                                    <span>/sign</span>
+                                    <span class="method post">POST</span>
+                                </div>
+                                <div class="endpoint-flow">
+                                    <div class="flow-step">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Upload File</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <div class="flow-step">
+                                        <i class="fas fa-hashtag"></i>
+                                        <span>SHA-256</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <div class="flow-step">
+                                        <i class="fas fa-signature"></i>
+                                        <span>Sign Hash</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="endpoint">
+                                <div class="endpoint-header">
+                                    <i class="fas fa-check-double"></i>
+                                    <span>/verify</span>
+                                    <span class="method post">POST</span>
+                                </div>
+                                <div class="endpoint-flow">
+                                    <div class="flow-step">
+                                        <i class="fas fa-file"></i>
+                                        <span>Doc + Sig</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <div class="flow-step">
+                                        <i class="fas fa-hashtag"></i>
+                                        <span>SHA-256</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                    <div class="flow-step">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Verify</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="implementation-note">
+                            <i class="fas fa-lightbulb"></i>
+                            <span><strong>Alternativa:</strong> Bindings Python a liboqs vs subprocess</span>
+                        </div>
+                    </div>
+
+                    <!-- User Interface -->
+                    <div class="implementation-section">
+                        <h3><i class="fas fa-browser"></i> 3.2.3 Interfaz de Usuario</h3>
+                        <div class="ui-forms">
+                            <div class="form-item">
+                                <i class="fas fa-upload"></i>
+                                <span>Formulario Firmar</span>
+                            </div>
+                            <div class="form-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Formulario Verificar</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Detalle Crítico de Metodología -->
+            <section class="methodology-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-exclamation-circle"></i> Detalle Crítico de Metodología para Benchmarking</h2>
+                    <span class="methodology-badge"><i class="fas fa-stopwatch"></i> FASE 4</span>
+                </div>
+                
+                <div class="methodology-content">
+                    <div class="methodology-grid">
+                        <div class="method-point">
+                            <i class="fas fa-clock"></i>
+                            <div class="point-content">
+                                <h4>Medición Pura</h4>
+                                <p>Medir <strong>únicamente</strong> operación criptográfica, no I/O ni hashing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="method-point">
+                            <i class="fas fa-memory"></i>
+                            <div class="point-content">
+                                <h4>Pre-carga</h4>
+                                <p>Hash pre-calculado y archivos en memoria antes del timer</p>
+                            </div>
+                        </div>
+                        
+                        <div class="method-point">
+                            <i class="fas fa-equals"></i>
+                            <div class="point-content">
+                                <h4>Hipótesis Clave</h4>
+                                <p>Tamaño archivo <strong>irrelevante</strong> - operación sobre hash fijo</p>
+                            </div>
+                        </div>
+                        
+                        <div class="method-point">
+                            <i class="fas fa-play-circle"></i>
+                            <div class="point-content">
+                                <h4>Timer Preciso</h4>
+                                <p>Iniciar justo antes de función crypto, detener al retorno</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" onclick="prevPhase()">
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 3 de 6
+            </div>
+            <button class="nav-btn next" onclick="nextPhase()">
+                Siguiente
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase3.js"></script>
+</body>
+</html>

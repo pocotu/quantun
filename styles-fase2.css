@@ -1,0 +1,775 @@
+/* Variables y Reset */
+:root {
+    --primary: #1e3a8a;        /* Azul profesional oscuro */
+    --secondary: #1e40af;      /* Azul corporativo */
+    --accent: #3b82f6;         /* Azul moderno */
+    --accent-dark: #1d4ed8;    /* Azul profundo */
+    --success: #059669;        /* Verde profesional */
+    --warning: #d97706;        /* Naranja corporativo */
+    --danger: #dc2626;         /* Rojo profesional */
+    --info: #0ea5e9;           /* Azul información */
+    --dark: #1f2937;           /* Gris oscuro profesional */
+    --gray: #6b7280;           /* Gris medio profesional */
+    --light-gray: #f3f4f6;     /* Gris claro */
+    --border: #e5e7eb;         /* Borde gris claro */
+    --white: #ffffff;
+    
+    /* Architecture colors - más profesionales */
+    --docker-blue: #0ea5e9;
+    --ubuntu-orange: #ea580c;
+    --openssl-green: #059669;
+    --build-purple: #7c3aed;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 8px;
+}
+
+/* Header Styles */
+.phase-header {
+    background: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.back-btn {
+    background: var(--light-gray);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--gray);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.back-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.phase-info h1 {
+    color: var(--dark);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phase-info h1 i {
+    color: var(--docker-blue);
+}
+
+.phase-info p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.progress-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+.progress-indicator span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+}
+
+/* Main Grid */
+.main-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr;
+}
+
+/* Two Column Grid for Space Optimization */
+.two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+/* Card Base Styles */
+.architecture-card,
+.crypto-stack-card {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.principle-badge {
+    background: var(--docker-blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.version-badge {
+    background: var(--build-purple);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Docker Section */
+.docker-section {
+    margin-bottom: 12px;
+}
+
+.docker-section h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.docker-section h3 i {
+    color: var(--docker-blue);
+    font-size: 1.1rem;
+}
+
+.docker-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+}
+
+.benefit-item {
+    background: rgba(36, 150, 237, 0.1);
+    border: 2px solid rgba(36, 150, 237, 0.2);
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--docker-blue);
+    box-shadow: 0 6px 15px rgba(36, 150, 237, 0.2);
+}
+
+.benefit-item i {
+    color: var(--docker-blue);
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.benefit-item span {
+    font-weight: 600;
+    color: var(--dark);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.85rem;
+}
+
+.benefit-item small {
+    color: var(--gray);
+    font-size: 0.75rem;
+}
+
+/* Base Environment */
+.base-env h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.base-env h3 i {
+    color: var(--ubuntu-orange);
+}
+
+.env-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+}
+
+.spec-card {
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.spec-card.os {
+    border-color: var(--ubuntu-orange);
+}
+
+.spec-card.tools {
+    border-color: var(--openssl-green);
+}
+
+.spec-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.spec-card i {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.spec-card.os i {
+    color: var(--ubuntu-orange);
+}
+
+.spec-card.tools i {
+    color: var(--openssl-green);
+}
+
+.spec-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.spec-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.spec-tags span {
+    background: rgba(233, 84, 32, 0.1);
+    color: var(--ubuntu-orange);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tool-list span {
+    background: rgba(104, 159, 56, 0.1);
+    color: var(--openssl-green);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Stack Diagram */
+.stack-diagram {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stack-layer,
+.stack-layer-dual {
+    background: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.stack-layer:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stack-layer.app {
+    border-left: 4px solid var(--info);
+}
+
+.stack-layer.ssl {
+    border-left: 4px solid var(--openssl-green);
+}
+
+.stack-layer.lib {
+    border-left: 4px solid var(--primary);
+}
+
+.stack-layer.base {
+    border-left: 4px solid var(--ubuntu-orange);
+}
+
+.stack-layer-dual {
+    justify-content: space-between;
+    border-left: 4px solid var(--build-purple);
+}
+
+.provider-classic,
+.provider-pqc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.provider-classic {
+    border-right: 1px solid var(--border);
+    padding-right: 15px;
+}
+
+.provider-pqc {
+    padding-left: 15px;
+}
+
+.provider-classic i,
+.provider-pqc i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.provider-classic i {
+    color: var(--success);
+}
+
+.provider-pqc i {
+    color: var(--primary);
+}
+
+.provider-classic span,
+.provider-pqc span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.layer-content {
+    flex: 1;
+}
+
+.layer-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3px;
+}
+
+.layer-content small,
+.provider-classic small,
+.provider-pqc small {
+    color: var(--gray);
+    font-size: 0.75rem;
+}
+
+.stack-arrow {
+    color: var(--primary);
+    font-size: 1rem;
+    margin: 2px 0;
+}
+
+/* Build Steps */
+.build-steps h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.build-steps h3 i {
+    color: var(--build-purple);
+}
+
+.steps-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.step-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.step1 {
+    border-color: var(--openssl-green);
+}
+
+.step2 {
+    border-color: var(--primary);
+}
+
+.step3 {
+    border-color: var(--build-purple);
+}
+
+.step4 {
+    border-color: var(--warning);
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.step-number {
+    background: var(--primary);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.step1 .step-number {
+    background: var(--openssl-green);
+}
+
+.step2 .step-number {
+    background: var(--primary);
+}
+
+.step3 .step-number {
+    background: var(--build-purple);
+}
+
+.step4 .step-number {
+    background: var(--warning);
+}
+
+.step-header h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.commands {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 6px;
+}
+
+.commands span {
+    background: var(--light-gray);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.path {
+    background: rgba(104, 159, 56, 0.1);
+    color: var(--openssl-green);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.flags span {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--primary);
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-family: monospace;
+}
+
+.critical {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 107, 107, 0.1);
+    color: var(--danger);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.config-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.config-items span {
+    background: rgba(254, 202, 87, 0.1);
+    color: var(--warning);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Build Section */
+.build-section {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+}
+
+/* Critical Note */
+.critical-note {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 107, 107, 0.05) 100%);
+    border: 2px solid rgba(255, 107, 107, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.critical-note i {
+    color: var(--danger);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.note-content h4 {
+    color: var(--danger);
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.note-content p {
+    color: var(--dark);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Footer */
+.phase-footer {
+    background: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: var(--light-gray);
+    color: var(--gray);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.phase-indicator {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .phase-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .phase-info h1 {
+        font-size: 1.4rem;
+    }
+    
+    .progress-bar {
+        width: 120px;
+    }
+    
+    .main-grid {
+        gap: 15px;
+    }
+    
+    .two-column-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .architecture-card,
+    .crypto-stack-card {
+        padding: 15px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .docker-benefits {
+        grid-template-columns: 1fr;
+    }
+    
+    .env-specs {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .phase-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .stack-layer,
+    .stack-layer-dual {
+        max-width: 100%;
+    }
+    
+    .critical-note {
+        flex-direction: column;
+        text-align: center;
+    }
+}
