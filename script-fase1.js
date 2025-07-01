@@ -165,7 +165,7 @@ function goBack() {
 }
 
 function nextPhase() {
-    showComingSoonModal(2);
+    window.location.href = 'fase2.html';
 }
 
 // Funciones de detalles

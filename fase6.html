@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 6: Conclusiones y Trabajo Futuro - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase6.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-flag-checkered"></i> FASE 6</h1>
+                <p>Conclusiones y Trabajo Futuro</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <span>6 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid horizontal de tres columnas optimizado -->
+            <div class="three-column-horizontal-grid">
+                
+                <!-- Columna 1: Síntesis de Hallazgos -->
+                <section class="synthesis-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-lightbulb"></i> 6.1 Síntesis de Hallazgos Clave</h2>
+                        <span class="synthesis-badge"><i class="fas fa-check-circle"></i> VIABILIDAD</span>
+                    </div>
+                    
+                    <!-- Declaración de Viabilidad -->
+                    <div class="viability-section">
+                        <h3><i class="fas fa-certificate"></i> Declaración de Viabilidad</h3>
+                        <div class="viability-statement">
+                            <div class="statement-box conclusion">
+                                <div class="statement-icon">
+                                    <i class="fas fa-thumbs-up"></i>
+                                </div>
+                                <div class="statement-content">
+                                    <h4>Conclusión Principal</h4>
+                                    <p>La implementación de estándares PQC del NIST (<strong>Kyber</strong> y <strong>Dilithium</strong>) es <strong>viable y práctica</strong> para aplicaciones web convencionales. La sobrecarga es <strong>manejable</strong> y no prohibitiva.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hallazgos Clave -->
+                    <div class="findings-section">
+                        <h3><i class="fas fa-search"></i> Hallazgos Clave</h3>
+                        <div class="findings-grid">
+                            <div class="finding-item tls-finding">
+                                <div class="finding-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="finding-content">
+                                    <h4>TLS Híbrido</h4>
+                                    <p>Sobrecarga <strong>modesta</strong> en redes de baja latencia, pero se <strong>magnifica</strong> en redes con alta latencia/pérdida</p>
+                                </div>
+                            </div>
+                            
+                            <div class="finding-item signature-finding">
+                                <div class="finding-icon">
+                                    <i class="fas fa-signature"></i>
+                                </div>
+                                <div class="finding-content">
+                                    <h4>Dilithium vs ECDSA</h4>
+                                    <p>Artefactos <strong>sustancialmente más grandes</strong>. Implicaciones para almacenamiento y ancho de banda</p>
+                                </div>
+                            </div>
+                            
+                            <div class="finding-item performance-finding">
+                                <div class="finding-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="finding-content">
+                                    <h4>Rendimiento Computacional</h4>
+                                    <p><strong>Competitivo</strong> con optimizaciones AVX2. Hardware es factor <strong>crítico</strong></p>
+                                </div>
+                            </div>
+                            
+                            <div class="finding-item variability-finding">
+                                <div class="finding-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="finding-content">
+                                    <h4>Variabilidad Temporal</h4>
+                                    <p>Fiat-Shamir con abortos genera <strong>variabilidad</strong>. P99 crucial para peor caso</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conclusión Final -->
+                    <div class="final-conclusion">
+                        <div class="conclusion-header">
+                            <i class="fas fa-trophy"></i>
+                            <h3>Conclusión Final</h3>
+                        </div>
+                        <div class="conclusion-content">
+                            <p>La transición a PQC está <strong>lista para comenzar</strong>. No es solución única: selección debe ser <strong>adaptada</strong> al entorno específico. <strong>Kyber y Dilithium</strong> ofrecen equilibrio sólido para amplia gama de casos de uso.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna 2: Limitaciones del Estudio -->
+                <section class="limitations-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-exclamation-triangle"></i> 6.2 Limitaciones del Estudio</h2>
+                        <span class="limitations-badge"><i class="fas fa-balance-scale"></i> TRANSPARENCIA</span>
+                    </div>
+                    
+                    <!-- Hardware y Entorno -->
+                    <div class="limitation-section">
+                        <h3><i class="fas fa-server"></i> Hardware y Entorno</h3>
+                        <div class="limitation-details">
+                            <div class="limitation-point">
+                                <div class="point-icon hardware">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                                <div class="point-content">
+                                    <h4>Arquitectura Única</h4>
+                                    <p>Limitado a <strong>x86-64</strong> en Docker simulado</p>
+                                </div>
+                            </div>
+                            <div class="limitation-point">
+                                <div class="point-icon other-arch">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="point-content">
+                                    <h4>Otras Arquitecturas</h4>
+                                    <p>ARM, RISC-V no evaluadas. Infraestructura real puede diferir</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alcance Algorítmico -->
+                    <div class="limitation-section">
+                        <h3><i class="fas fa-code-branch"></i> Alcance Algorítmico</h3>
+                        <div class="algorithm-limitations">
+                            <div class="algo-limit focused">
+                                <div class="algo-icon">
+                                    <i class="fas fa-focus"></i>
+                                </div>
+                                <div class="algo-content">
+                                    <h4>Enfoque Limitado</h4>
+                                    <p>Solo <strong>Kyber y Dilithium</strong> analizados</p>
+                                </div>
+                            </div>
+                            <div class="algo-limit missing">
+                                <div class="algo-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="algo-content">
+                                    <h4>Algoritmos No Incluidos</h4>
+                                    <p><strong>Falcon</strong> (firmas pequeñas), <strong>SPHINCS+</strong> (base hash)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Análisis de Seguridad -->
+                    <div class="limitation-section">
+                        <h3><i class="fas fa-shield-alt"></i> Análisis de Seguridad</h3>
+                        <div class="security-limitations">
+                            <div class="security-warning">
+                                <div class="warning-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="warning-content">
+                                    <h4>Canal Lateral No Evaluado</h4>
+                                    <p>Enfoque en <strong>rendimiento</strong>, no criptoanalítica. Se asume seguridad de <strong>liboqs</strong>.</p>
+                                </div>
+                            </div>
+                            <div class="attack-types">
+                                <span class="attack-tag timing">Timing</span>
+                                <span class="attack-tag power">Power</span>
+                                <span class="attack-tag cache">Cache</span>
+                                <span class="attack-tag electromagnetic">EM</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna 3: Trabajo Futuro -->
+                <section class="future-work-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-rocket"></i> 6.3 Vías para Trabajo Futuro</h2>
+                        <span class="future-badge"><i class="fas fa-route"></i> INVESTIGACIÓN</span>
+                    </div>
+                    
+                    <!-- Dispositivos IoT -->
+                    <div class="future-section">
+                        <h3><i class="fas fa-wifi"></i> Benchmarking IoT y Edge</h3>
+                        <div class="future-item iot">
+                            <div class="future-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="future-content">
+                                <h4>Plataformas ARM</h4>
+                                <p>Raspberry Pi, móviles. Evaluar <strong>CPU, memoria, energía</strong> limitados</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consumo de Energía -->
+                    <div class="future-section">
+                        <h3><i class="fas fa-battery-half"></i> Análisis Energético</h3>
+                        <div class="future-item energy">
+                            <div class="future-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="future-content">
+                                <h4>Medición Directa</h4>
+                                <p>Vatios y julios por operación. <strong>Crítico</strong> para dispositivos con batería</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ataques de Canal Lateral -->
+                    <div class="future-section">
+                        <h3><i class="fas fa-bug"></i> Resistencia a Canal Lateral</h3>
+                        <div class="side-channel-analysis">
+                            <div class="attack-analysis timing-analysis">
+                                <div class="analysis-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="analysis-content">
+                                    <h5>Timing</h5>
+                                    <p>Variaciones vs datos secretos</p>
+                                </div>
+                            </div>
+                            <div class="attack-analysis power-analysis">
+                                <div class="analysis-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <div class="analysis-content">
+                                    <h5>Consumo</h5>
+                                    <p>Correlaciones energéticas</p>
+                                </div>
+                            </div>
+                            <div class="attack-analysis cache-analysis">
+                                <div class="analysis-icon">
+                                    <i class="fas fa-memory"></i>
+                                </div>
+                                <div class="analysis-content">
+                                    <h5>Cache</h5>
+                                    <p>Flush+Reload, patrones acceso</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparación Ampliada -->
+                    <div class="future-section">
+                        <h3><i class="fas fa-balance-scale-right"></i> Comparación Algorítmica</h3>
+                        <div class="extended-comparison">
+                            <div class="algo-future falcon-future">
+                                <span class="algo-name">Falcon</span>
+                                <span class="algo-feature">Firmas pequeñas</span>
+                            </div>
+                            <div class="algo-future sphincs-future">
+                                <span class="algo-name">SPHINCS+</span>
+                                <span class="algo-feature">Base hash</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Despliegue Real -->
+                    <div class="future-section">
+                        <h3><i class="fas fa-globe"></i> Despliegue a Gran Escala</h3>
+                        <div class="real-world-deployment">
+                            <div class="deployment-step">
+                                <i class="fas fa-handshake"></i>
+                                <span>Colaboración industrial</span>
+                            </div>
+                            <div class="deployment-step">
+                                <i class="fas fa-rocket"></i>
+                                <span>Canary deployment</span>
+                            </div>
+                            <div class="deployment-step">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Tráfico real</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" onclick="prevPhase()">
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 6 de 6 - ¡Completado!
+            </div>
+            <button class="nav-btn completion" onclick="showCompletion()">
+                <i class="fas fa-trophy"></i>
+                Finalizar
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase6.js"></script>
+</body>
+</html>

@@ -454,8 +454,7 @@ function goBack() {
 }
 
 function nextPhase() {
-    // Próxima fase (Fase 5)
-    alert('Fase 5: Análisis de Resultados - Próximamente disponible');
+    window.location.href = 'fase5.html';
 }
 
 function prevPhase() {

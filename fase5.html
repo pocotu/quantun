@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 5: Análisis de Resultados y Discusión - Criptografía Post-Cuántica</title>
+    <link rel="stylesheet" href="styles-fase5.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header de Navegación -->
+        <header class="phase-header">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Volver al Índice
+            </button>
+            <div class="phase-info">
+                <h1><i class="fas fa-chart-bar"></i> FASE 5</h1>
+                <p>Análisis de Resultados y Discusión</p>
+            </div>
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 83.33%"></div>
+                </div>
+                <span>5 de 6</span>
+            </div>
+        </header>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            
+            <!-- Grid horizontal de tres columnas compactas -->
+            <div class="three-column-horizontal-grid">
+                
+                <!-- Columna 1: Procesamiento Estadístico -->
+                <section class="processing-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-calculator"></i> 5.1 Procesamiento Estadístico y Visualización</h2>
+                        <span class="processing-badge"><i class="fas fa-chart-pie"></i> ANÁLISIS RIGUROSO</span>
+                    </div>
+                    
+                    <!-- Agregación y Limpieza Horizontal -->
+                    <div class="processing-section">
+                        <h3><i class="fas fa-broom"></i> 5.1.1 Agregación y Limpieza</h3>
+                        <div class="tools-stats-grid">
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fab fa-python"></i></div>
+                                <div class="tool-info">
+                                    <h4>Herramientas</h4>
+                                    <div class="tech-tags">
+                                        <span>pandas</span>
+                                        <span>matplotlib</span>
+                                        <span>seaborn</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stats-metrics">
+                                <h4>Medidas Estadísticas (N=1,000)</h4>
+                                <div class="metrics-compact">
+                                    <div class="metric-item">
+                                        <i class="fas fa-calculator"></i>
+                                        <span>Media</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <i class="fas fa-divide"></i>
+                                        <span>Mediana</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Desv. Estándar</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <i class="fas fa-percentage"></i>
+                                        <span>P95/P99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Outliers handling -->
+                        <div class="outliers-handling">
+                            <div class="outlier-method">
+                                <i class="fas fa-filter"></i>
+                                <span><strong>Outliers:</strong> IQR + Z-score modificado</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualización de Datos -->
+                    <div class="visualization-section">
+                        <h3><i class="fas fa-chart-area"></i> 5.1.2 Visualización de Datos</h3>
+                        <div class="charts-grid">
+                            <div class="chart-type">
+                                <div class="chart-icon table-icon"><i class="fas fa-table"></i></div>
+                                <div class="chart-details">
+                                    <h4>Tablas Comparativas</h4>
+                                    <p>Métricas clave: latencia, CPU, memoria, tamaños</p>
+                                </div>
+                            </div>
+                            <div class="chart-type">
+                                <div class="chart-icon box-icon"><i class="fas fa-chart-bar"></i></div>
+                                <div class="chart-details">
+                                    <h4>Box Plots</h4>
+                                    <p>Distribución completa, mediana, IQR, outliers</p>
+                                </div>
+                            </div>
+                            <div class="chart-type">
+                                <div class="chart-icon bar-icon"><i class="fas fa-chart-column"></i></div>
+                                <div class="chart-details">
+                                    <h4>Gráficos de Barras</h4>
+                                    <p>CPU cycles, memoria, tamaños de claves/firmas</p>
+                                </div>
+                            </div>
+                            <div class="chart-type">
+                                <div class="chart-icon line-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="chart-details">
+                                    <h4>Gráficos de Líneas</h4>
+                                    <p>TLS vs latencia/pérdida de red</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna 2: Análisis Interpretativo -->
+                <section class="analysis-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-microscope"></i> 5.2 Análisis Interpretativo de Trade-offs</h2>
+                        <span class="analysis-badge"><i class="fas fa-balance-scale"></i> COMPENSACIONES</span>
+                    </div>
+                    
+                    <!-- Sobrecarga PQC -->
+                    <div class="overhead-section">
+                        <h3><i class="fas fa-weight-hanging"></i> 5.2.1 Sobrecarga PQC</h3>
+                        <div class="overhead-examples">
+                            <div class="example-card tls-example">
+                                <div class="example-header">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>TLS Handshake</span>
+                                </div>
+                                <div class="example-content">
+                                    <p>"x25519_kyber768 → <strong>+Z ms (+X%)</strong> latencia + <strong>Y bytes</strong> overhead vs amenaza HNDL"</p>
+                                </div>
+                            </div>
+                            <div class="example-card sig-example">
+                                <div class="example-header">
+                                    <i class="fas fa-signature"></i>
+                                    <span>Firmas Digitales</span>
+                                </div>
+                                <div class="example-content">
+                                    <p>"ECDSA→Dilithium-3: PubKey <strong>Ax</strong>, PrivKey <strong>Bx</strong>, Firma <strong>Cx</strong>, Verificación <strong>+D%</strong>"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Precipicio de Rendimiento -->
+                    <div class="cliff-section">
+                        <h3><i class="fas fa-mountain"></i> 5.2.2 "Precipicio de Rendimiento"</h3>
+                        <div class="cliff-analysis">
+                            <div class="network-impact">
+                                <div class="impact-factor">
+                                    <i class="fas fa-network-wired"></i>
+                                    <span>MTU + Fragmentación</span>
+                                </div>
+                                <div class="impact-factor">
+                                    <i class="fas fa-satellite"></i>
+                                    <span>Redes de Alta Latencia</span>
+                                </div>
+                                <div class="impact-factor">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Conexiones Móviles</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AVX2 Evaluation -->
+                    <div class="avx2-section">
+                        <h3><i class="fas fa-microchip"></i> 5.2.3 Aceleración Hardware (AVX2)</h3>
+                        <div class="avx2-comparison">
+                            <div class="hardware-impact">
+                                <div class="hw-factor enabled">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Centros de Datos Modernos</span>
+                                </div>
+                                <div class="hw-factor planning">
+                                    <i class="fas fa-server"></i>
+                                    <span>Planificación de Capacidad</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Columna 3: Marco de Decisión -->
+                <section class="decision-framework compact-decision">
+                    <div class="framework-header">
+                        <h2><i class="fas fa-compass"></i> 5.2.4 Marco de Decisión para Profesionales</h2>
+                        <span class="framework-badge"><i class="fas fa-route"></i> GUÍA PRÁCTICA</span>
+                    </div>
+                    
+                    <div class="decision-matrix">
+                        <div class="matrix-header">
+                            <span>Prioridad</span>
+                            <span>Entorno</span>
+                            <span>Recomendación</span>
+                            <span>Justificación</span>
+                        </div>
+                        
+                        <div class="matrix-row signatures">
+                            <div class="priority-cell">
+                                <i class="fas fa-compress"></i>
+                                <span>Firmas Pequeñas</span>
+                            </div>
+                            <div class="environment-cell">
+                                <span>Almacenamiento/BW Restringido</span>
+                            </div>
+                            <div class="recommendation-cell falcon">
+                                <span>Falcon</span>
+                            </div>
+                            <div class="justification-cell">
+                                <span>Firmas más pequeñas que Dilithium, costo: generación lenta</span>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-row verification">
+                            <div class="priority-cell">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Verificación Rápida</span>
+                            </div>
+                            <div class="environment-cell">
+                                <span>Servidor (muchas verificaciones)</span>
+                            </div>
+                            <div class="recommendation-cell dilithium">
+                                <span>Dilithium</span>
+                            </div>
+                            <div class="justification-cell">
+                                <span>Verificación computacionalmente eficiente</span>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-row signing">
+                            <div class="priority-cell">
+                                <i class="fas fa-pen-fancy"></i>
+                                <span>Firma Rápida</span>
+                            </div>
+                            <div class="environment-cell">
+                                <span>Cliente (firmas frecuentes)</span>
+                            </div>
+                            <div class="recommendation-cell dilithium">
+                                <span>Dilithium</span>
+                            </div>
+                            <div class="justification-cell">
+                                <span>Tiempo de firma variable pero media competitiva</span>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-row mobile-tls">
+                            <div class="priority-cell">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>TLS Móvil</span>
+                            </div>
+                            <div class="environment-cell">
+                                <span>Alta latencia, pérdida packets</span>
+                            </div>
+                            <div class="recommendation-cell kyber768">
+                                <span>Kyber-768</span>
+                            </div>
+                            <div class="justification-cell">
+                                <span>Menor handshake, menos susceptible a fragmentación</span>
+                            </div>
+                        </div>
+                        
+                        <div class="matrix-row datacenter-tls">
+                            <div class="priority-cell">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Máxima Seguridad</span>
+                            </div>
+                            <div class="environment-cell">
+                                <span>Redes de centro de datos</span>
+                            </div>
+                            <div class="recommendation-cell kyber1024">
+                                <span>Kyber-1024</span>
+                            </div>
+                            <div class="justification-cell">
+                                <span>Overhead de red despreciable en redes de alta calidad</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="phase-footer">
+            <button class="nav-btn prev" onclick="prevPhase()">
+                <i class="fas fa-chevron-left"></i>
+                Anterior
+            </button>
+            <div class="phase-indicator">
+                Fase 5 de 6
+            </div>
+            <button class="nav-btn next" onclick="nextPhase()">
+                Siguiente
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="script-fase5.js"></script>
+</body>
+</html>

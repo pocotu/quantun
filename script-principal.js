@@ -87,6 +87,12 @@ function openPhase(phaseNumber) {
     } else if (phaseNumber == 4) {
         // Redireccionar a la Fase 4
         window.location.href = 'fase4.html';
+    } else if (phaseNumber == 5) {
+        // Redireccionar a la Fase 5
+        window.location.href = 'fase5.html';
+    } else if (phaseNumber == 6) {
+        // Redireccionar a la Fase 6
+        window.location.href = 'fase6.html';
     } else {
         // Mostrar modal para fases no disponibles
         showComingSoonModal(phaseNumber);
@@ -97,7 +103,7 @@ function openPhase(phaseNumber) {
 function showComingSoonModal(phaseNumber) {
     const modal = createModal(
         `Fase ${phaseNumber}`,
-        `Esta fase estará disponible próximamente. Actualmente están disponibles la Fase 1: Fundamentos Teóricos y la Fase 2: Diseño y Configuración del Entorno.`,
+        `Esta fase estará disponible próximamente. Actualmente están disponibles las Fases 1-6: desde Fundamentos Teóricos hasta Conclusiones y Trabajo Futuro.`,
         'info'
     );
     document.body.appendChild(modal);
