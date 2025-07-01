@@ -22,7 +22,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    background: #ffffff;
     color: var(--dark);
     line-height: 1.6;
     min-height: 100vh;
@@ -51,8 +51,8 @@ body {
 }
 
 .project-title h1 {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 2.1rem;
+    font-weight: 600;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -60,69 +60,142 @@ body {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--gray);
     font-weight: 500;
+    font-style: italic;
 }
 
-/* Animación de Partículas Cuánticas */
+/* Animación de Átomo Cuántico */
 .quantum-visual {
     position: relative;
     width: 150px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.quantum-particles {
+.atom {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 120px;
 }
 
-.particle {
+.nucleus {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
     border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+    animation: nucleusPulse 2s ease-in-out infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.proton, .neutron {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.proton {
+    background: #ff4757;
+    animation: subatomicSpin 1.5s linear infinite;
+}
+
+.neutron {
+    background: #747d8c;
+    animation: subatomicSpin 1.8s linear infinite reverse;
+}
+
+.proton:nth-child(1) { transform: translate(-2px, -2px); }
+.proton:nth-child(3) { transform: translate(2px, 2px); }
+.neutron { transform: translate(0, 0); }
+
+.orbit {
+    position: absolute;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.orbit-1 {
+    width: 60px;
+    height: 60px;
+    animation: orbitRotate 3s linear infinite;
+}
+
+.orbit-2 {
+    width: 90px;
+    height: 90px;
+    animation: orbitRotate 4s linear infinite reverse;
+    transform: translate(-50%, -50%) rotateX(60deg);
+}
+
+.orbit-3 {
+    width: 120px;
+    height: 120px;
+    animation: orbitRotate 5s linear infinite;
+    transform: translate(-50%, -50%) rotateY(60deg);
+}
+
+.electron {
+    position: absolute;
+    width: 8px;
+    height: 8px;
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    animation: quantumFloat 3s ease-in-out infinite;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: electronGlow 1s ease-in-out infinite alternate;
 }
 
-.particle:nth-child(1) {
-    top: 0;
-    left: 0;
-    animation-delay: 0s;
-}
-
-.particle:nth-child(2) {
-    top: 0;
-    right: 0;
-    animation-delay: 0.75s;
-}
-
-.particle:nth-child(3) {
-    bottom: 0;
-    left: 0;
-    animation-delay: 1.5s;
-}
-
-.particle:nth-child(4) {
-    bottom: 0;
-    right: 0;
-    animation-delay: 2.25s;
-}
-
-@keyframes quantumFloat {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-        opacity: 0.7;
+@keyframes nucleusPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
     }
-    50% {
-        transform: translateY(-20px) scale(1.2);
-        opacity: 1;
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 107, 107, 0.9);
+    }
+}
+
+@keyframes subatomicSpin {
+    0% { transform: rotate(0deg) translateX(1px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(1px) rotate(-360deg); }
+}
+
+@keyframes orbitRotate {
+    0% { transform: translate(-50%, -50%) rotateZ(0deg); }
+    100% { transform: translate(-50%, -50%) rotateZ(360deg); }
+}
+
+@keyframes electronGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(59, 130, 246, 1);
+        transform: translateX(-50%) scale(1.2);
     }
 }
 
@@ -353,10 +426,13 @@ body {
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+.tech-stack {
+    text-align: center;
 }
 
 .footer-content h4 {
@@ -411,8 +487,9 @@ body {
     }
     
     .project-title h1 {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         justify-content: center;
+        text-align: center;
     }
 }
 
@@ -426,9 +503,11 @@ body {
     }
     
     .project-title h1 {
-        font-size: 2rem;
+        font-size: 1.4rem;
         flex-direction: column;
         gap: 10px;
+        text-align: center;
+        line-height: 1.3;
     }
     
     .subtitle {
@@ -449,13 +528,31 @@ body {
     }
     
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
         text-align: center;
     }
     
     .quantum-visual {
         width: 100px;
         height: 100px;
+    }
+    
+    .atom {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .nucleus {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .orbit-1 { width: 40px; height: 40px; }
+    .orbit-2 { width: 60px; height: 60px; }
+    .orbit-3 { width: 80px; height: 80px; }
+    
+    .electron {
+        width: 6px;
+        height: 6px;
+        top: -3px;
     }
 }

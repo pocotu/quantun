@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criptografía Post-Cuántica - Proyecto Completo</title>
+    <title>Implementación y Análisis de Rendimiento de los Estándares PQC del NIST</title>
     <link rel="stylesheet" href="styles-principal.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,15 +13,25 @@
         <!-- Header Principal -->
         <header class="main-header">
             <div class="project-title">
-                <h1><i class="fas fa-shield-alt"></i> Criptografía Post-Cuántica</h1>
-                <p class="subtitle">Evaluación de Rendimiento y Migración a Estándares NIST</p>
+                <h1><i class="fas fa-shield-alt"></i> Implementación y Análisis de Rendimiento de los Estándares PQC del NIST</h1>
+                <p class="subtitle">TLS-Kyber y Firmas Dilithium en una Aplicación Web Segura</p>
             </div>
             <div class="quantum-visual">
-                <div class="quantum-particles">
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
+                <div class="atom">
+                    <div class="nucleus">
+                        <div class="proton"></div>
+                        <div class="neutron"></div>
+                        <div class="proton"></div>
+                    </div>
+                    <div class="orbit orbit-1">
+                        <div class="electron"></div>
+                    </div>
+                    <div class="orbit orbit-2">
+                        <div class="electron"></div>
+                    </div>
+                    <div class="orbit orbit-3">
+                        <div class="electron"></div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -45,10 +55,6 @@
                             <span class="highlight"><i class="fas fa-code"></i> Ecosistema OQS</span>
                         </div>
                     </div>
-                    <div class="phase-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Disponible</span>
-                    </div>
                 </div>
 
                 <!-- Arrow -->
@@ -70,10 +76,6 @@
                             <span class="highlight"><i class="fas fa-layer-group"></i> Pila PQC</span>
                             <span class="highlight"><i class="fas fa-hammer"></i> Build Process</span>
                         </div>
-                    </div>
-                    <div class="phase-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Disponible</span>
                     </div>
                 </div>
 
@@ -97,10 +99,6 @@
                             <span class="highlight"><i class="fas fa-terminal"></i> Comandos</span>
                         </div>
                     </div>
-                    <div class="phase-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Disponible</span>
-                    </div>
                 </div>
 
                 <!-- Fase 4 -->
@@ -117,10 +115,6 @@
                             <span class="highlight"><i class="fas fa-chart-line"></i> Métricas</span>
                             <span class="highlight"><i class="fas fa-globe"></i> Simulación Red</span>
                         </div>
-                    </div>
-                    <div class="phase-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Disponible</span>
                     </div>
                 </div>
 
@@ -139,10 +133,6 @@
                             <span class="highlight"><i class="fas fa-balance-scale"></i> Trade-offs</span>
                         </div>
                     </div>
-                    <div class="phase-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Disponible</span>
-                    </div>
                 </div>
 
                 <!-- Fase 6 -->
@@ -153,45 +143,27 @@
                     </div>
                     <div class="phase-content">
                         <h3>Conclusiones</h3>
-                        <p>Recomendaciones y Futuro</p>
+                        <p>Recomendaciones y Trabajo Futuro</p>
                         <div class="phase-highlights">
                             <span class="highlight"><i class="fas fa-lightbulb"></i> Insights</span>
                             <span class="highlight"><i class="fas fa-road"></i> Roadmap</span>
                             <span class="highlight"><i class="fas fa-handshake"></i> Recomendaciones</span>
                         </div>
                     </div>
-                    <div class="phase-status">
-                        <i class="fas fa-clock"></i>
-                        <span>Próximamente</span>
-                    </div>
                 </div>
-            </div>
-
-            <!-- Call to Action -->
-            <div class="cta-section">
-                <h2><i class="fas fa-rocket"></i> Comenzar Exploración</h2>
-                <p>Haz clic en la Fase 1 para comenzar tu viaje por la Criptografía Post-Cuántica</p>
-                <button class="cta-button" onclick="openPhase(1)">
-                    <i class="fas fa-play"></i>
-                    Iniciar con Fase 1
-                </button>
             </div>
         </main>
 
         <!-- Footer -->
         <footer class="main-footer">
             <div class="footer-content">
-                <div class="project-info">
-                    <h4><i class="fas fa-university"></i> Seminario I - Informática</h4>
-                    <p>Evaluación de Rendimiento de Algoritmos Post-Cuánticos</p>
-                </div>
                 <div class="tech-stack">
-                    <h4><i class="fas fa-tools"></i> Tecnologías</h4>
+                    <h4><i class="fas fa-certificate"></i> Estándares Evaluados</h4>
                     <div class="tech-icons">
-                        <span title="OpenSSL"><i class="fas fa-lock"></i></span>
-                        <span title="Nginx"><i class="fas fa-server"></i></span>
-                        <span title="C/C++"><i class="fas fa-code"></i></span>
-                        <span title="NIST Standards"><i class="fas fa-certificate"></i></span>
+                        <span title="ML-KEM (FIPS 203)"><i class="fas fa-key"></i></span>
+                        <span title="ML-DSA (FIPS 204)"><i class="fas fa-signature"></i></span>
+                        <span title="OpenSSL 3.x"><i class="fas fa-lock"></i></span>
+                        <span title="NIST Post-Quantum Standards"><i class="fas fa-shield-alt"></i></span>
                     </div>
                 </div>
             </div>

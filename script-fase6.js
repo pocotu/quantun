@@ -116,30 +116,65 @@ function setupHoverEffects() {
 }
 
 function setupClickHandlers() {
-    // Click en hallazgos para destacar
-    const findingItems = document.querySelectorAll('.finding-item');
-    findingItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remover clase activa de otros
-            findingItems.forEach(f => f.classList.remove('active'));
-            
-            // Agregar clase activa al clickeado
-            this.classList.add('active');
-            
-            // Efecto visual temporal
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
+    // Click en hallazgos para más información
+    const findings = document.querySelectorAll('.finding-item');
+    findings.forEach(finding => {
+        finding.addEventListener('click', function() {
+            const type = this.classList.contains('tls-finding') ? 'tls' :
+                         this.classList.contains('signature-finding') ? 'signature' :
+                         this.classList.contains('performance-finding') ? 'performance' :
+                         'variability';
+            showFindingDetails(type);
         });
     });
-    
+
+    // Click en limitaciones
+    const limitations = document.querySelectorAll('.limitation-point');
+    limitations.forEach(limitation => {
+        limitation.addEventListener('click', function() {
+            const type = this.classList.contains('hardware') ? 'hardware' :
+                         this.classList.contains('other-arch') ? 'architecture' :
+                         'algorithmic';
+            showLimitationDetails(type);
+        });
+    });
+
+    // Click en elementos de trabajo futuro
+    const futureItems = document.querySelectorAll('.future-item');
+    futureItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const type = this.classList.contains('short-term') ? 'short' :
+                         this.classList.contains('medium-term') ? 'medium' :
+                         'long';
+            showFutureWorkDetails(type);
+        });
+    });
+
+    // Click en la conclusión final para certificado
+    const finalConclusion = document.querySelector('.final-conclusion');
+    if (finalConclusion) {
+        finalConclusion.addEventListener('click', function() {
+            showCertificate();
+        });
+    }
+
     // Click en análisis de canal lateral
     const attackAnalyses = document.querySelectorAll('.attack-analysis');
     attackAnalyses.forEach(analysis => {
         analysis.addEventListener('click', function() {
             showAttackDetails(this);
         });
+    });
+
+    // Agregar manejadores de teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => {
+                modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+                setTimeout(() => modal.remove(), 300);
+            });
+        }
     });
 }
 
@@ -398,5 +433,378 @@ const additionalStyles = `
 const styleSheet = document.createElement('style');
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
+
+// Función para crear modales
+function createModal(title, content, type = 'info') {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        animation: modalFadeIn 0.3s ease-out;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    modalContent.style.cssText = `
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 600px;
+        max-height: 80vh;
+        margin: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: modalSlideUp 0.3s ease-out;
+        overflow-y: auto;
+    `;
+    
+    // Agregar estilos de animación si no existen
+    if (!document.querySelector('#modal-animations')) {
+        const style = document.createElement('style');
+        style.id = 'modal-animations';
+        style.textContent = `
+            @keyframes modalFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes modalSlideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Color según tipo
+    let headerColor;
+    switch(type) {
+        case 'success': headerColor = '#27ae60'; break;
+        case 'warning': headerColor = '#f39c12'; break;
+        case 'error': headerColor = '#e74c3c'; break;
+        case 'info': headerColor = '#3498db'; break;
+        default: headerColor = '#9b59b6';
+    }
+    
+    modalContent.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: ${headerColor}; font-size: 1.5rem; line-height: 1.3; flex: 1;">${title}</h3>
+            <button class="close-btn" style="
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #999;
+                padding: 5px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                margin-left: 15px;
+                flex-shrink: 0;
+            ">&times;</button>
+        </div>
+        <div style="line-height: 1.6; color: #333; font-size: 1rem; white-space: pre-line;">${content}</div>
+    `;
+    
+    const closeBtn = modalContent.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+        setTimeout(() => modal.remove(), 300);
+    });
+    
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.background = '#f0f0f0';
+        closeBtn.style.transform = 'scale(1.1)';
+    });
+    
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.background = 'none';
+        closeBtn.style.transform = 'scale(1)';
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+            setTimeout(() => modal.remove(), 300);
+        }
+    });
+    
+    modal.appendChild(modalContent);
+    return modal;
+}
+
+// Funciones para mostrar detalles específicos
+function showFindingDetails(type) {
+    let title, content;
+    
+    switch(type) {
+        case 'tls':
+            title = '🔗 TLS Híbrido - Análisis Detallado';
+            content = `La implementación de TLS híbrido muestra resultados prometedores con consideraciones importantes.
+
+Resultados específicos:
+• Sobrecarga promedio: 15-25ms en redes LAN
+• Incremento de 3-5x en redes con latencia >100ms
+• Tamaño de handshake: +1.5KB vs clásico
+
+Factores críticos:
+• Calidad de la conexión de red
+• Configuración del servidor
+• Optimizaciones de implementación
+
+Recomendación: Evaluación específica por caso de uso.`;
+            break;
+        case 'signature':
+            title = '✍️ Dilithium vs ECDSA - Comparativa';
+            content = `Las firmas post-cuánticas requieren un replanteamiento del diseño de aplicaciones.
+
+Diferencias clave:
+• Tamaño de firma: 3,293 bytes vs 64 bytes (ECDSA)
+• Clave pública: 1,952 bytes vs 64 bytes
+• Velocidad de verificación: Competitiva
+• Generación de firma: 2-3x más lenta
+
+Implicaciones:
+• Protocolos de red necesitan adaptación
+• Almacenamiento de certificados aumenta
+• Ancho de banda de aplicaciones críticas
+
+Estrategia: Implementación gradual con híbridos.`;
+            break;
+        case 'performance':
+            title = '⚡ Rendimiento Computacional - Factores Clave';
+            content = `El rendimiento depende críticamente de las optimizaciones de hardware disponibles.
+
+Con optimizaciones AVX2:
+• Kyber: Competitivo con ECDH
+• Dilithium: 2-3x overhead vs ECDSA
+• Uso de CPU: Incremento moderado
+
+Sin optimizaciones:
+• Kyber: 5-10x más lento
+• Dilithium: 10x+ overhead
+• Uso de CPU: Incremento significativo
+
+Hardware recomendado:
+• Procesadores Intel/AMD modernos (2018+)
+• Soporte AVX2 habilitado
+• Memoria suficiente para claves más grandes`;
+            break;
+        case 'variability':
+            title = '📊 Variabilidad Temporal - Implicaciones';
+            content = `Los algoritmos Fiat-Shamir introducen variabilidad que debe considerarse en el diseño de sistemas.
+
+Causas de variabilidad:
+• Rechazo de muestras en Dilithium
+• Calidad del generador aleatorio
+• Condiciones de red variables
+
+Métricas importantes:
+• P50 (mediana): Rendimiento típico
+• P95: Casos moderadamente adversos  
+• P99: Peor caso realista
+
+Diseño de sistemas:
+• Timeouts basados en P95/P99
+• Buffers adicionales para firmas
+• Monitoreo de cola de percentiles altos`;
+            break;
+    }
+    
+    const modal = createModal(title, content, 'info');
+    document.body.appendChild(modal);
+}
+
+function showLimitationDetails(type) {
+    let title, content;
+    
+    switch(type) {
+        case 'hardware':
+            title = '🖥️ Limitaciones de Hardware';
+            content = `Este estudio se limitó a una configuración específica que puede no representar todos los escenarios.
+
+Limitaciones identificadas:
+• Solo arquitectura x86-64 evaluada
+• Procesador específico (Intel/AMD)
+• Entorno virtualizado (Docker)
+• Recursos de memoria fijos
+
+Impacto en generalización:
+• Resultados pueden variar en hardware diferente
+• Optimizaciones específicas no evaluadas
+• Rendimiento real vs virtualizado
+
+Trabajo futuro necesario:
+• Evaluación en ARM/RISC-V
+• Pruebas en hardware embebido
+• Medición en metal desnudo`;
+            break;
+        case 'architecture':
+            title = '🏗️ Otras Arquitecturas No Evaluadas';
+            content = `La diversidad de arquitecturas modernas requiere evaluación específica.
+
+Arquitecturas pendientes:
+• ARM64 (servidores y móviles)
+• RISC-V (emergente)
+• Arquitecturas embebidas
+
+Consideraciones específicas:
+• Instrucciones SIMD diferentes (NEON vs AVX)
+• Jerarquías de memoria distintas
+• Limitaciones de potencia/térmica
+
+Relevancia práctica:
+• Servidores ARM en centros de datos
+• Dispositivos IoT y embebidos
+• Diversidad de ecosistemas cloud
+
+Recomendación: Evaluación específica por arquitectura objetivo.`;
+            break;
+        case 'algorithmic':
+            title = '🔬 Limitaciones Algorítmicas';
+            content = `Este estudio se enfocó en estándares NIST específicos, excluyendo otras alternativas prometedoras.
+
+Algoritmos no evaluados:
+• BIKE, HQC (Code-based)
+• Rainbow, MAYO (Multivariate)
+• Falcon (NTRU lattices)
+
+Limitaciones del enfoque:
+• Solo ML-KEM y ML-DSA evaluados
+• Híbridos limitados a x25519+Kyber
+• Sin evaluación de diversidad algorítmica
+
+Consideraciones de seguridad:
+• Monocultura algorítmica vs diversidad
+• Riesgos de ataques futuros
+• Estrategias de migración múltiple
+
+Evolución esperada: Evaluación de portfolio diverso.`;
+            break;
+    }
+    
+    const modal = createModal(title, content, 'warning');
+    document.body.appendChild(modal);
+}
+
+function showFutureWorkDetails(type) {
+    let title, content;
+    
+    switch(type) {
+        case 'short':
+            title = '🚀 Trabajo Futuro - Corto Plazo (6-12 meses)';
+            content = `Extensiones inmediatas identificadas para el proyecto.
+
+Prioridad alta:
+• Evaluación en hardware ARM64
+• Implementación de más algoritmos híbridos
+• Medición en aplicaciones web reales
+• Optimización de configuraciones de red
+
+Metodología:
+• Mismo framework de benchmarking
+• Extensión de métricas existentes
+• Validación con casos de uso industriales
+
+Resultados esperados:
+• Guías de implementación específicas
+• Recomendaciones de hardware
+• Configuraciones optimizadas`;
+            break;
+        case 'medium':
+            title = '🎯 Trabajo Futuro - Mediano Plazo (1-2 años)';
+            content = `Investigación más profunda y casos de uso complejos.
+
+Áreas de investigación:
+• Análisis de seguridad de implementaciones
+• Evaluación de resistencia a canales laterales
+• Impacto en aplicaciones de tiempo real
+• Estudios de adopción empresarial
+
+Colaboraciones necesarias:
+• Industria para casos de uso reales
+• Comunidad académica para validación
+• Estándares para interoperabilidad
+
+Objetivos:
+• Marcos de referencia industriales
+• Mejores prácticas establecidas
+• Herramientas de evaluación automatizadas`;
+            break;
+        case 'long':
+            title = '🔮 Trabajo Futuro - Largo Plazo (3+ años)';
+            content = `Visión a largo plazo para la criptografía post-cuántica.
+
+Investigación fundamental:
+• Nuevas familias de algoritmos
+• Optimizaciones de hardware específico
+• Integración con computación cuántica
+• Protocolos de nueva generación
+
+Evolución tecnológica:
+• Estándares de segunda generación
+• Hardware con aceleración PQC nativa
+• Protocolos optimizados desde diseño
+
+Impacto esperado:
+• Ecosistema PQC maduro y adoptado
+• Herramientas de migración automatizadas
+• Seguridad cuántica ubicua
+
+Meta: Transición completa del ecosistema digital.`;
+            break;
+    }
+    
+    const modal = createModal(title, content, 'info');
+    document.body.appendChild(modal);
+}
+
+function showCertificate() {
+    const modal = createModal(
+        '🏆 Certificado de Finalización',
+        `¡Felicitaciones! Has completado exitosamente el recorrido por todas las fases del proyecto de Criptografía Post-Cuántica.
+
+Fases completadas:
+✅ Fase 1: Fundamentos Teóricos
+✅ Fase 2: Entorno de Laboratorio  
+✅ Fase 3: Implementación Práctica
+✅ Fase 4: Diseño de Benchmarking
+✅ Fase 5: Análisis de Resultados
+✅ Fase 6: Conclusiones y Trabajo Futuro
+
+Conocimientos adquiridos:
+• Comprensión de la amenaza cuántica
+• Conocimiento de estándares NIST
+• Experiencia con implementaciones PQC
+• Análisis de rendimiento y trade-offs
+• Visión de futuro de la criptografía
+
+¡Estás preparado para contribuir a la transición hacia la criptografía post-cuántica!
+
+Seminario I - Informática
+Evaluación de Rendimiento de Algoritmos Post-Cuánticos`,
+        'success'
+    );
+    document.body.appendChild(modal);
+}
 
 console.log('Script Fase 6 cargado exitosamente');

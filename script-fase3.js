@@ -215,33 +215,143 @@ function showDilithiumDetails() {
 function createModal(title, content, type = 'info') {
     const modal = document.createElement('div');
     modal.className = 'modal-overlay';
-    
-    modal.innerHTML = `
-        <div class="modal-container ${type}">
-            <div class="modal-header">
-                <h3><i class="fas fa-info-circle"></i> ${title}</h3>
-                <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                ${content}
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn" onclick="this.closest('.modal-overlay').remove()">
-                    Cerrar
-                </button>
-            </div>
-        </div>
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        animation: modalFadeIn 0.3s ease-out;
     `;
     
-    // Cerrar modal al hacer clic fuera
-    modal.addEventListener('click', function(e) {
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    modalContent.style.cssText = `
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 600px;
+        max-height: 80vh;
+        margin: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: modalSlideUp 0.3s ease-out;
+        overflow-y: auto;
+    `;
+    
+    // Agregar estilos de animación si no existen
+    if (!document.querySelector('#modal-animations')) {
+        const style = document.createElement('style');
+        style.id = 'modal-animations';
+        style.textContent = `
+            @keyframes modalFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes modalSlideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            .copy-tooltip {
+                position: absolute;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 6px 10px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                top: -30px;
+                left: 50%;
+                transform: translateX(-50%) translateY(10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                white-space: nowrap;
+                z-index: 1000;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Color según tipo
+    let headerColor;
+    switch(type) {
+        case 'success': headerColor = '#27ae60'; break;
+        case 'warning': headerColor = '#f39c12'; break;
+        case 'error': headerColor = '#e74c3c'; break;
+        case 'info': headerColor = '#3498db'; break;
+        default: headerColor = '#9b59b6';
+    }
+    
+    modalContent.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: ${headerColor}; font-size: 1.5rem; line-height: 1.3; flex: 1;">${title}</h3>
+            <button class="close-btn" style="
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #999;
+                padding: 5px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                margin-left: 15px;
+                flex-shrink: 0;
+            ">&times;</button>
+        </div>
+        <div style="line-height: 1.6; color: #333; font-size: 1rem; white-space: pre-line;">${content}</div>
+    `;
+    
+    const closeBtn = modalContent.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+        setTimeout(() => modal.remove(), 300);
+    });
+    
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.background = '#f0f0f0';
+        closeBtn.style.transform = 'scale(1.1)';
+    });
+    
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.background = 'none';
+        closeBtn.style.transform = 'scale(1)';
+    });
+    
+    modal.addEventListener('click', (e) => {
         if (e.target === modal) {
-            modal.remove();
+            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+            setTimeout(() => modal.remove(), 300);
         }
     });
     
+    // Agregar soporte para tecla Escape
+    const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+            setTimeout(() => modal.remove(), 300);
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    };
+    document.addEventListener('keydown', escapeHandler);
+    
+    modal.appendChild(modalContent);
     return modal;
 }
 

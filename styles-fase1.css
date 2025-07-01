@@ -22,7 +22,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: #ffffff;
     color: var(--dark);
     line-height: 1.4;
     min-height: 100vh;

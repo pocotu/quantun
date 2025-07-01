@@ -76,6 +76,10 @@ function setupInteractivity() {
             setTimeout(() => {
                 this.style.transform = 'translateY(-3px)';
             }, 150);
+            
+            // Mostrar información específica
+            const title = this.querySelector('span').textContent;
+            showBenefitInfo(title);
         });
     });
 
@@ -103,69 +107,143 @@ function setupInteractivity() {
             stackLayers.forEach(l => l.classList.remove('selected'));
             this.classList.add('selected');
             
-            // Mostrar información adicional (simulado)
-            showLayerInfo(this);
+            // Mostrar información de la capa
+            const layerType = this.classList.contains('app') ? 'app' :
+                             this.classList.contains('ssl') ? 'ssl' :
+                             this.classList.contains('lib') ? 'lib' :
+                             this.classList.contains('stack-layer-dual') ? 'provider' : 'base';
+            showStackLayerInfo(layerType);
         });
+    });
+
+    // Click en spec cards
+    const specCards = document.querySelectorAll('.spec-card');
+    specCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const isOS = this.classList.contains('os');
+            if (isOS) {
+                showUbuntuInfo();
+            } else {
+                showToolchainInfo();
+            }
+        });
+    });
+
+    // Agregar manejadores de teclado para modales
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => {
+                modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+                setTimeout(() => modal.remove(), 300);
+            });
+        }
     });
 }
 
-function showLayerInfo(layer) {
-    // Crear tooltip temporal con información del layer
-    const existingTooltip = document.querySelector('.layer-tooltip');
-    if (existingTooltip) {
-        existingTooltip.remove();
+// Funciones para mostrar información específica
+function showBenefitInfo(title) {
+    let content = '';
+    switch(title) {
+        case 'Control Variables':
+            content = `Control preciso sobre todas las variables del entorno de ejecución.
+
+Beneficios:
+• Kernel específico y versión determinista
+• Bibliotecas con versiones fijas
+• Configuración de red controlada
+• Recursos de sistema predecibles
+
+Resultado: Mediciones reproducibles y confiables.`;
+            break;
+        case 'Entorno como Código':
+            content = `Definición declarativa del entorno mediante Dockerfile.
+
+Características:
+• Configuración versionada
+• Reproducible en cualquier máquina
+• Auditoria completa de cambios
+• Rollback rápido a versiones anteriores
+
+Ventaja: Investigación reproducible y colaborativa.`;
+            break;
+        case 'Reproducibilidad':
+            content = `Garantía de resultados consistentes en diferentes ejecuciones.
+
+Elementos clave:
+• Misma imagen base siempre
+• Dependencias con versiones fijas
+• Configuración idéntica
+• Aislamiento del host
+
+Importancia: Validación científica de los resultados.`;
+            break;
+        case 'Orquestación':
+            content = `Gestión coordinada de múltiples contenedores con docker-compose.
+
+Capacidades:
+• Definición de servicios
+• Redes virtuales
+• Volúmenes compartidos
+• Escalado automático
+
+Aplicación: Simulación de entornos distribuidos complejos.`;
+            break;
     }
     
-    const tooltip = document.createElement('div');
-    tooltip.className = 'layer-tooltip';
-    tooltip.innerHTML = getLayerInfo(layer);
-    
-    document.body.appendChild(tooltip);
-    
-    // Posicionar tooltip
-    const rect = layer.getBoundingClientRect();
-    tooltip.style.position = 'fixed';
-    tooltip.style.left = rect.right + 10 + 'px';
-    tooltip.style.top = rect.top + 'px';
-    tooltip.style.zIndex = '1000';
-    tooltip.style.background = 'rgba(0,0,0,0.9)';
-    tooltip.style.color = 'white';
-    tooltip.style.padding = '10px';
-    tooltip.style.borderRadius = '8px';
-    tooltip.style.fontSize = '0.8rem';
-    tooltip.style.maxWidth = '200px';
-    tooltip.style.opacity = '0';
-    tooltip.style.transition = 'opacity 0.3s ease';
-    
-    setTimeout(() => {
-        tooltip.style.opacity = '1';
-    }, 10);
-    
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        if (tooltip.parentNode) {
-            tooltip.style.opacity = '0';
-            setTimeout(() => {
-                tooltip.remove();
-            }, 300);
-        }
-    }, 3000);
+    const modal = createModal(`💡 ${title}`, content, 'info');
+    document.body.appendChild(modal);
 }
 
-function getLayerInfo(layer) {
-    if (layer.classList.contains('app')) {
-        return '<strong>Nginx Application</strong><br/>Compiled with custom OpenSSL support for PQC algorithms.';
-    } else if (layer.classList.contains('ssl')) {
-        return '<strong>Custom OpenSSL 3.x</strong><br/>Provides TLS/SSL engine with provider architecture.';
-    } else if (layer.classList.contains('lib')) {
-        return '<strong>liboqs Library</strong><br/>Core implementations of post-quantum algorithms.';
-    } else if (layer.classList.contains('base')) {
-        return '<strong>Ubuntu 22.04 LTS</strong><br/>Stable foundation with modern toolchain.';
-    } else if (layer.classList.contains('stack-layer-dual')) {
-        return '<strong>Provider Architecture</strong><br/>Classic and PQC algorithms side by side.';
-    }
-    return 'Click for more information';
+function showUbuntuInfo() {
+    const modal = createModal(
+        '🐧 Ubuntu 22.04 LTS - Sistema Base',
+        `Ubuntu 22.04 LTS "Jammy Jellyfish" proporciona una base estable y moderna.
+
+Características técnicas:
+• Kernel Linux 5.15 LTS
+• GCC 11.2 con soporte C++20
+• Python 3.10 nativo
+• Bibliotecas actualizadas
+
+Ventajas para PQC:
+• Amplio soporte en literatura académica
+• Cadena de herramientas moderna
+• Repositorios bien mantenidos
+• Compatibilidad con herramientas de benchmarking
+
+Soporte a largo plazo:
+• Actualizaciones de seguridad hasta 2027
+• Estabilidad para investigación reproducible`,
+        'info'
+    );
+    document.body.appendChild(modal);
 }
+
+function showToolchainInfo() {
+    const modal = createModal(
+        '🛠️ Cadena de Compilación - Herramientas de Desarrollo',
+        `Conjunto completo de herramientas para compilar OpenSSL y componentes PQC.
+
+Herramientas incluidas:
+• build-essential - Compiladores GCC/G++
+• git - Control de versiones para código fuente
+• cmake - Sistema de construcción moderno
+• ninja-build - Backend de construcción rápido
+• perl - Requerido por scripts de OpenSSL
+
+Versiones específicas:
+• GCC 11.2 - Optimizaciones modernas
+• CMake 3.22 - Soporte completo C++20
+• Ninja 1.10 - Construcción paralela eficiente
+
+Resultado: Compilación optimizada de toda la pila PQC`,
+        'info'
+    );
+    document.body.appendChild(modal);
+}
+
+
 
 // Efectos hover mejorados
 function setupHoverEffects() {
@@ -246,6 +324,236 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * 200 + 1000);
     });
 });
+
+// Función para crear modales
+function createModal(title, content, type = 'info') {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        animation: modalFadeIn 0.3s ease-out;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    modalContent.style.cssText = `
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 600px;
+        max-height: 80vh;
+        margin: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: modalSlideUp 0.3s ease-out;
+        overflow-y: auto;
+    `;
+    
+    // Agregar estilos de animación si no existen
+    if (!document.querySelector('#modal-animations')) {
+        const style = document.createElement('style');
+        style.id = 'modal-animations';
+        style.textContent = `
+            @keyframes modalFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes modalSlideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Color según tipo
+    let headerColor;
+    switch(type) {
+        case 'info': headerColor = '#3498db'; break;
+        case 'success': headerColor = '#27ae60'; break;
+        case 'warning': headerColor = '#f39c12'; break;
+        case 'error': headerColor = '#e74c3c'; break;
+        default: headerColor = '#9b59b6';
+    }
+    
+    modalContent.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: ${headerColor}; font-size: 1.5rem; line-height: 1.3; flex: 1;">${title}</h3>
+            <button class="close-btn" style="
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #999;
+                padding: 5px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                margin-left: 15px;
+                flex-shrink: 0;
+            ">&times;</button>
+        </div>
+        <div style="line-height: 1.6; color: #333; font-size: 1rem; white-space: pre-line;">${content}</div>
+    `;
+    
+    const closeBtn = modalContent.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+        modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+        setTimeout(() => modal.remove(), 300);
+    });
+    
+    closeBtn.addEventListener('mouseenter', () => {
+        closeBtn.style.background = '#f0f0f0';
+        closeBtn.style.transform = 'scale(1.1)';
+    });
+    
+    closeBtn.addEventListener('mouseleave', () => {
+        closeBtn.style.background = 'none';
+        closeBtn.style.transform = 'scale(1)';
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
+            setTimeout(() => modal.remove(), 300);
+        }
+    });
+    
+    modal.appendChild(modalContent);
+    return modal;
+}
+
+// Funciones para mostrar información de componentes
+function showDockerInfo() {
+    const modal = createModal(
+        '🐳 Docker - Contenerización',
+        `Docker proporciona un entorno aislado y reproducible para nuestras pruebas.
+
+Ventajas:
+• Control total sobre el entorno de ejecución
+• Eliminación de variables del sistema host
+• Portabilidad entre diferentes máquinas
+• Configuración declarativa via Dockerfile
+
+En nuestro proyecto:
+• Ubuntu 22.04 LTS como base
+• Cadena de compilación completa
+• OpenSSL + oqs-provider + liboqs preinstalados`,
+        'info'
+    );
+    document.body.appendChild(modal);
+}
+
+function showOpenSSLInfo() {
+    const modal = createModal(
+        '🔒 OpenSSL 3.x - Motor Criptográfico',
+        `OpenSSL 3.x introduce la arquitectura de proveedores que revoluciona la integración PQC.
+
+Características clave:
+• Arquitectura modular con proveedores
+• Carga dinámica de algoritmos
+• Compatibilidad hacia atrás
+• Configuración flexible
+
+Ventaja para PQC:
+• No requiere modificar aplicaciones existentes
+• oqs-provider se conecta transparentemente
+• Soporte híbrido clásico + PQC`,
+        'info'
+    );
+    document.body.appendChild(modal);
+}
+
+function showStackLayerInfo(layerType) {
+    let title, content;
+    
+    switch(layerType) {
+        case 'app':
+            title = '🌐 Capa de Aplicación - Nginx';
+            content = `Nginx actúa como nuestro prototipo de aplicación web.
+
+Configuración:
+• Compilado con OpenSSL personalizado
+• Soporte para TLS 1.3
+• Certificados híbridos
+• Métricas de rendimiento integradas
+
+Rol en benchmarking:
+• Representa aplicaciones web reales
+• Permite medición end-to-end
+• Configurable para diferentes escenarios`;
+            break;
+        case 'ssl':
+            title = '🔐 Capa SSL/TLS - OpenSSL';
+            content = `OpenSSL maneja todo el protocolo TLS/SSL.
+
+Funcionalidades:
+• Negociación de algoritmos
+• Establecimiento de claves
+• Cifrado de datos
+• Validación de certificados
+
+Integración PQC:
+• Carga automática de oqs-provider
+• Soporte para curvas híbridas
+• Transparente para aplicaciones`;
+            break;
+        case 'provider':
+            title = '🔌 Capa Provider - oqs-provider';
+            content = `El puente entre OpenSSL y las implementaciones PQC.
+
+Responsabilidades:
+• Traducir llamadas OpenSSL a liboqs
+• Gestionar algoritmos híbridos
+• Configuración via archivos
+• Optimizaciones específicas
+
+Algoritmos soportados:
+• ML-KEM (Kyber) - Intercambio de claves
+• ML-DSA (Dilithium) - Firmas digitales
+• SLH-DSA (SPHINCS+) - Firmas hash`;
+            break;
+        case 'lib':
+            title = '⚙️ Capa Biblioteca - liboqs';
+            content = `Las implementaciones fundamentales de algoritmos PQC.
+
+Contenido:
+• Implementaciones de referencia NIST
+• Optimizaciones específicas (AVX2, ARM)
+• API unificada
+• Benchmarking integrado
+
+Mantenimiento:
+• Actualizaciones frecuentes
+• Nuevos algoritmos
+• Correcciones de seguridad
+• Optimizaciones de rendimiento`;
+            break;
+    }
+    
+    const modal = createModal(title, content, 'info');
+    document.body.appendChild(modal);
+}
 
 // Agregar estilos CSS dinámicos
 const style = document.createElement('style');

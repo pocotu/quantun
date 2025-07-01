@@ -103,7 +103,7 @@ function openPhase(phaseNumber) {
 function showComingSoonModal(phaseNumber) {
     const modal = createModal(
         `Fase ${phaseNumber}`,
-        `Esta fase estará disponible próximamente. Actualmente están disponibles las Fases 1-6: desde Fundamentos Teóricos hasta Conclusiones y Trabajo Futuro.`,
+        `Esta sección del estudio está disponible para consulta. El marco de investigación incluye todas las fases del análisis desde los fundamentos teóricos hasta las conclusiones y recomendaciones.`,
         'info'
     );
     document.body.appendChild(modal);
@@ -118,20 +118,20 @@ function showComingSoonModal(phaseNumber) {
 function showTechInfo(techName) {
     let info = '';
     switch(techName) {
-        case 'OpenSSL':
-            info = 'Biblioteca criptográfica robusta que proporciona las funciones de seguridad para comunicaciones en red.';
+        case 'ML-KEM (FIPS 203)':
+            info = 'Estándar NIST FIPS 203 para Mecanismos de Encapsulamiento de Claves basado en CRYSTALS-Kyber. Evaluado en niveles de seguridad 512, 768 y 1024 bits.';
             break;
-        case 'Nginx':
-            info = 'Servidor web de alto rendimiento utilizado como prototipo de aplicación para las pruebas.';
+        case 'ML-DSA (FIPS 204)':
+            info = 'Estándar NIST FIPS 204 para Firmas Digitales basado en CRYSTALS-Dilithium. Evaluado en configuraciones de seguridad 44, 65 y 87.';
             break;
-        case 'C/C++':
-            info = 'Lenguajes de programación utilizados para implementaciones optimizadas de algoritmos criptográficos.';
+        case 'OpenSSL 3.x':
+            info = 'Motor criptográfico de código abierto con arquitectura de proveedores modular, utilizado como plataforma base para la integración de algoritmos post-cuánticos.';
             break;
-        case 'NIST Standards':
-            info = 'Estándares oficiales de criptografía post-cuántica publicados por el Instituto Nacional de Estándares y Tecnología.';
+        case 'NIST Post-Quantum Standards':
+            info = 'Estándares oficiales de criptografía post-cuántica establecidos por el Instituto Nacional de Estándares y Tecnología de Estados Unidos tras el proceso de estandarización 2016-2024.';
             break;
         default:
-            info = 'Tecnología clave en el ecosistema de criptografía post-cuántica.';
+            info = 'Componente técnico evaluado en el marco de investigación de criptografía post-cuántica.';
     }
     
     const modal = createModal(techName, info, 'tech');
@@ -309,8 +309,8 @@ function activateQuantumMode() {
     });
     
     const modal = createModal(
-        '🎉 Modo Cuántico Activado',
-        '¡Has desbloqueado el modo cuántico! Las partículas ahora oscilan en superposición de estados. ¡Perfecto para un proyecto de criptografía cuántica!',
+        '🔬 Modo de Investigación Activado',
+        'Acceso especial a visualizaciones avanzadas del comportamiento cuántico simulado. Este modo mejora la representación visual de los conceptos criptográficos evaluados en el estudio.',
         'info'
     );
     document.body.appendChild(modal);
