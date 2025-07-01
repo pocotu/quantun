@@ -12,18 +12,30 @@
     <div class="container">
         <!-- Header de Navegación -->
         <header class="phase-header">
-            <button class="back-btn" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i> Volver al Índice
-            </button>
+            <div class="header-left">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Volver al Índice
+                </button>
+            </div>
             <div class="phase-info">
                 <h1><i class="fas fa-book-open"></i> FASE 1</h1>
                 <p>Fundamentos Teóricos y Estado del Arte</p>
             </div>
-            <div class="progress-indicator">
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 16.66%"></div>
+            <div class="header-right">
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 16.66%"></div>
+                    </div>
+                    <span>1 de 6</span>
                 </div>
-                <span>1 de 6</span>
+                <div class="nav-controls">
+                    <button class="nav-btn prev-btn" disabled title="Fase anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn next-btn" onclick="nextPhase()" title="Siguiente fase">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -260,23 +272,10 @@
                 </div>
             </section>
         </div>
-
-        <!-- Navigation Footer -->
-        <footer class="phase-footer">
-            <button class="nav-btn prev" disabled>
-                <i class="fas fa-chevron-left"></i>
-                Anterior
-            </button>
-            <div class="phase-indicator">
-                Fase 1 de 6
-            </div>
-            <button class="nav-btn next" onclick="nextPhase()">
-                Siguiente
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </footer>
     </div>
 
     <script src="script-fase1.js"></script>
+</body>
+</html>
 </body>
 </html>

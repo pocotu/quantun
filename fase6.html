@@ -12,18 +12,30 @@
     <div class="container">
         <!-- Header de Navegación -->
         <header class="phase-header">
-            <button class="back-btn" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i> Volver al Índice
-            </button>
+            <div class="header-left">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Volver al Índice
+                </button>
+            </div>
             <div class="phase-info">
                 <h1><i class="fas fa-flag-checkered"></i> FASE 6</h1>
                 <p>Conclusiones y Trabajo Futuro</p>
             </div>
-            <div class="progress-indicator">
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%"></div>
+            <div class="header-right">
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <span>6 de 6</span>
                 </div>
-                <span>6 de 6</span>
+                <div class="nav-controls">
+                    <button class="nav-btn prev-btn" onclick="prevPhase()" title="Fase anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn next-btn" disabled title="Última fase">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -299,21 +311,6 @@
                 </section>
             </div>
         </div>
-
-        <!-- Navigation Footer -->
-        <footer class="phase-footer">
-            <button class="nav-btn prev" onclick="prevPhase()">
-                <i class="fas fa-chevron-left"></i>
-                Anterior
-            </button>
-            <div class="phase-indicator">
-                Fase 6 de 6 - ¡Completado!
-            </div>
-            <button class="nav-btn completion" onclick="showCompletion()">
-                <i class="fas fa-trophy"></i>
-                Finalizar
-            </button>
-        </footer>
     </div>
 
     <script src="script-fase6.js"></script>

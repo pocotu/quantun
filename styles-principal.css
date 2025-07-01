@@ -53,10 +53,9 @@ body {
 .project-title h1 {
     font-size: 2.1rem;
     font-weight: 600;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+                 0 0 10px rgba(0, 0, 0, 0.3);
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -67,9 +66,10 @@ body {
 
 .subtitle {
     font-size: 1.1rem;
-    color: var(--gray);
+    color: #374151;
     font-weight: 500;
     font-style: italic;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 /* Animación de Átomo Cuántico */
@@ -382,10 +382,9 @@ body {
 .cta-section h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+                 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .cta-section p {
@@ -462,6 +461,187 @@ body {
     transform: scale(1.1);
 }
 
+/* Estilos para Modales de Navegación */
+.overview-modal,
+.quicknav-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overview-modal.show,
+.quicknav-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: scale(0.8) translateY(50px);
+    transition: transform 0.3s ease;
+}
+
+.overview-modal.show .modal-content,
+.quicknav-modal.show .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 25px 30px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+/* Vista General del Proyecto */
+.project-roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.phase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: var(--light-gray);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.phase-item:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateX(10px);
+}
+
+.phase-item.completed {
+    background: rgba(5, 150, 105, 0.1);
+    border-left: 4px solid var(--success);
+}
+
+.phase-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gray);
+    margin-top: 4px;
+    transition: all 0.3s ease;
+}
+
+.phase-item.completed .phase-dot {
+    background: var(--success);
+    box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);
+}
+
+.phase-details h4 {
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.phase-details p {
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+/* Navegación Rápida */
+.quick-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.quick-nav-item {
+    background: linear-gradient(135deg, var(--light-gray), white);
+    border: 2px solid var(--light-gray);
+    border-radius: 15px;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.quick-nav-item:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+}
+
+.quick-nav-item i {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.quick-nav-item:hover i {
+    transform: scale(1.1);
+}
+
+.quick-nav-item span {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .phases-grid {
@@ -500,6 +680,8 @@ body {
     
     .main-header {
         padding: 25px;
+        flex-direction: column;
+        gap: 20px;
     }
     
     .project-title h1 {
@@ -554,5 +736,14 @@ body {
         width: 6px;
         height: 6px;
         top: -3px;
+    }
+    
+    .quick-nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
     }
 }

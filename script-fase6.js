@@ -807,4 +807,13 @@ Evaluación de Rendimiento de Algoritmos Post-Cuánticos`,
     document.body.appendChild(modal);
 }
 
+// Funciones de navegación
+function goBack() {
+    window.location.href = 'index.html';
+}
+
+function prevPhase() {
+    window.location.href = 'fase5.html';
+}
+
 console.log('Script Fase 6 cargado exitosamente');

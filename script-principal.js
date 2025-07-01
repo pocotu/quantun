@@ -161,171 +161,59 @@ function createModal(title, content, type) {
     modalContent.className = 'modal-content';
     modalContent.style.cssText = `
         background: white;
-        border-radius: 20px;
         padding: 30px;
+        border-radius: 20px;
         max-width: 500px;
-        margin: 20px;
+        width: 90%;
+        text-align: center;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         position: relative;
-        animation: modalSlideUp 0.3s ease-out;
+        animation: modalSlideIn 0.3s ease-out;
     `;
     
-    // Agregar estilos de animación si no existen
-    if (!document.querySelector('#modal-animations')) {
-        const style = document.createElement('style');
-        style.id = 'modal-animations';
-        style.textContent = `
-            @keyframes modalFadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            @keyframes modalSlideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px) scale(0.9);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
-    // Iconos según el tipo
-    let icon = '';
-    let color = '';
-    switch(type) {
-        case 'info':
-            icon = '<i class="fas fa-info-circle"></i>';
-            color = '#3498db';
-            break;
-        case 'tech':
-            icon = '<i class="fas fa-cogs"></i>';
-            color = '#9b59b6';
-            break;
-        default:
-            icon = '<i class="fas fa-lightbulb"></i>';
-            color = '#f39c12';
-    }
+    const iconClass = type === 'info' ? 'fas fa-info-circle' : 
+                     type === 'tech' ? 'fas fa-microchip' : 'fas fa-exclamation-triangle';
+    const iconColor = type === 'info' ? '#3b82f6' : 
+                     type === 'tech' ? '#059669' : '#f59e0b';
     
     modalContent.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h3 style="margin: 0; color: ${color}; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
-                ${icon} ${title}
-            </h3>
-            <button class="close-btn" style="
-                background: none;
-                border: none;
-                font-size: 1.8rem;
-                cursor: pointer;
-                color: #999;
-                padding: 5px;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-            ">&times;</button>
+        <div style="margin-bottom: 20px;">
+            <i class="${iconClass}" style="font-size: 3rem; color: ${iconColor}; margin-bottom: 15px;"></i>
+            <h3 style="color: #1f2937; margin-bottom: 15px; font-size: 1.5rem;">${title}</h3>
+            <p style="color: #6b7280; line-height: 1.6; font-size: 1rem;">${content}</p>
         </div>
-        <p style="line-height: 1.6; color: #333; font-size: 1.1rem;">${content}</p>
+        <button onclick="this.closest('.modal-overlay').remove()" 
+                style="background: linear-gradient(135deg, #1e40af, #3b82f6); 
+                       color: white; border: none; padding: 12px 30px; 
+                       border-radius: 25px; cursor: pointer; font-weight: 600;
+                       transition: all 0.3s ease;">
+            Entendido
+        </button>
     `;
     
-    const closeBtn = modalContent.querySelector('.close-btn');
-    closeBtn.addEventListener('click', () => {
-        modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
-        setTimeout(() => modal.remove(), 300);
-    });
+    modal.appendChild(modalContent);
     
-    closeBtn.addEventListener('mouseenter', () => {
-        closeBtn.style.background = '#f0f0f0';
-        closeBtn.style.transform = 'scale(1.1)';
-    });
-    
-    closeBtn.addEventListener('mouseleave', () => {
-        closeBtn.style.background = 'none';
-        closeBtn.style.transform = 'scale(1)';
-    });
-    
-    modal.addEventListener('click', (e) => {
+    // Cerrar modal al hacer clic fuera
+    modal.addEventListener('click', function(e) {
         if (e.target === modal) {
-            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
-            setTimeout(() => modal.remove(), 300);
+            modal.remove();
         }
     });
     
-    modal.appendChild(modalContent);
     return modal;
 }
 
-// Efectos adicionales
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const modals = document.querySelectorAll('.modal-overlay');
-        modals.forEach(modal => {
-            modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
-            setTimeout(() => modal.remove(), 300);
-        });
+// Animaciones CSS en JavaScript
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes modalFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
     
-    // Navegación con teclas numéricas
-    if (e.key >= '1' && e.key <= '6') {
-        const phaseNumber = e.key;
-        openPhase(phaseNumber);
+    @keyframes modalSlideIn {
+        from { transform: scale(0.8) translateY(50px); opacity: 0; }
+        to { transform: scale(1) translateY(0); opacity: 1; }
     }
-});
-
-// Easter egg - Konami code
-let konamiCode = [];
-const konamiPattern = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.code);
-    if (konamiCode.length > konamiPattern.length) {
-        konamiCode.shift();
-    }
-    
-    if (konamiCode.join(',') === konamiPattern.join(',')) {
-        activateQuantumMode();
-        konamiCode = [];
-    }
-});
-
-function activateQuantumMode() {
-    // Efecto especial cuántico
-    const particles = document.querySelectorAll('.particle');
-    particles.forEach(particle => {
-        particle.style.animation = 'quantumFloat 0.5s ease-in-out infinite';
-        particle.style.background = 'linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4)';
-        particle.style.backgroundSize = '400% 400%';
-        particle.style.animation += ', gradientShift 2s ease-in-out infinite';
-    });
-    
-    const modal = createModal(
-        '🔬 Modo de Investigación Activado',
-        'Acceso especial a visualizaciones avanzadas del comportamiento cuántico simulado. Este modo mejora la representación visual de los conceptos criptográficos evaluados en el estudio.',
-        'info'
-    );
-    document.body.appendChild(modal);
-    
-    // Agregar animación de gradiente
-    if (!document.querySelector('#quantum-mode-styles')) {
-        const style = document.createElement('style');
-        style.id = 'quantum-mode-styles';
-        style.textContent = `
-            @keyframes gradientShift {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
+`;
+document.head.appendChild(style);
