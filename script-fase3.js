@@ -269,35 +269,59 @@ function showDilithiumDetails() {
 
 function showConfidentialityDetails() {
     const title = '🔒 Caso de Uso 1: Confidencialidad en Tránsito';
-    const content = `Implementación de TLS-Kyber para asegurar canales de comunicación post-cuánticos.
+    const content = `
+        <div class="modal-content-formatted">
+            <p class="modal-intro">Implementación de TLS-Kyber para asegurar canales de comunicación post-cuánticos.</p>
+            
+            <div class="modal-section">
+                <h4>🎯 <strong>Objetivo del Prototipo:</strong></h4>
+                <ul>
+                    <li>Caso de uso más común para PQC: seguridad del canal cliente-servidor</li>
+                    <li>Evaluación de rendimiento de handshake TLS con KEMs post-cuánticos</li>
+                    <li>Implementación realista para generar mediciones significativas</li>
+                </ul>
+            </div>
 
-🎯 **Objetivo del Prototipo:**
-• Caso de uso más común para PQC: seguridad del canal cliente-servidor
-• Evaluación de rendimiento de handshake TLS con KEMs post-cuánticos
-• Implementación realista para generar mediciones significativas
+            <div class="modal-section">
+                <h4>🏗️ <strong>Componentes de Implementación:</strong></h4>
+                <ul>
+                    <li>Nginx compilado con OpenSSL 3.x + oqs-provider</li>
+                    <li>Certificados híbridos (firma clásica + KEM PQC)</li>
+                    <li>Configuración <code>ssl_ecdh_curve: x25519_kyber768:X25519</code></li>
+                    <li>Página index.html simple para generar handshakes medibles</li>
+                </ul>
+            </div>
 
-🏗️ **Componentes de Implementación:**
-• Nginx compilado con OpenSSL 3.x + oqs-provider
-• Certificados híbridos (firma clásica + KEM PQC)
-• Configuración ssl_ecdh_curve: x25519_kyber768:X25519
-• Página index.html simple para generar handshakes medibles
+            <div class="modal-section">
+                <h4>🔑 <strong>Decisión de Diseño Crítica:</strong></h4>
+                <ul>
+                    <li><strong>Certificado servidor:</strong> firmado con algoritmo clásico (ECDSA)</li>
+                    <li><strong>KEMs:</strong> híbridos post-cuánticos (x25519_kyber768)</li>
+                    <li><strong>Aislamiento de rendimiento:</strong> solo KEM evaluado, no firma</li>
+                    <li><strong>Medición pura:</strong> del mecanismo de intercambio de claves</li>
+                </ul>
+            </div>
 
-🔑 **Decisión de Diseño Crítica:**
-• Certificado servidor: firmado con algoritmo clásico (ECDSA)
-• KEMs: híbridos post-cuánticos (x25519_kyber768)
-• Aislamiento de rendimiento: solo KEM evaluado, no firma
-• Medición pura del mecanismo de intercambio de claves
+            <div class="modal-section">
+                <h4>⚙️ <strong>Configuración Nginx:</strong></h4>
+                <ul>
+                    <li><code>listen 443 ssl</code> con TLSv1.3 únicamente</li>
+                    <li><code>ssl_prefer_server_ciphers on</code></li>
+                    <li>Grupos híbridos priorizados con fallback clásico</li>
+                    <li>Certificados generados con CA autofirmada</li>
+                </ul>
+            </div>
 
-⚙️ **Configuración Nginx:**
-• listen 443 ssl con TLSv1.3 únicamente
-• ssl_prefer_server_ciphers on
-• Grupos híbridos priorizados con fallback clásico
-• Certificados generados con CA autofirmada
-
-📊 **Mediciones Objetivo:**
-• Latencia de handshake TLS completo (extremo a extremo)
-• Impacto de condiciones de red adversas
-• Comparación directa: clásico vs. híbrido vs. PQC puro`;
+            <div class="modal-section">
+                <h4>📊 <strong>Mediciones Objetivo:</strong></h4>
+                <ul>
+                    <li>Latencia de handshake TLS completo (extremo a extremo)</li>
+                    <li>Impacto de condiciones de red adversas</li>
+                    <li>Comparación directa: clásico vs. híbrido vs. PQC puro</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     const modal = createModal(title, content, 'confidentiality');
     document.body.appendChild(modal);
@@ -305,37 +329,61 @@ function showConfidentialityDetails() {
 
 function showAuthenticityDetails() {
     const title = '✍️ Caso de Uso 2: Autenticidad de Documentos';
-    const content = `Implementación de firmas Dilithium para garantizar integridad y autenticidad.
+    const content = `
+        <div class="modal-content-formatted">
+            <p class="modal-intro">Implementación de firmas Dilithium para garantizar integridad y autenticidad.</p>
+            
+            <div class="modal-section">
+                <h4>🎯 <strong>Objetivo del Prototipo:</strong></h4>
+                <ul>
+                    <li>Evaluación de firmas digitales post-cuánticas en flujo realista</li>
+                    <li>Medición de primitivas criptográficas discretas: KeyGen, Sign, Verify</li>
+                    <li>Aplicación práctica: firma y verificación de documentos</li>
+                </ul>
+            </div>
 
-🎯 **Objetivo del Prototipo:**
-• Evaluación de firmas digitales post-cuánticas en flujo realista
-• Medición de primitivas criptográficas discretas: KeyGen, Sign, Verify
-• Aplicación práctica: firma y verificación de documentos
+            <div class="modal-section">
+                <h4>🏗️ <strong>Implementación Backend (FastAPI):</strong></h4>
+                <ul>
+                    <li><strong>Endpoint /sign:</strong> carga de archivo → hash SHA-256 → firma Dilithium</li>
+                    <li><strong>Endpoint /verify:</strong> documento + firma + certificado → verificación</li>
+                    <li><strong>Subprocess:</strong> para invocar OpenSSL personalizado con comandos dgst</li>
+                    <li><strong>Alternativa:</strong> dilithium-py library para API más limpia</li>
+                </ul>
+            </div>
 
-🏗️ **Implementación Backend (FastAPI):**
-• Endpoint /sign: carga de archivo → hash SHA-256 → firma Dilithium
-• Endpoint /verify: documento + firma + certificado → verificación
-• Subprocess para invocar OpenSSL personalizado con comandos dgst
-• Alternativa: dilithium-py library para API más limpia
+            <div class="modal-section">
+                <h4>🔑 <strong>Flujo de Firma Digital:</strong></h4>
+                <ul>
+                    <li><strong>Generación par de claves:</strong> <code>openssl req -x509 -new -newkey dilithium3</code></li>
+                    <li><strong>Cálculo hash:</strong> SHA-256 del contenido (tamaño fijo)</li>
+                    <li><strong>Firma:</strong> <code>openssl dgst -sha256 -sign dilithium_priv.key</code></li>
+                    <li><strong>Verificación:</strong> <code>openssl dgst -sha256 -verify dilithium_pub.crt</code></li>
+                </ul>
+            </div>
 
-🔑 **Flujo de Firma Digital:**
-• Generación par de claves: openssl req -x509 -new -newkey dilithium3
-• Cálculo hash: SHA-256 del contenido (tamaño fijo)
-• Firma: openssl dgst -sha256 -sign dilithium_priv.key
-• Verificación: openssl dgst -sha256 -verify dilithium_pub.crt
+            <div class="modal-section">
+                <h4>⚠️ <strong>Consideración Crítica - "Fiat-Shamir con Abortos":</strong></h4>
+                <ul>
+                    <li>Técnica de muestreo por rechazo durante firma</li>
+                    <li>Tiempo de firma <strong>VARIABLE</strong> debido a "abortos" probabilísticos</li>
+                    <li>Distribución de tiempos: no determinista, requiere análisis estadístico</li>
+                    <li>Implicaciones para sistemas en tiempo real</li>
+                </ul>
+            </div>
 
-⚠️ **Consideración Crítica - "Fiat-Shamir con Abortos":**
-• Técnica de muestreo por rechazo durante firma
-• Tiempo de firma VARIABLE debido a "abortos" probabilísticos
-• Distribución de tiempos: no determinista, requiere análisis estadístico
-• Implicaciones para sistemas en tiempo real
-
-📊 **Mediciones Específicas:**
-• Tiempo de generación de claves (una vez)
-• Tiempo de firma (variable - medir percentiles 95, 99)
-• Tiempo de verificación (consistente)
-• Tamaños: clave pública, clave privada, firma
-• Independencia del tamaño de documento (hash tamaño fijo)`;
+            <div class="modal-section">
+                <h4>📊 <strong>Mediciones Específicas:</strong></h4>
+                <ul>
+                    <li><strong>Tiempo de generación de claves</strong> (una vez)</li>
+                    <li><strong>Tiempo de firma</strong> (variable - medir percentiles 95, 99)</li>
+                    <li><strong>Tiempo de verificación</strong> (consistente)</li>
+                    <li><strong>Tamaños:</strong> clave pública, clave privada, firma</li>
+                    <li><strong>Independencia del tamaño</strong> de documento (hash tamaño fijo)</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     const modal = createModal(title, content, 'authenticity');
     document.body.appendChild(modal);
@@ -343,43 +391,71 @@ function showAuthenticityDetails() {
 
 function showBenchmarkingMethodologyDetails() {
     const title = '⏱️ Metodología de Benchmarking (Fase 4)';
-    const content = `Preparación crítica para mediciones precisas en la siguiente fase.
+    const content = `
+        <div class="modal-content-formatted">
+            <p class="modal-intro">Preparación crítica para mediciones precisas en la siguiente fase.</p>
+            
+            <div class="modal-section">
+                <h4>🎯 <strong>Principio de Aislamiento de Variables:</strong></h4>
+                <ul>
+                    <li>Medir <strong>ÚNICAMENTE</strong> la operación criptográfica</li>
+                    <li>Pre-cargar archivos en memoria antes del timer</li>
+                    <li>Excluir I/O de archivos, hashing y lógica de aplicación</li>
+                    <li>Temporizador: start después de preparación, stop inmediatamente post-crypto</li>
+                </ul>
+            </div>
 
-🎯 **Principio de Aislamiento de Variables:**
-• Medir ÚNICAMENTE la operación criptográfica
-• Pre-cargar archivos en memoria antes del timer
-• Excluir I/O de archivos, hashing y lógica de aplicación
-• Temporizador: start después de preparación, stop inmediatamente post-crypto
+            <div class="modal-section">
+                <h4>📊 <strong>Metodología para Firmas:</strong></h4>
+                <ul>
+                    <li>Pre-calcular hash SHA-256 del documento</li>
+                    <li>Cargar claves en memoria</li>
+                    <li>Timer solo para: <code>sign()</code> o <code>verify()</code></li>
+                    <li>Confirmar independencia del tamaño de documento</li>
+                </ul>
+            </div>
 
-📊 **Metodología para Firmas:**
-• Pre-calcular hash SHA-256 del documento
-• Cargar claves en memoria
-• Timer solo para: sign() o verify()
-• Confirmar independencia del tamaño de documento
+            <div class="modal-section">
+                <h4>🔬 <strong>Metodología para TLS:</strong></h4>
+                <ul>
+                    <li>Medición extremo a extremo del handshake completo</li>
+                    <li>Incluir impacto del protocolo TLS + overhead PQC</li>
+                    <li>Simulación condiciones de red con <code>tc+netem</code></li>
+                    <li><strong>N=1,000</strong> repeticiones para significancia estadística</li>
+                </ul>
+            </div>
 
-🔬 **Metodología para TLS:**
-• Medición extremo a extremo del handshake completo
-• Incluir impacto del protocolo TLS + overhead PQC
-• Simulación condiciones de red con tc+netem
-• N=1,000 repeticiones para significancia estadística
+            <div class="modal-section">
+                <h4>⚡ <strong>Variables Críticas a Controlar:</strong></h4>
+                <ul>
+                    <li>Versiones exactas de bibliotecas</li>
+                    <li>Flags de compilación (AVX2 vs. referencia)</li>
+                    <li>Condiciones de red simuladas</li>
+                    <li>Configuración de algoritmos híbridos</li>
+                </ul>
+            </div>
 
-⚡ **Variables Críticas a Controlar:**
-• Versiones exactas de bibliotecas
-• Flags de compilación (AVX2 vs. referencia)
-• Condiciones de red simuladas
-• Configuración de algoritmos híbridos
+            <div class="modal-section">
+                <h4>📈 <strong>Métricas Objetivo:</strong></h4>
+                <ul>
+                    <li><strong>Latencia:</strong> tiempo de handshake, operaciones criptográficas</li>
+                    <li><strong>Recursos:</strong> ciclos CPU, memoria RSS, instrucciones</li>
+                    <li><strong>Red:</strong> bytes transmitidos, paquetes, fragmentación</li>
+                    <li><strong>Almacenamiento:</strong> tamaños de claves, firmas, certificados</li>
+                </ul>
+            </div>
 
-📈 **Métricas Objetivo:**
-• Latencia: tiempo de handshake, operaciones criptográficas
-• Recursos: ciclos CPU, memoria RSS, instrucciones
-• Red: bytes transmitidos, paquetes, fragmentación
-• Almacenamiento: tamaños de claves, firmas, certificados
-
-🔧 **Herramientas de Medición:**
-• openssl s_time para handshakes TLS
-• perf stat para métricas de CPU
-• tcpdump/Wireshark para análisis de red
-• /usr/bin/time -v para memoria`;
+            <div class="modal-section">
+                <h4>🔧 <strong>Herramientas de Medición:</strong></h4>
+                <ul>
+                    <li><code>openssl s_time</code> para handshakes TLS</li>
+                    <li><code>perf stat</code> para métricas de CPU</li>
+                    <li><code>tcpdump/Wireshark</code> para análisis de red</li>
+                    <li><code>/usr/bin/time -v</code> para memoria</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     const modal = createModal(title, content, 'methodology');
     document.body.appendChild(modal);
@@ -387,37 +463,51 @@ function showBenchmarkingMethodologyDetails() {
 
 function showCertificateManagementDetails() {
     const title = '🏷️ Generación y Gestión de Certificados PQC';
-    const content = `Estrategia de certificados para evaluación aislada de rendimiento de KEMs.
+    const content = `
+        <div class="modal-content-formatted">
+            <p class="modal-intro">Estrategia de certificados para evaluación aislada de rendimiento de KEMs.</p>
+            
+            <div class="modal-section">
+                <h4>🎯 <strong>Diseño de Certificados:</strong></h4>
+                <ul>
+                    <li>CA autofirmada simple para entorno de pruebas</li>
+                    <li><strong>Certificado servidor:</strong> firmado con algoritmo CLÁSICO (ECDSA)</li>
+                    <li><strong>Objetivo:</strong> aislar rendimiento del KEM, no de verificación de firma</li>
+                    <li>Evitar sobrecarga PQC en verificación de certificados</li>
+                </ul>
+            </div>
 
-🎯 **Diseño de Certificados:**
-• CA autofirmada simple para entorno de pruebas
-• Certificado servidor: firmado con algoritmo CLÁSICO (ECDSA)
-• Objetivo: aislar rendimiento del KEM, no de verificación de firma
-• Evitar sobrecarga PQC en verificación de certificados
+            <div class="modal-section">
+                <h4>🔧 <strong>Proceso de Generación:</strong></h4>
+                <ul>
+                    <li><strong>CA root:</strong> <code>openssl req -x509 -new -newkey ecdsa</code></li>
+                    <li><strong>Certificado servidor:</strong> firmado por CA con ECDSA-SHA256</li>
+                    <li><strong>Sin firmas PQC</strong> en certificados para esta fase</li>
+                    <li><strong>Enfoque:</strong> medición pura del intercambio de claves</li>
+                </ul>
+            </div>
 
-🔧 **Proceso de Generación:**
-• CA root: openssl req -x509 -new -newkey ecdsa
-• Certificado servidor: firmado por CA con ECDSA-SHA256
-• Sin firmas PQC en certificados para esta fase
-• Enfoque: medición pura del intercambio de claves
+            <div class="modal-section">
+                <h4>🔑 <strong>Configuración Nginx Crítica:</strong></h4>
+                <ul>
+                    <li><strong>Grupos híbridos:</strong> <code>ssl_ecdh_curve x25519_kyber768:X25519</code></li>
+                    <li><strong>Verificación:</strong> <code>openssl list -key-exchange-algorithms</code></li>
+                    <li><strong>Fallback:</strong> X25519 clásico como respaldo</li>
+                    <li><strong>Priorización:</strong> servidor prefiere algoritmos PQC</li>
+                </ul>
+            </div>
 
-⚙️ **Configuración para Nginx:**
-• ssl_certificate: apunta a certificado servidor ECDSA
-• ssl_certificate_key: clave privada ECDSA correspondiente
-• ssl_ecdh_curve: x25519_kyber768:X25519 (híbrido)
-• TLS 1.3: protocol exclusivo para KEMs modernos
-
-🔍 **Decisión Metodológica:**
-• Separación de concerns: KEM vs. firmas
-• Handshake TLS: verificación certificado + intercambio de claves
-• Solo intercambio de claves usa PQC (Kyber)
-• Verificación certificado: ECDSA rápido, overhead mínimo
-
-📊 **Beneficio para Mediciones:**
-• Tiempo de handshake ≈ tiempo de KEM + overhead protocolo
-• Sin confusión por tiempo de verificación de firma PQC
-• Comparación directa: X25519 vs. Kyber vs. híbrido
-• Datos más limpios para análisis de rendimiento`;
+            <div class="modal-section">
+                <h4>🧪 <strong>Validación de Funcionamiento:</strong></h4>
+                <ul>
+                    <li>Conectar cliente y verificar algoritmo utilizado</li>
+                    <li>Capturar handshake con <code>tcpdump</code></li>
+                    <li>Confirmar intercambio de claves PQC en logs</li>
+                    <li>Medición baseline con configuración clásica</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     const modal = createModal(title, content, 'certificates');
     document.body.appendChild(modal);
@@ -425,17 +515,24 @@ function showCertificateManagementDetails() {
 
 function showNginxConfigDetails() {
     const title = '🌐 Configuración de Nginx con Soporte PQC';
-    const content = `Configuración específica para servidor web con capacidades post-cuánticas.
+    const content = `
+        <div class="modal-content-formatted">
+            <p class="modal-intro">Configuración específica para servidor web con capacidades post-cuánticas.</p>
+            
+            <div class="modal-section">
+                <h4>🏗️ <strong>Compilación desde Código Fuente:</strong></h4>
+                <ul>
+                    <li><code>--with-openssl=&lt;path-to-source&gt;</code>: vinculación con OpenSSL personalizado</li>
+                    <li><code>--with-http_ssl_module</code>: habilitación funcionalidad SSL/TLS</li>
+                    <li>Compilación estática vs. dinámica según requerimientos</li>
+                    <li>Instalación en directorio aislado <code>(/opt/nginx-pqc/)</code></li>
+                </ul>
+            </div>
 
-🏗️ **Compilación desde Código Fuente:**
-• --with-openssl=<path-to-source>: vinculación con OpenSSL personalizado
-• --with-http_ssl_module: habilitación funcionalidad SSL/TLS
-• Compilación estática vs. dinámica según requerimientos
-• Instalación en directorio aislado (/opt/nginx-pqc/)
-
-⚙️ **Bloque de Servidor Crítico:**
-\`\`\`nginx
-server {
+            <div class="modal-section">
+                <h4>⚙️ <strong>Bloque de Servidor Crítico:</strong></h4>
+                <div class="code-block">
+                    <pre><code>server {
     listen 443 ssl;
     server_name localhost;
     
@@ -447,26 +544,41 @@ server {
     
     # Grupos híbridos con fallback clásico
     ssl_ecdh_curve x25519_kyber768:X25519;
-}
-\`\`\`
+}</code></pre>
+                </div>
+            </div>
 
-🔑 **Configuración de Grupos KEMs:**
-• x25519_kyber768: algoritmo híbrido principal
-• X25519: fallback clásico para compatibilidad
-• Nombres específicos dependen de versión oqs-provider
-• Verificación: openssl list -key-exchange-algorithms
+            <div class="modal-section">
+                <h4>🔑 <strong>Configuración de Grupos KEMs:</strong></h4>
+                <ul>
+                    <li><strong>x25519_kyber768:</strong> algoritmo híbrido principal</li>
+                    <li><strong>X25519:</strong> fallback clásico para compatibilidad</li>
+                    <li>Nombres específicos dependen de versión oqs-provider</li>
+                    <li><strong>Verificación:</strong> <code>openssl list -key-exchange-algorithms</code></li>
+                </ul>
+            </div>
 
-📡 **Protocolo TLS 1.3:**
-• Requerido para KEMs modernos post-cuánticos
-• Handshake optimizado vs. versiones anteriores
-• Soporte nativo para extensiones de criptografía
-• Negociación de algoritmos durante ClientHello
+            <div class="modal-section">
+                <h4>📡 <strong>Protocolo TLS 1.3:</strong></h4>
+                <ul>
+                    <li>Requerido para KEMs modernos post-cuánticos</li>
+                    <li>Handshake optimizado vs. versiones anteriores</li>
+                    <li>Soporte nativo para extensiones de criptografía</li>
+                    <li>Negociación de algoritmos durante ClientHello</li>
+                </ul>
+            </div>
 
-🎯 **Objetivo de la Configuración:**
-• Prototipo realista para mediciones de rendimiento
-• Entorno controlado para benchmarking
-• Base para comparación algoritmos clásicos vs. PQC
-• Simulación de servidor web típico con capacidades futuras`;
+            <div class="modal-section">
+                <h4>🎯 <strong>Objetivo de la Configuración:</strong></h4>
+                <ul>
+                    <li>Prototipo realista para mediciones de rendimiento</li>
+                    <li>Entorno controlado para benchmarking</li>
+                    <li>Base para comparación algoritmos clásicos vs. PQC</li>
+                    <li>Simulación de servidor web típico con capacidades futuras</li>
+                </ul>
+            </div>
+        </div>
+    `;
     
     const modal = createModal(title, content, 'nginx-config');
     document.body.appendChild(modal);
@@ -594,13 +706,13 @@ function createModal(title, content, type = 'info') {
     `;
     
     const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
+    modalContent.className = 'modal-content modal-content-compact';
     modalContent.style.cssText = `
         background: white;
         border-radius: 20px;
-        padding: 30px;
-        max-width: 600px;
-        max-height: 80vh;
+        padding: 20px;
+        max-width: 650px;
+        max-height: 85vh;
         margin: 20px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         position: relative;
@@ -647,54 +759,18 @@ function createModal(title, content, type = 'info') {
         document.head.appendChild(style);
     }
     
-    // Color según tipo
-    let headerColor;
-    switch(type) {
-        case 'success': headerColor = '#27ae60'; break;
-        case 'warning': headerColor = '#f39c12'; break;
-        case 'error': headerColor = '#e74c3c'; break;
-        case 'info': headerColor = '#3498db'; break;
-        default: headerColor = '#9b59b6';
-    }
-    
     modalContent.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-            <h3 style="margin: 0; color: ${headerColor}; font-size: 1.5rem; line-height: 1.3; flex: 1;">${title}</h3>
-            <button class="close-btn" style="
-                background: none;
-                border: none;
-                font-size: 1.8rem;
-                cursor: pointer;
-                color: #999;
-                padding: 5px;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                margin-left: 15px;
-                flex-shrink: 0;
-            ">&times;</button>
+        <div class="modal-header">
+            <h3 class="modal-title">${title}</h3>
+            <button class="close-btn">&times;</button>
         </div>
-        <div style="line-height: 1.6; color: #333; font-size: 1rem; white-space: pre-line;">${content}</div>
+        <div class="modal-body">${content}</div>
     `;
     
     const closeBtn = modalContent.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
         modal.style.animation = 'modalFadeIn 0.3s ease-out reverse';
         setTimeout(() => modal.remove(), 300);
-    });
-    
-    closeBtn.addEventListener('mouseenter', () => {
-        closeBtn.style.background = '#f0f0f0';
-        closeBtn.style.transform = 'scale(1.1)';
-    });
-    
-    closeBtn.addEventListener('mouseleave', () => {
-        closeBtn.style.background = 'none';
-        closeBtn.style.transform = 'scale(1)';
     });
     
     modal.addEventListener('click', (e) => {

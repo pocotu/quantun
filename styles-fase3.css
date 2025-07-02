@@ -667,7 +667,124 @@ body {
     color: var(--gray);
 }
 
-/* Responsive */
+/* Modal Content Formatting Styles */
+.modal-content-formatted {
+    line-height: 1.3;
+}
+
+/* Estilos compactos para nueva estructura de modales */
+.modal-content-compact {
+    font-size: 0.9rem !important;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+    margin: 0 !important;
+    color: var(--primary) !important;
+    font-size: 1.3rem !important;
+    line-height: 1.3 !important;
+    flex: 1;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none !important;
+    border: none !important;
+    font-size: 1.6rem !important;
+    cursor: pointer;
+    color: #999 !important;
+    padding: 4px !important;
+    border-radius: 50%;
+    width: 35px !important;
+    height: 35px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.close-btn:hover {
+    background: #f0f0f0 !important;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    line-height: 1.3 !important;
+    color: #333;
+    font-size: 0.9rem !important;
+}
+
+.modal-body .modal-content-formatted {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos más compactos para elementos dentro del modal */
+.modal-content-compact .modal-intro {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+    padding: 6px 10px !important;
+}
+
+.modal-content-compact .modal-section {
+    margin-bottom: 8px !important;
+}
+
+.modal-content-compact .modal-section h4 {
+    font-size: 0.95rem !important;
+    margin-bottom: 3px !important;
+}
+
+.modal-content-compact .modal-section li {
+    padding: 1px 0 1px 12px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.5px !important;
+    font-size: 0.85rem !important;
+}
+
+.modal-content-compact .modal-section ul {
+    margin-bottom: 2px !important;
+}
+
+.modal-content-compact .modal-section li:last-child {
+    margin-bottom: 2px !important;
+}
+
+.modal-content-compact .modal-section h4::before {
+    margin-right: 2px;
+}
+
+/* Reducir espacio específicamente en código y bloques */
+.modal-content-compact .code-block + .modal-section {
+    margin-top: 6px !important;
+}
+
+.modal-content-compact pre {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.modal-content-compact .code-block {
+    padding: 6px !important;
+    margin: 3px 0 !important;
+}
+
+.modal-content-compact .code-block pre {
+    font-size: 0.7rem !important;
+    line-height: 1.1 !important;
+}
+
+/* Modal responsivo */
 @media (max-width: 768px) {
     .container {
         padding: 12px;
@@ -745,5 +862,33 @@ body {
     .endpoint-flow {
         flex-direction: column;
         align-items: flex-start;
+    }
+    
+    .modal-intro {
+        font-size: 0.95rem;
+        padding: 6px 10px;
+        margin-bottom: 8px;
+    }
+    
+    .modal-section {
+        margin-bottom: 8px;
+    }
+    
+    .modal-section h4 {
+        font-size: 1rem;
+        margin-bottom: 3px;
+    }
+    
+    .modal-section li {
+        padding-left: 12px;
+        font-size: 0.85rem;
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+    
+    .code-block {
+        padding: 8px;
+        font-size: 0.75rem;
+        margin: 4px 0;
     }
 }
