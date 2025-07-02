@@ -531,7 +531,6 @@ function getReferencesContent() {
             <p>Esta investigación se basa en estándares NIST actualizados y implementaciones de referencia del proyecto Open Quantum Safe. 
             Todas las mediciones de rendimiento se realizaron en un entorno controlado y reproducible utilizando metodologías de benchmarking científico establecidas.</p>
             
-            <p><strong>Fecha de acceso a referencias web:</strong> Junio 30, 2025</p>
             <p><strong>Frameworks utilizados:</strong> OpenSSL 3.x, liboqs, oqs-provider, NGINX</p>
             <p><strong>Algoritmos evaluados:</strong> ML-KEM (Kyber), ML-DSA (Dilithium)</p>
         </div>
