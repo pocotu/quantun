@@ -1,7 +1,10 @@
 // Script para el índice principal
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar el qubit del header
+    initHeaderQubit();
+    
     // Animación de entrada para las tarjetas
-    const phaseCards = document.querySelectorAll('.phase-card');
+    const phaseCards = document.querySelectorAll('.phase-card-mini');
     
     // Observer para animaciones
     const observerOptions = {
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Efectos hover mejorados
         card.addEventListener('mouseenter', function() {
             if (!this.classList.contains('active')) {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.transform = 'translateY(-5px) scale(1.02)';
             }
         });
         
@@ -201,6 +204,103 @@ function createModal(title, content, type) {
     });
     
     return modal;
+}
+
+// Función para inicializar el qubit del header
+function initHeaderQubit() {
+    const qubitSystem = document.querySelector('.qubit-system-header');
+    const virtualParticles = document.querySelectorAll('.virtual-particle-header');
+    const qubitStates = document.querySelectorAll('.qubit-state-header');
+    const sphereCore = document.querySelector('.sphere-core-header');
+    
+    if (!qubitSystem) return;
+    
+    // Variables para el seguimiento del mouse
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Interacción con el mouse - el qubit reacciona sutilmente
+    document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 10;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
+        
+        // Movimiento suave siguiendo el mouse
+        qubitSystem.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        
+        // Efecto de resplandor en el núcleo basado en la proximidad del mouse
+        const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+        const intensity = Math.max(0.8, 1 - distance / 50);
+        
+        if (sphereCore) {
+            sphereCore.style.filter = `hue-rotate(${distance * 3}deg) brightness(${intensity})`;
+        }
+        
+        // Resetear después de un tiempo sin movimiento
+        clearTimeout(window.mouseTimeout);
+        window.mouseTimeout = setTimeout(() => {
+            qubitSystem.style.transform = 'translate(0, 0)';
+            if (sphereCore) {
+                sphereCore.style.filter = '';
+            }
+        }, 1500);
+    });
+    
+    // Cambio de estados cuánticos aleatorio
+    function randomStateTransition() {
+        const randomState = qubitStates[Math.floor(Math.random() * qubitStates.length)];
+        if (randomState) {
+            // Efecto de destello
+            randomState.style.animation = 'none';
+            randomState.style.transform = 'scale(1.3)';
+            randomState.style.opacity = '1';
+            
+            setTimeout(() => {
+                randomState.style.animation = 'stateTransition 3s ease-in-out infinite';
+                randomState.style.transform = '';
+                randomState.style.opacity = '';
+            }, 300);
+        }
+    }
+    
+    // Ejecutar transiciones aleatorias
+    setInterval(randomStateTransition, 6000 + Math.random() * 3000);
+    
+    // Efecto de entrelazamiento cuántico - sincronizar partículas
+    function quantumEntanglement() {
+        virtualParticles.forEach((particle, index) => {
+            const delay = index * 100;
+            const colors = ['var(--primary)', 'var(--accent)', 'var(--accent-dark)', 'var(--secondary)'];
+            
+            setTimeout(() => {
+                // Efecto de sincronización
+                particle.style.filter = 'brightness(2) saturate(2)';
+                particle.style.transform = 'scale(1.5)';
+                
+                setTimeout(() => {
+                    particle.style.filter = '';
+                    particle.style.transform = '';
+                }, 800);
+            }, delay);
+        });
+    }
+    
+    // Ejecutar entrelazamiento cada 12-18 segundos
+    setInterval(quantumEntanglement, 12000 + Math.random() * 6000);
+    
+    // Efecto de colapso cuántico al hacer clic en el header
+    document.querySelector('.main-header')?.addEventListener('click', function(e) {
+        if (qubitSystem) {
+            qubitSystem.style.filter = 'brightness(1.3) hue-rotate(180deg)';
+            qubitSystem.style.transform += ' scale(1.05)';
+            
+            setTimeout(() => {
+                qubitSystem.style.filter = '';
+                qubitSystem.style.transform = qubitSystem.style.transform.replace(' scale(1.05)', '');
+            }, 400);
+        }
+    });
+    
+    console.log('🚀 Qubit del Header Inicializado');
 }
 
 // Animaciones CSS en JavaScript

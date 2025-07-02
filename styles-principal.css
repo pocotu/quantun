@@ -27,522 +27,469 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
+    margin: 0;
     padding: 20px;
-}
-
-/* Header Principal */
-.main-header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 25px;
-    padding: 40px;
-    margin-bottom: 40px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
     align-items: center;
 }
 
-.project-title h1 {
+/* Project Title Section */
+.project-title-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+}
+
+.project-title-section h1 {
     font-size: 2.1rem;
     font-weight: 600;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
-                 0 0 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 10px;
+    color: var(--primary);
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
     gap: 15px;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.project-title-section h1 i {
+    color: var(--accent);
+    font-size: 2rem;
 }
 
 .subtitle {
     font-size: 1.1rem;
-    color: #374151;
+    color: var(--gray);
     font-weight: 500;
-    font-style: italic;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    margin-bottom: 30px;
 }
 
-/* Animación de Átomo Cuántico */
-.quantum-visual {
-    position: relative;
-    width: 150px;
-    height: 150px;
+/* Phases Section */
+.phases-section {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.atom {
-    position: relative;
-    width: 120px;
-    height: 120px;
+/* Grid de Fases en el Header */
+.phases-grid-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
 }
 
-.nucleus {
+/* Tarjetas de Fase Mini */
+.phase-card-mini {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.phase-card-mini::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.phase-card-mini:hover::before {
+    opacity: 1;
+}
+
+.phase-card-mini.active {
+    border-color: var(--primary);
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.15);
+}
+
+.phase-card-mini:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.phase-number-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.phase-number-mini i {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.phase-number-mini span {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--secondary);
+}
+
+.phase-content-mini h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--dark);
+    line-height: 1.2;
+}
+
+.phase-content-mini p {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Animación de Qubit Cuántico */
+.quantum-visual {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.qubit-system-header {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    animation: qubitSystemFloat 15s ease-in-out infinite;
+}
+
+@keyframes qubitSystemFloat {
+    0%, 100% { 
+        transform: rotate(0deg) scale(1);
+        opacity: 0.9;
+    }
+    25% { 
+        transform: rotate(90deg) scale(1.05);
+        opacity: 1;
+    }
+    50% { 
+        transform: rotate(180deg) scale(0.95);
+        opacity: 0.8;
+    }
+    75% { 
+        transform: rotate(270deg) scale(1.02);
+        opacity: 0.95;
+    }
+}
+
+.quantum-sphere-header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(30, 58, 138, 0.1) 30%,
+        rgba(29, 78, 216, 0.08) 60%,
+        transparent 100%);
+    animation: spherePulse 4s ease-in-out infinite;
+}
+
+@keyframes spherePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(30, 58, 138, 0.4);
+    }
+}
+
+.sphere-core-header {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
-    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    background: radial-gradient(circle, 
+        var(--accent) 0%,
+        var(--primary) 50%,
+        var(--accent-dark) 100%);
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
-    animation: nucleusPulse 2s ease-in-out infinite alternate;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 
+        0 0 20px rgba(59, 130, 246, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: coreRotation 6s linear infinite;
 }
 
-.proton, .neutron {
+@keyframes coreRotation {
+    0% { 
+        transform: translate(-50%, -50%) rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% { 
+        transform: translate(-50%, -50%) rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+.quantum-field-header {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-}
-
-.proton {
-    background: #ff4757;
-    animation: subatomicSpin 1.5s linear infinite;
-}
-
-.neutron {
-    background: #747d8c;
-    animation: subatomicSpin 1.8s linear infinite reverse;
-}
-
-.proton:nth-child(1) { transform: translate(-2px, -2px); }
-.proton:nth-child(3) { transform: translate(2px, 2px); }
-.neutron { transform: translate(0, 0); }
-
-.orbit {
-    position: absolute;
-    border: 2px solid rgba(59, 130, 246, 0.3);
-    border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.orbit-1 {
-    width: 60px;
-    height: 60px;
-    animation: orbitRotate 3s linear infinite;
-}
-
-.orbit-2 {
-    width: 90px;
-    height: 90px;
-    animation: orbitRotate 4s linear infinite reverse;
-    transform: translate(-50%, -50%) rotateX(60deg);
-}
-
-.orbit-3 {
     width: 120px;
     height: 120px;
-    animation: orbitRotate 5s linear infinite;
-    transform: translate(-50%, -50%) rotateY(60deg);
-}
-
-.electron {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    border: 1px solid rgba(59, 130, 246, 0.4);
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
-    top: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: electronGlow 1s ease-in-out infinite alternate;
+    background: radial-gradient(circle, 
+        transparent 40%,
+        rgba(59, 130, 246, 0.1) 60%,
+        transparent 80%);
+    animation: fieldOscillation 3s ease-in-out infinite;
 }
 
-@keyframes nucleusPulse {
-    0% {
+@keyframes fieldOscillation {
+    0%, 100% { 
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+        border-color: rgba(59, 130, 246, 0.4);
     }
-    100% {
+    50% { 
         transform: translate(-50%, -50%) scale(1.1);
-        box-shadow: 0 0 30px rgba(255, 107, 107, 0.9);
+        border-color: rgba(30, 58, 138, 0.5);
     }
 }
 
-@keyframes subatomicSpin {
-    0% { transform: rotate(0deg) translateX(1px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(1px) rotate(-360deg); }
-}
-
-@keyframes orbitRotate {
-    0% { transform: translate(-50%, -50%) rotateZ(0deg); }
-    100% { transform: translate(-50%, -50%) rotateZ(360deg); }
-}
-
-@keyframes electronGlow {
-    0% {
-        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
-        transform: translateX(-50%) scale(1);
-    }
-    100% {
-        box-shadow: 0 0 15px rgba(59, 130, 246, 1);
-        transform: translateX(-50%) scale(1.2);
-    }
-}
-
-/* Grid de Fases */
-.phases-container {
-    margin-bottom: 50px;
-}
-
-.phases-grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    grid-template-rows: auto auto;
-    gap: 30px;
-    align-items: center;
-    margin-bottom: 50px;
-}
-
-/* Tarjetas de Fase */
-.phase-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    border: 3px solid transparent;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.phase-card::before {
-    content: '';
+/* Estados Cuánticos */
+.qubit-state-header {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-shadow: 0 0 10px currentColor;
+    animation: stateTransition 3s ease-in-out infinite;
+    opacity: 0;
+    user-select: none;
 }
 
-.phase-card:hover::before {
-    opacity: 1;
-}
-
-.phase-card.active {
-    border-color: var(--primary);
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-}
-
-.phase-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
-
-.phase-number {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.phase-number i {
-    font-size: 2.5rem;
+.state-0-header {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
     color: var(--primary);
 }
 
-.phase-number span {
-    font-size: 2rem;
-    font-weight: 800;
+.state-1-header {
+    top: 10%;
+    right: 10%;
+    animation-delay: 1s;
+    color: var(--accent);
+}
+
+.state-superposition-header {
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 2s;
+    color: var(--accent-dark);
+    font-size: 1.3rem;
+}
+
+@keyframes stateTransition {
+    0%, 80%, 100% { 
+        opacity: 0;
+        transform: scale(0.8) translateY(5px);
+    }
+    10%, 70% { 
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Órbitas Cuánticas */
+.quantum-orbit-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    transform-origin: center;
+}
+
+.orbit-x-header {
+    width: 90px;
+    height: 90px;
+    transform: translate(-50%, -50%) rotateX(0deg);
+    animation: orbitX 8s linear infinite;
+}
+
+.orbit-y-header {
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%) rotateY(60deg);
+    animation: orbitY 10s linear infinite reverse;
+    border-color: rgba(30, 58, 138, 0.25);
+}
+
+.orbit-z-header {
+    width: 150px;
+    height: 150px;
+    transform: translate(-50%, -50%) rotateZ(30deg);
+    animation: orbitZ 12s linear infinite;
+    border-color: rgba(29, 78, 216, 0.2);
+}
+
+@keyframes orbitX {
+    0% { transform: translate(-50%, -50%) rotateX(0deg) rotateZ(0deg); }
+    100% { transform: translate(-50%, -50%) rotateX(360deg) rotateZ(360deg); }
+}
+
+@keyframes orbitY {
+    0% { transform: translate(-50%, -50%) rotateY(60deg) rotateX(0deg); }
+    100% { transform: translate(-50%, -50%) rotateY(60deg) rotateX(360deg); }
+}
+
+@keyframes orbitZ {
+    0% { transform: translate(-50%, -50%) rotateZ(30deg) rotateY(0deg); }
+    100% { transform: translate(-50%, -50%) rotateZ(30deg) rotateY(360deg); }
+}
+
+/* Partículas Virtuales */
+.virtual-particles-header {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.virtual-particle-header {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+    animation: particleFloat 4s ease-in-out infinite;
+}
+
+.p1-header {
+    top: 25%;
+    left: 30%;
+    animation-delay: 0s;
+    animation-duration: 3.5s;
+    color: var(--primary);
+}
+
+.p2-header {
+    top: 60%;
+    left: 70%;
+    animation-delay: 0.8s;
+    animation-duration: 4.5s;
+    color: var(--accent);
+}
+
+.p3-header {
+    top: 45%;
+    left: 15%;
+    animation-delay: 1.6s;
+    animation-duration: 3s;
+    color: var(--accent-dark);
+}
+
+.p4-header {
+    top: 80%;
+    left: 50%;
+    animation-delay: 2.4s;
+    animation-duration: 4s;
     color: var(--secondary);
 }
 
-.phase-content h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--dark);
-}
-
-.phase-content p {
-    color: var(--gray);
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.phase-highlights {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.highlight {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    color: var(--dark);
-    background: rgba(102, 126, 234, 0.1);
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-.highlight i {
-    color: var(--primary);
-    font-size: 0.8rem;
-}
-
-.phase-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    margin-top: auto;
-}
-
-.phase-card.active .phase-status {
-    color: var(--success);
-}
-
-.phase-card:not(.active) .phase-status {
-    color: var(--warning);
-}
-
-/* Flechas entre Fases */
-.phase-arrow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: var(--primary);
-    animation: arrowPulse 2s ease-in-out infinite;
-}
-
-@keyframes arrowPulse {
-    0%, 100% {
-        transform: scale(1);
+@keyframes particleFloat {
+    0%, 100% { 
+        transform: translateY(0) translateX(0) scale(1);
         opacity: 0.7;
     }
-    50% {
-        transform: scale(1.2);
+    25% { 
+        transform: translateY(-15px) translateX(10px) scale(1.2);
         opacity: 1;
+    }
+    50% { 
+        transform: translateY(-5px) translateX(-8px) scale(0.8);
+        opacity: 1;
+    }
+    75% { 
+        transform: translateY(10px) translateX(5px) scale(1.1);
+        opacity: 0.8;
     }
 }
 
-/* Posicionamiento del Grid */
-.phase-card[data-phase="1"] { grid-column: 1; grid-row: 1; }
-.phase-card[data-phase="2"] { grid-column: 3; grid-row: 1; }
-.phase-card[data-phase="3"] { grid-column: 5; grid-row: 1; }
-.phase-card[data-phase="4"] { grid-column: 1; grid-row: 2; }
-.phase-card[data-phase="5"] { grid-column: 3; grid-row: 2; }
-.phase-card[data-phase="6"] { grid-column: 5; grid-row: 2; }
-
-.phase-arrow:nth-of-type(2) { grid-column: 2; grid-row: 1; }
-.phase-arrow:nth-of-type(4) { grid-column: 4; grid-row: 1; }
-.phase-arrow:nth-of-type(6) { grid-column: 2; grid-row: 2; }
-.phase-arrow:nth-of-type(8) { grid-column: 4; grid-row: 2; }
-
-/* Flechas verticales */
-.phase-arrow:nth-of-type(6),
-.phase-arrow:nth-of-type(8) {
-    transform: rotate(90deg);
-}
-
-/* Call to Action */
-.cta-section {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.cta-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
-                 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.cta-section p {
-    font-size: 1.2rem;
-    color: var(--gray);
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    border: none;
-    padding: 18px 40px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-}
-
-/* Footer */
-.main-footer {
-    background: rgba(44, 62, 80, 0.95);
-    backdrop-filter: blur(15px);
-    border-radius: 25px;
-    padding: 30px;
-    color: white;
-    margin-top: 40px;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.tech-stack {
-    text-align: center;
-}
-
-.footer-content h4 {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.tech-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.tech-icons span {
-    font-size: 1.5rem;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.tech-icons span:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-/* Estilos para Modales de Navegación */
-.overview-modal,
-.quicknav-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Ondas de Probabilidad */
+.probability-waves-header {
+    position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    top: 0;
+    left: 0;
 }
 
-.overview-modal.show,
-.quicknav-modal.show {
-    opacity: 1;
-    visibility: visible;
+.wave-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: waveExpansion 2s ease-out infinite;
 }
 
-.modal-content {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    max-width: 700px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    transform: scale(0.8) translateY(50px);
-    transition: transform 0.3s ease;
-}
-
-.overview-modal.show .modal-content,
-.quicknav-modal.show .modal-content {
-    transform: scale(1) translateY(0);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    padding: 25px 30px;
-    border-radius: 20px 20px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0;
+.wave-1-header {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
+    animation-delay: 0s;
+    border-color: rgba(59, 130, 246, 0.6);
 }
 
-.close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+.wave-2-header {
+    width: 70px;
+    height: 70px;
+    animation-delay: 1s;
+    border-color: rgba(30, 58, 138, 0.4);
 }
 
-.modal-body {
-    padding: 30px;
+@keyframes waveExpansion {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: 1;
+        border-width: 2px;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.6;
+        border-width: 1px;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+        border-width: 0px;
+    }
 }
 
 /* Vista General del Proyecto */
@@ -642,50 +589,71 @@ body {
     font-size: 1rem;
 }
 
+/* Project Title Styling */
+.project-title h1 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    line-height: 1.2;
+}
+
+.project-title h1 i {
+    color: var(--accent);
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--gray);
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .phases-grid {
+    body {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(6, auto);
-        gap: 20px;
-    }
-    
-    .phase-card {
-        grid-column: 1 !important;
-        min-height: auto;
-    }
-    
-    .phase-arrow {
-        transform: rotate(90deg) !important;
-        margin: 10px 0;
-    }
-    
-    .main-header {
-        flex-direction: column;
-        text-align: center;
         gap: 30px;
     }
     
-    .project-title h1 {
-        font-size: 1.8rem;
-        justify-content: center;
+    .project-title-section {
+        padding-right: 0;
         text-align: center;
+    }
+    
+    .phases-grid-header {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+    
+    .phase-card-mini {
+        min-height: 120px;
+        padding: 15px;
+    }
+    
+    .quantum-visual {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .qubit-system-header {
+        width: 140px;
+        height: 140px;
     }
 }
 
 @media (max-width: 768px) {
-    .container {
+    body {
         padding: 15px;
+        gap: 25px;
     }
     
-    .main-header {
-        padding: 25px;
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .project-title h1 {
-        font-size: 1.4rem;
+    .project-title-section h1 {
+        font-size: 1.6rem;
         flex-direction: column;
         gap: 10px;
         text-align: center;
@@ -694,19 +662,33 @@ body {
     
     .subtitle {
         font-size: 1rem;
+        margin-bottom: 20px;
     }
     
-    .phase-card {
-        padding: 20px;
-        min-height: 250px;
+    .phases-grid-header {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
     
-    .cta-section {
-        padding: 25px;
+    .phase-card-mini {
+        min-height: 100px;
+        padding: 12px;
     }
     
-    .cta-section h2 {
-        font-size: 2rem;
+    .phase-number-mini i {
+        font-size: 1.2rem;
+    }
+    
+    .phase-number-mini span {
+        font-size: 1rem;
+    }
+    
+    .phase-content-mini h3 {
+        font-size: 0.9rem;
+    }
+    
+    .phase-content-mini p {
+        font-size: 0.75rem;
     }
     
     .footer-content {
@@ -714,36 +696,92 @@ body {
     }
     
     .quantum-visual {
+        width: 120px;
+        height: 120px;
+        margin: 15px auto;
+    }
+    
+    .qubit-system-header {
         width: 100px;
         height: 100px;
     }
     
-    .atom {
-        width: 80px;
-        height: 80px;
+    .quantum-sphere-header {
+        width: 100px;
+        height: 100px;
     }
     
-    .nucleus {
-        width: 15px;
-        height: 15px;
+    .sphere-core-header {
+        width: 10px;
+        height: 10px;
     }
     
-    .orbit-1 { width: 40px; height: 40px; }
-    .orbit-2 { width: 60px; height: 60px; }
-    .orbit-3 { width: 80px; height: 80px; }
-    
-    .electron {
-        width: 6px;
-        height: 6px;
-        top: -3px;
+    .quantum-field-header {
+        width: 60px;
+        height: 60px;
     }
     
-    .quick-nav-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .orbit-x-header { width: 50px; height: 50px; }
+    .orbit-y-header { width: 65px; height: 65px; }
+    .orbit-z-header { width: 80px; height: 80px; }
+    
+    .virtual-particle-header {
+        width: 2px;
+        height: 2px;
     }
     
-    .modal-content {
-        width: 95%;
-        margin: 20px;
+    .qubit-state-header {
+        font-size: 0.6rem;
+    }
+    
+    .state-superposition-header {
+        font-size: 0.7rem;
+    }
+}
+
+/* Large screens optimization */
+@media (min-width: 1440px) {
+    body {
+        padding: 30px;
+    }
+    
+    .main-header {
+        padding: 50px;
+        gap: 60px;
+        min-height: 650px;
+    }
+    
+    .project-title h1 {
+        font-size: 2.5rem;
+    }
+    
+    .quantum-visual {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .phase-card-mini {
+        padding: 20px;
+    }
+    
+    .phase-content-mini h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1920px) {
+    body {
+        padding: 40px 60px;
+    }
+    
+    .main-header {
+        max-width: 1600px;
+        padding: 60px;
+        gap: 80px;
+    }
+    
+    .phases-grid-header {
+        gap: 25px;
     }
 }
