@@ -135,6 +135,220 @@ function initInteractions() {
     
     // Interacciones con protocolo
     initProtocolInteractions();
+    
+    // Event listeners para modales educativos
+    setupEducationalModals();
+}
+
+// Configuración de modales educativos
+function setupEducationalModals() {
+    // Modal para scenario-badge (Matriz de Pruebas)
+    const scenarioBadge = document.querySelector('.scenario-badge');
+    if (scenarioBadge) {
+        scenarioBadge.style.cursor = 'pointer';
+        scenarioBadge.addEventListener('click', () => showScenarioMatrixModal());
+    }
+    
+    // Modal para metrics-badge (Análisis Multifacético)
+    const metricsBadge = document.querySelector('.metrics-badge');
+    if (metricsBadge) {
+        metricsBadge.style.cursor = 'pointer';
+        metricsBadge.addEventListener('click', () => showMetricsAnalysisModal());
+    }
+    
+    // Modal para simulation-badge (Simulación de Red)
+    const simulationBadge = document.querySelector('.simulation-badge');
+    if (simulationBadge) {
+        simulationBadge.style.cursor = 'pointer';
+        simulationBadge.addEventListener('click', () => showNetworkSimulationModal());
+    }
+    
+    // Modal para protocol-badge (Protocolo de Ejecución)
+    const protocolBadge = document.querySelector('.protocol-badge');
+    if (protocolBadge) {
+        protocolBadge.style.cursor = 'pointer';
+        protocolBadge.addEventListener('click', () => showExecutionProtocolModal());
+    }
+}
+
+// Modal: Matriz de Pruebas - Escenarios y Configuraciones
+function showScenarioMatrixModal() {
+    showModal({
+        title: "Matriz de Configuraciones de Benchmarking",
+        content: `
+            <div class="modal-section">
+                <h4><i class="fas fa-sitemap"></i> Metodología de Benchmarking Sistemático</h4>
+                <p>La matriz de configuraciones implementa un enfoque exhaustivo para evaluar algoritmos post-cuánticos bajo múltiples condiciones operacionales.</p>
+                
+                <h5>🔬 Escenarios de Evaluación:</h5>
+                <ul>
+                    <li><strong>TLS Handshake End-to-End:</strong> Evaluación del handshake completo TLS 1.3 con algoritmos post-cuánticos (Kyber para intercambio de claves, Dilithium para autenticación)</li>
+                    <li><strong>Primitivas Criptográficas Puras:</strong> Medición directa de operaciones KeyGen, Sign y Verify sin overhead de protocolo</li>
+                </ul>
+                
+                <h5>⚙️ Variables de Configuración:</h5>
+                <ul>
+                    <li><strong>Optimización Hardware (AVX2):</strong> Comparación entre implementaciones optimizadas y genéricas</li>
+                    <li><strong>Configuraciones de Red:</strong> Simulación de latencias WAN/LAN y pérdida de paquetes</li>
+                    <li><strong>Cargas de Trabajo:</strong> Variación en tamaños de mensaje y frecuencia de operaciones</li>
+                </ul>
+                
+                <div class="tech-note">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Fundamentación Técnica:</strong> Esta matriz permite identificar compensaciones (trade-offs) entre seguridad post-cuántica y rendimiento operacional, proporcionando datos empíricos para decisiones de implementación.
+                </div>
+            </div>
+        `
+    });
+}
+
+// Modal: Análisis Multifacético de Métricas
+function showMetricsAnalysisModal() {
+    showModal({
+        title: "Análisis Multifacético de Rendimiento",
+        content: `
+            <div class="modal-section">
+                <h4><i class="fas fa-chart-line"></i> Métricas Comprehensivas de Evaluación</h4>
+                <p>El análisis multifacético captura múltiples dimensiones del rendimiento para proporcionar una evaluación holística de los algoritmos post-cuánticos.</p>
+                
+                <h5>📊 Dimensiones de Medición:</h5>
+                <ul>
+                    <li><strong>Rendimiento Temporal:</strong>
+                        <ul>
+                            <li>Latencia de handshake TLS completo</li>
+                            <li>Tiempo de generación de claves (KeyGen)</li>
+                            <li>Tiempo de firma digital (Sign/Verify)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Eficiencia Computacional:</strong>
+                        <ul>
+                            <li>Utilización de CPU durante operaciones criptográficas</li>
+                            <li>Throughput de conexiones simultáneas</li>
+                            <li>Escalabilidad bajo carga</li>
+                        </ul>
+                    </li>
+                    <li><strong>Overhead de Comunicación:</strong>
+                        <ul>
+                            <li>Tamaño de claves públicas y firmas</li>
+                            <li>Bandwidth adicional en handshakes</li>
+                            <li>Fragmentación de paquetes</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h5>🎯 Metodología de Análisis:</h5>
+                <p>Aplicación de técnicas estadísticas robustas incluyendo análisis de percentiles, detección de outliers y correlación entre métricas para identificar patrones de rendimiento.</p>
+                
+                <div class="tech-note">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Valor Metodológico:</strong> Este enfoque multidimensional permite identificar algoritmos que optimizan globalmente el rendimiento, no solo métricas individuales.
+                </div>
+            </div>
+        `
+    });
+}
+
+// Modal: Simulación de Condiciones de Red
+function showNetworkSimulationModal() {
+    showModal({
+        title: "Simulación de Condiciones de Red Realistas",
+        content: `
+            <div class="modal-section">
+                <h4><i class="fas fa-network-wired"></i> Traffic Control y Network Emulation</h4>
+                <p>La simulación de red utiliza herramientas Linux avanzadas para replicar condiciones de red del mundo real y evaluar la robustez de algoritmos post-cuánticos.</p>
+                
+                <h5>🛠️ Herramientas Utilizadas:</h5>
+                <ul>
+                    <li><strong>tc (Traffic Control):</strong> Control de tráfico a nivel de kernel para simular limitaciones de bandwidth</li>
+                    <li><strong>netem (Network Emulation):</strong> Emulación de características de red como latencia, jitter y pérdida de paquetes</li>
+                </ul>
+                
+                <h5>📡 Escenarios de Red Simulados:</h5>
+                <ul>
+                    <li><strong>LAN (Red Local):</strong>
+                        <ul>
+                            <li>Latencia: 1-5ms</li>
+                            <li>Bandwidth: 1Gbps</li>
+                            <li>Pérdida de paquetes: 0%</li>
+                        </ul>
+                    </li>
+                    <li><strong>WAN (Internet):</strong>
+                        <ul>
+                            <li>Latencia: 50-200ms</li>
+                            <li>Bandwidth: 10-100Mbps</li>
+                            <li>Pérdida de paquetes: 0.1-1%</li>
+                        </ul>
+                    </li>
+                    <li><strong>Condiciones Adversas:</strong>
+                        <ul>
+                            <li>Alta latencia: >300ms</li>
+                            <li>Bandwidth limitado: <1Mbps</li>
+                            <li>Pérdida significativa: >2%</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h5>🎯 Objetivo de la Simulación:</h5>
+                <p>Evaluar cómo el mayor tamaño de claves y firmas de algoritmos post-cuánticos afecta el rendimiento en redes con limitaciones reales, especialmente en el contexto de timeouts de TLS y retransmisiones.</p>
+                
+                <div class="tech-note">
+                    <i class="fas fa-shield-alt"></i>
+                    <strong>Importancia Práctica:</strong> Los algoritmos post-cuánticos introducen overhead significativo. La simulación de red permite identificar configuraciones óptimas para diferentes entornos de despliegue.
+                </div>
+            </div>
+        `
+    });
+}
+
+// Modal: Protocolo de Ejecución Riguroso
+function showExecutionProtocolModal() {
+    showModal({
+        title: "Protocolo de Ejecución de Benchmarks",
+        content: `
+            <div class="modal-section">
+                <h4><i class="fas fa-cogs"></i> Metodología de Ejecución Sistemática</h4>
+                <p>El protocolo de ejecución garantiza la reproducibilidad y validez estadística de los resultados mediante un enfoque sistemático y controlado.</p>
+                
+                <h5>🔄 Parámetros de Ejecución:</h5>
+                <ul>
+                    <li><strong>N = 1,000 Iteraciones:</strong> Número de ejecuciones por configuración para asegurar significancia estadística</li>
+                    <li><strong>Warmup Period:</strong> 100 iteraciones iniciales descartadas para estabilizar el sistema</li>
+                    <li><strong>Cooldown:</strong> Pausa entre batches para evitar efectos térmicos</li>
+                </ul>
+                
+                <h5>🎯 Control de Variables:</h5>
+                <ul>
+                    <li><strong>Aislamiento del Sistema:</strong>
+                        <ul>
+                            <li>CPU governor fijado en "performance"</li>
+                            <li>Desactivación de power saving</li>
+                            <li>Isolation de cores específicos</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reproducibilidad:</strong>
+                        <ul>
+                            <li>Seeds fijas para generadores aleatorios</li>
+                            <li>Orden determinístico de ejecución</li>
+                            <li>Logging completo de configuraciones</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h5>📈 Análisis Estadístico:</h5>
+                <ul>
+                    <li><strong>Medidas de Tendencia Central:</strong> Media, mediana y percentiles</li>
+                    <li><strong>Variabilidad:</strong> Desviación estándar y coeficiente de variación</li>
+                    <li><strong>Detección de Outliers:</strong> Método IQR para identificar mediciones anómalas</li>
+                    <li><strong>Intervalos de Confianza:</strong> 95% de confianza para todas las métricas</li>
+                </ul>
+                
+                <div class="tech-note">
+                    <i class="fas fa-microscope"></i>
+                    <strong>Rigor Científico:</strong> El protocolo sigue estándares de benchmarking académico para asegurar que los resultados sean comparables con investigación previa y futura en el campo.
+                </div>
+            </div>
+        `
+    });
 }
 
 function addHoverEffects() {
@@ -609,6 +823,12 @@ function createModal(title, content, type = 'info') {
     }
     
     return modal;
+}
+
+// Función helper para mostrar modales
+function showModal(config) {
+    const modal = createModal(config.title, config.content, config.type || 'info');
+    document.body.appendChild(modal);
 }
 
 // Función para mostrar información de herramientas

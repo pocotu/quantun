@@ -94,6 +94,8 @@ function animateMetrics() {
 
 // Interacciones
 function initInteractions() {
+    // Event listeners para modales educativos
+    setupEducationalModals();
     // Hover effects para tarjetas
     addHoverEffects();
     
@@ -751,3 +753,91 @@ additionalStyles.textContent = `
     }
 `;
 document.head.appendChild(additionalStyles);
+
+// Configuración de modales educativos
+function setupEducationalModals() {
+    const processingBadge = document.querySelector('.processing-badge');
+    if (processingBadge) {
+        processingBadge.style.cursor = 'pointer';
+        processingBadge.addEventListener('click', () => showDataProcessingModal());
+    }
+    
+    const analysisBadge = document.querySelector('.analysis-badge');
+    if (analysisBadge) {
+        analysisBadge.style.cursor = 'pointer';
+        analysisBadge.addEventListener('click', () => showTradeoffAnalysisModal());
+    }
+    
+    const frameworkBadge = document.querySelector('.framework-badge');
+    if (frameworkBadge) {
+        frameworkBadge.style.cursor = 'pointer';
+        frameworkBadge.addEventListener('click', () => showDecisionFrameworkModal());
+    }
+}
+
+function showDataProcessingModal() {
+    showModal({
+        title: "Procesamiento y Análisis Riguroso de Datos",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-chart-pie"></i> Metodología de Análisis Estadístico</h4>
+            <p>El procesamiento utiliza técnicas estadísticas robustas para extraer insights significativos.</p>
+            <h5>📊 Pipeline de Procesamiento:</h5>
+            <ul>
+                <li><strong>Limpieza:</strong> Filtrado de outliers mediante método IQR</li>
+                <li><strong>Descriptivo:</strong> Estadísticas robustas y distribuciones</li>
+                <li><strong>Inferencial:</strong> Tests de significancia estadística</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showTradeoffAnalysisModal() {
+    showModal({
+        title: "Análisis de Compensaciones",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-balance-scale"></i> Trade-offs Post-Cuánticos</h4>
+            <p>Evaluación de relaciones entre seguridad, rendimiento y viabilidad.</p>
+            <h5>⚖️ Dimensiones:</h5>
+            <ul>
+                <li><strong>Seguridad vs. Velocidad:</strong> Más seguridad = más tiempo</li>
+                <li><strong>Seguridad vs. Bandwidth:</strong> Claves grandes impactan ancho de banda</li>
+                <li><strong>Madurez vs. Adopción:</strong> Balance estabilidad/innovación</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showDecisionFrameworkModal() {
+    showModal({
+        title: "Framework de Decisiones",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-route"></i> Guía de Selección</h4>
+            <p>Framework sistemático para selección e implementación de algoritmos.</p>
+            <h5>🎯 Proceso:</h5>
+            <ul>
+                <li><strong>Requisitos:</strong> Análisis de necesidades específicas</li>
+                <li><strong>Filtrado:</strong> Evaluación de compatibilidad</li>
+                <li><strong>Empírico:</strong> Benchmarking en condiciones reales</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showModal(config) {
+    const modal = createModal(config.title, config.content);
+    document.body.appendChild(modal);
+}
+
+function createModal(title, content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `<div class="modal-container">
+        <div class="modal-header">
+            <h3>${title}</h3>
+            <button onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">${content}</div>
+    </div>`;
+    modal.onclick = e => e.target === modal && modal.remove();
+    return modal;
+}

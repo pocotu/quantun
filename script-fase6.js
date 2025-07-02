@@ -78,6 +78,8 @@ function animateInternalElements() {
 }
 
 function setupInteractions() {
+    // Event listeners para modales educativos
+    setupEducationalModals();
     // Efectos hover para elementos interactivos
     setupHoverEffects();
     
@@ -805,6 +807,111 @@ Evaluación de Rendimiento de Algoritmos Post-Cuánticos`,
         'success'
     );
     document.body.appendChild(modal);
+}
+
+// Configuración de modales educativos
+function setupEducationalModals() {
+    const synthesisBadge = document.querySelector('.synthesis-badge');
+    if (synthesisBadge) {
+        synthesisBadge.style.cursor = 'pointer';
+        synthesisBadge.addEventListener('click', () => showSynthesisModal());
+    }
+    
+    const limitationsBadge = document.querySelector('.limitations-badge');
+    if (limitationsBadge) {
+        limitationsBadge.style.cursor = 'pointer';
+        limitationsBadge.addEventListener('click', () => showLimitationsModal());
+    }
+    
+    const futureBadge = document.querySelector('.future-badge');
+    if (futureBadge) {
+        futureBadge.style.cursor = 'pointer';
+        futureBadge.addEventListener('click', () => showFutureWorkModal());
+    }
+}
+
+function showSynthesisModal() {
+    showModal({
+        title: "Síntesis de Resultados y Viabilidad",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-check-circle"></i> Evaluación de Viabilidad</h4>
+            <p>Síntesis integral de hallazgos sobre la viabilidad práctica de algoritmos post-cuánticos.</p>
+            <h5>🎯 Hallazgos Clave:</h5>
+            <ul>
+                <li><strong>Viabilidad Técnica:</strong> Algoritmos NIST son implementables en infraestructura actual</li>
+                <li><strong>Overhead Aceptable:</strong> Impacto de rendimiento dentro de rangos manejables</li>
+                <li><strong>Preparación Gradual:</strong> Transición híbrida permite migración segura</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showLimitationsModal() {
+    showModal({
+        title: "Limitaciones y Transparencia Metodológica",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-balance-scale"></i> Transparencia en Limitaciones</h4>
+            <p>Reconocimiento honesto de limitaciones metodológicas y del alcance del estudio.</p>
+            <h5>⚠️ Limitaciones Identificadas:</h5>
+            <ul>
+                <li><strong>Scope Temporal:</strong> Evaluación en momento específico del desarrollo</li>
+                <li><strong>Entorno Controlado:</strong> Condiciones de laboratorio vs. producción real</li>
+                <li><strong>Algoritmos Específicos:</strong> Enfoque en subset de candidatos NIST</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showFutureWorkModal() {
+    showModal({
+        title: "Direcciones de Investigación Futura",
+        content: `<div class="modal-section">
+            <h4><i class="fas fa-route"></i> Roadmap de Investigación</h4>
+            <p>Identificación de áreas prioritarias para investigación continuada en el campo.</p>
+            <h5>🔬 Líneas de Investigación:</h5>
+            <ul>
+                <li><strong>Optimización Continua:</strong> Mejoras algorítmicas y de implementación</li>
+                <li><strong>Nuevos Candidatos:</strong> Evaluación de algoritmos emergentes</li>
+                <li><strong>Casos de Uso Específicos:</strong> Adaptación a dominios particulares</li>
+            </ul>
+        </div>`
+    });
+}
+
+function showModal(config) {
+    const modal = createModal(config.title, config.content);
+    document.body.appendChild(modal);
+}
+
+function createModal(title, content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `<div class="modal-container">
+        <div class="modal-header">
+            <h3>${title}</h3>
+            <button onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">${content}</div>
+    </div>`;
+    modal.onclick = e => e.target === modal && modal.remove();
+    
+    // Agregar estilos si no existen
+    if (!document.querySelector('#modal-styles-fase6')) {
+        const styles = document.createElement('style');
+        styles.id = 'modal-styles-fase6';
+        styles.textContent = `
+            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 10000; }
+            .modal-container { background: white; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+            .modal-header { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 15px 20px; 
+                border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
+            .modal-header button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+            .modal-body { padding: 20px; line-height: 1.6; }
+        `;
+        document.head.appendChild(styles);
+    }
+    
+    return modal;
 }
 
 // Funciones de navegación

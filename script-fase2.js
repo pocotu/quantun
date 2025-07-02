@@ -129,6 +129,39 @@ function setupInteractivity() {
         });
     });
 
+    // Click en badges de principios
+    const principleBadge = document.querySelector('.principle-badge');
+    if (principleBadge) {
+        principleBadge.addEventListener('click', function() {
+            showIsolationPrincipleDetails();
+        });
+    }
+
+    // Click en version badge
+    const versionBadge = document.querySelector('.version-badge');
+    if (versionBadge) {
+        versionBadge.addEventListener('click', function() {
+            showVersionCompatibilityDetails();
+        });
+    }
+
+    // Click en improvement note
+    const improvementNote = document.querySelector('.improvement-note');
+    if (improvementNote) {
+        improvementNote.addEventListener('click', function() {
+            showProviderArchitectureDetails();
+        });
+    }
+
+    // Click en compilation details
+    const compilationDetails = document.querySelectorAll('.compilation-detail');
+    compilationDetails.forEach(detail => {
+        detail.addEventListener('click', function() {
+            const step = this.querySelector('h4').textContent;
+            showCompilationStepDetails(step);
+        });
+    });
+
     // Agregar manejadores de teclado para modales
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
@@ -552,6 +585,246 @@ Mantenimiento:
     }
     
     const modal = createModal(title, content, 'info');
+    document.body.appendChild(modal);
+}
+
+function showIsolationPrincipleDetails() {
+    const title = '🛡️ Principio de Aislamiento Arquitectónico';
+    const content = `Fundamento metodológico para investigación empírica rigurosa en PQC.
+
+🔬 **Control de Variables Experimentales:**
+• Eliminación de variables ambientales como fuente de error
+• Dependencias con versiones exactas y reproducibles
+• Configuración determinista del entorno de ejecución
+• Aislamiento del sistema host para evitar interferencias
+
+🏗️ **Estrategia de Contenerización:**
+• Docker: encapsulación completa de entornos servidor y cliente
+• Garantía de configuraciones idénticas en cada ejecución de prueba
+• Dockerfile declarativo: entorno definido como código
+• docker-compose: orquestación de múltiples componentes
+
+📊 **Requisitos de Investigación Científica:**
+• Reproducibilidad: pilar de investigación creíble
+• Verificabilidad: resultados deben ser confirmables por terceros
+• Archivabilidad: configuración compartible y documentada
+• Automatización: eliminación de variabilidad humana
+
+🎯 **Beneficio para Benchmarking PQC:**
+• Mediciones consistentes entre algoritmos clásicos y post-cuánticos
+• Eliminación de sesgos por diferencias de configuración
+• Comparaciones justas de rendimiento bajo condiciones controladas`;
+    
+    const modal = createModal(title, content, 'principle');
+    document.body.appendChild(modal);
+}
+
+function showVersionCompatibilityDetails() {
+    const title = '🏷️ Compatibilidad Crítica de Versiones';
+    const content = `Desafío fundamental en la construcción de pila criptográfica PQC desde código fuente.
+
+⚠️ **Problema de Compatibilidad:**
+• Versiones de liboqs, oqs-provider y OpenSSL no garantizan compatibilidad en todos los commits
+• Compilación exitosa depende de versiones específicas probadas conjuntamente
+• APIs en evolución constante durante desarrollo activo de PQC
+
+🔧 **Estrategia de Mitigación:**
+• Usar últimas etiquetas de lanzamiento estables para liboqs y oqs-provider
+• Alternativamente: versiones especificadas en repositorio oqs-demos
+• oqs-demos: selección curada de versiones compatibles probadas
+
+📋 **Metodología Robusta:**
+• Especificar commits exactos de git para reproducibilidad
+• Proyecto OQS publica versiones de oqs-provider probadas con liboqs específicas
+• Tutoriales oficiales: extraen commits específicos para garantizar compilación estable
+
+🏗️ **Implementación en Dockerfile:**
+• Variables de entorno para especificar versiones exactas
+• Estrategia de fallback si versiones principales fallan
+• Documentación de matriz de compatibilidad en comentarios
+
+⭐ **Lección Crítica:**
+• Investigación reproducible requiere especificación precisa de dependencias
+• Flexibilidad vs. estabilidad: balance crítico en desarrollo experimental`;
+    
+    const modal = createModal(title, content, 'compatibility');
+    document.body.appendChild(modal);
+}
+
+function showProviderArchitectureDetails() {
+    const title = '🏗️ Mejora Arquitectónica: Modelo de Proveedores';
+    const content = `Evolución fundamental de OpenSSL 1.1.1 fork a OpenSSL 3.x provider architecture.
+
+🔄 **Modelo Anterior (Fork):**
+• Equipo OQS mantenía fork completo de OpenSSL 1.1.1
+• Sincronización difícil con parches de seguridad oficiales
+• Barrera alta de entrada para adopción
+• Mantenimiento costoso de código base completo
+
+✨ **Modelo Actual (Provider):**
+• OpenSSL 3.x: arquitectura de proveedores modular
+• oqs-provider: solo algoritmos PQC, no protocolo TLS/SSL
+• Usuarios: OpenSSL estándar sin modificar + provider como módulo
+• Separación clara de responsabilidades
+
+🚀 **Ventajas del Desacoplamiento:**
+• Mantenibilidad: equipo OQS solo mantiene provider
+• Seguridad: parches oficiales OpenSSL aplicables inmediatamente
+• Adopción: sin necesidad de fork personalizado
+• Compatibilidad: aplicaciones existentes sin modificación de código
+
+🔌 **Integración Transparente:**
+• Carga dinámica de algoritmos PQC
+• Configuración via openssl.cnf
+• API OpenSSL estándar, funcionalidad PQC transparente
+• Soporte híbridos clásicos + PQC sin cambios en aplicación
+
+📈 **Impacto en Despliegue Futuro:**
+• Alineación con despliegues de producción reales
+• Reducción drástica de barrera de entrada
+• Mejor modelo de seguridad y mantenimiento
+• Base sólida para adopción industrial de PQC`;
+    
+    const modal = createModal(title, content, 'architecture');
+    document.body.appendChild(modal);
+}
+
+function showCompilationStepDetails(step) {
+    let title, content;
+    
+    switch(step) {
+        case 'OpenSSL 3.x':
+            title = '🔧 Compilación Personalizada de OpenSSL 3.x';
+            content = `Paso fundamental: construcción de motor criptográfico con soporte para proveedores.
+
+📦 **Proceso de Compilación:**
+• Clonar código fuente de versión estable reciente (3.2.x+)
+• ./config --prefix=/opt/openssl-pqc (directorio aislado)
+• make && make install en ubicación personalizada
+• Evitar conflictos con OpenSSL del sistema
+
+🎯 **Configuración Crítica:**
+• --prefix: directorio personalizado para evitar conflictos
+• Ubicación típica: /opt/openssl-pqc
+• Separación completa de instalación del sistema
+• Preparación para carga de providers externos
+
+🔑 **Arquitectura de Proveedores:**
+• OpenSSL 3.x: soporte nativo para módulos cargables
+• Interfaz estándar para algoritmos externos
+• Base para integración transparente de PQC
+• Compatibilidad API con versiones anteriores
+
+⚙️ **Consideraciones de Compilación:**
+• Flags de optimización para rendimiento
+• Soporte para extensiones de hardware (AVX2)
+• Configuración de paths para bibliotecas dinámicas
+• Preparación para linking con aplicaciones`;
+            break;
+            
+        case 'liboqs':
+            title = '⚙️ Compilación de liboqs - Implementaciones PQC';
+            content = `Biblioteca fundamental con implementaciones de algoritmos post-cuánticos.
+
+🏗️ **Proceso de Construcción:**
+• cmake . -DBUILD_SHARED_LIBS=ON
+• Compilación como biblioteca compartida (esencial para provider)
+• ninja (build system paralelo para compilación rápida)
+• Apuntar a OpenSSL personalizado para dependencias
+
+🔬 **Contenido de la Biblioteca:**
+• Implementaciones de referencia NIST: Kyber, Dilithium, SPHINCS+
+• Implementaciones optimizadas con extensiones CPU (AVX2, ARM Neon)
+• API unificada para diferentes familias de algoritmos
+• Benchmarking integrado para evaluación de rendimiento
+
+🚀 **Optimizaciones Disponibles:**
+• AVX2: aceleración significativa en CPUs modernas x86-64
+• ARM Neon: optimización para arquitectura ARM
+• Compilación condicional según hardware disponible
+• Impact drástico en rendimiento (factor 2-10x)
+
+🔧 **Configuración CMAKE:**
+• -DBUILD_SHARED_LIBS=ON: biblioteca compartida para provider
+• -DOQS_USE_OPENSSL=ON: integración con OpenSSL personalizado
+• -DOQS_ENABLE_AVX2=ON/OFF: control de optimizaciones
+• Variables de entorno para paths de OpenSSL personalizado`;
+            break;
+            
+        case 'oqs-provider':
+            title = '🔌 Compilación de oqs-provider - Puente de Integración';
+            content = `Componente crítico que conecta liboqs con OpenSSL 3.x provider architecture.
+
+🔗 **Función de Integración:**
+• Puente entre implementaciones PQC (liboqs) y motor OpenSSL
+• Exposición de algoritmos PQC via API estándar OpenSSL
+• Traducción de llamadas API a funciones liboqs específicas
+• Manejo de parámetros y configuraciones algorítmicas
+
+🛠️ **Proceso de Compilación:**
+• cmake con paths a OpenSSL y liboqs personalizados
+• Linking crítico: debe encontrar ambas bibliotecas
+• Compilación de oqsprovider.so (módulo dinámico)
+• Instalación en directorio módulos OpenSSL
+
+📍 **Configuración de Paths:**
+• CMAKE_PREFIX_PATH: ubicación de OpenSSL personalizado
+• liboqs_DIR: path a instalación de liboqs
+• Linking dinámico vs. estático según configuración
+• RPATH: paths de runtime para bibliotecas compartidas
+
+⚙️ **Instalación del Provider:**
+• Copia a /opt/openssl-pqc/lib/ossl-modules/
+• Directorio específico donde OpenSSL busca providers
+• Permisos y ownership correctos
+• Verificación de dependencias resueltas
+
+🔧 **Configuración Final:**
+• Modificación de openssl.cnf para activar provider
+• Sección [provider_sect] con oqsprovider activado
+• Activación por defecto para aplicaciones
+• Verificación: openssl list -providers`;
+            break;
+            
+        case 'Configuración Final':
+            title = '⚡ Configuración Final de OpenSSL + PQC';
+            content = `Paso crítico: activación y configuración del provider para uso transparente.
+
+📝 **Archivo openssl.cnf:**
+• Ubicación: /opt/openssl-pqc/ssl/openssl.cnf
+• Configuración de secciones provider
+• Activación automática del oqsprovider
+• Mantenimiento del provider default para compatibilidad
+
+🔧 **Estructura de Configuración:**
+\`\`\`
+openssl_conf = openssl_init
+[openssl_init]
+providers = provider_sect
+[provider_sect]
+oqsprovider = oqsprovider_sect
+default = default_sect
+[oqsprovider_sect]
+activate = 1
+[default_sect]
+activate = 1
+\`\`\`
+
+✅ **Verificación de Funcionamiento:**
+• openssl list -providers: verificar carga de oqsprovider
+• openssl list -key-exchange-algorithms: ver algoritmos PQC
+• Grupos disponibles: x25519_kyber768, p256_kyber512, etc.
+• Test de funcionalidad con algoritmos híbridos
+
+🎯 **Preparación para Nginx:**
+• Retener directorio código fuente OpenSSL (requerido para compilación Nginx)
+• Variables de entorno para build de aplicaciones
+• Configuración de LD_LIBRARY_PATH para runtime
+• Documentación de paths para uso en aplicaciones`;
+            break;
+    }
+    
+    const modal = createModal(title, content, 'compilation');
     document.body.appendChild(modal);
 }
 

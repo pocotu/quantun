@@ -157,6 +157,38 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'scale(1)';
         });
     });
+    
+    // Efectos HNDL click
+    if (hndlSection) {
+        hndlSection.addEventListener('click', function() {
+            showHNDLDetails();
+        });
+    }
+
+    // Efectos en badges críticos
+    const urgencyBadge = document.querySelector('.urgency-badge');
+    if (urgencyBadge) {
+        urgencyBadge.addEventListener('click', function() {
+            showThreatUrgencyDetails();
+        });
+    }
+
+    // Efectos en AES items
+    const aesItems = document.querySelectorAll('.aes-item');
+    aesItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const aesType = this.querySelector('span').textContent;
+            showAESDetails(aesType);
+        });
+    });
+
+    // Efectos en estrategia híbrida
+    const hybridStrategy = document.querySelector('.hybrid-strategy');
+    if (hybridStrategy) {
+        hybridStrategy.addEventListener('click', function() {
+            showHybridStrategyDetails();
+        });
+    }
 });
 
 // Funciones de navegación
@@ -318,6 +350,156 @@ Progreso del proyecto:
     document.body.appendChild(modal);
 }
 
+function showHNDLDetails() {
+    const title = '⏰ Harvest Now, Decrypt Later (HNDL)';
+    const content = `Paradigma de ataque sigiloso y a largo plazo que justifica la urgencia de PQC.
+
+🎯 **Modelo de Ataque:**
+• Interceptar y almacenar grandes volúmenes de datos cifrados actuales
+• Esperar pacientemente la llegada de una CRQC (Computadora Cuántica Criptográficamente Relevante)
+• Ejecutar algoritmo de Shor para descifrar retroactivamente
+• Ataque invisible - sin señales de intrusión detectables
+
+🚨 **Urgencia del Problema:**
+• Amenaza inmediata para datos de larga confidencialidad (décadas)
+• Secretos de estado, propiedad intelectual corporativa, registros financieros
+• Datos de salud y comunicaciones diplomáticas
+• "Día Q" - momento crítico donde se activa el descifrado masivo
+
+💡 **Cambio de Paradigma:**
+• Desacopla el robo de datos de su explotación
+• Seguridad debe evaluarse contra amenazas futuras durante toda la vida útil de los datos
+• Justificación principal para adopción inmediata de criptografía híbrida
+
+📊 **Impacto Estratégico:**
+• Catalizador clave para directivas gubernamentales de migración PQC
+• Esfuerzos de migración acelerados en la industria
+• Necesidad de protección PQC + salvaguarda clásica`;
+    
+    const modal = createModal(title, content, 'threat');
+    document.body.appendChild(modal);
+}
+
+function showThreatUrgencyDetails() {
+    const title = '🚨 Criticidad de la Amenaza Cuántica';
+    const content = `Análisis del nivel de urgencia CRÍTICO para la transición a Criptografía Post-Cuántica.
+
+📊 **Evaluación de Criticidad:**
+• Timeline de desarrollo de computadoras cuánticas: 2030-2040 (estimaciones conservadoras)
+• Tiempo requerido para migración completa de infraestructura global: 10-15 años
+• Vida útil de datos sensibles: 20-50 años de confidencialidad requerida
+
+⚡ **Factores de Urgencia:**
+• Algoritmo de Shor: colapso TOTAL de RSA y ECC (no degradación)
+• HNDL: datos ya comprometidos, esperando "Día Q"
+• Proceso de estandarización NIST (2016-2024): finalmente completado
+• Directivas gubernamentales: migración mandatoria iniciada
+
+🔄 **Respuesta Estratégica:**
+• Implementación híbrida inmediata (X25519 + Kyber, ECDSA + Dilithium)
+• Agilidad criptográfica en arquitecturas de sistemas
+• "Defensa en profundidad" contra vulnerabilidades desconocidas en nuevos algoritmos
+
+🏢 **Adopción Industrial Actual:**
+• Meta, Google, Amazon: implementación en producción
+• IETF: proceso de estandarización TLS 1.3 híbrido en curso
+• NIST/ANSSI: recomendaciones oficiales de transición`;
+    
+    const modal = createModal(title, content, 'urgent');
+    document.body.appendChild(modal);
+}
+
+function showAESDetails(aesType) {
+    let title, content;
+    
+    if (aesType === 'AES-128') {
+        title = '⚠️ AES-128 bajo Amenaza de Grover';
+        content = `Impacto del Algoritmo de Grover en la seguridad de AES-128.
+
+🔍 **Mecanismo de Ataque:**
+• Algoritmo de Grover ofrece aceleración cuadrática O(√N)
+• Búsqueda no estructurada: de O(2^k) a O(2^k/2)
+• Para clave de k=128 bits: reducción de 2^128 a 2^64 operaciones
+
+⚡ **Reducción de Seguridad:**
+• Seguridad original: 128 bits
+• Seguridad efectiva post-cuántica: ~64 bits
+• 64 bits: nivel criptográficamente ROMPIBLE con hardware dedicado
+• Tiempo de ataque estimado: días/semanas vs. imposible anteriormente
+
+📋 **Costo Práctico del Ataque:**
+• Requiere qubits lógicos masivos + corrección de errores cuánticos casi perfecta
+• Tiempo de ejecución considerable incluso con CRQC
+• Desafío de ingeniería monumental, pero amenaza teórica CREÍBLE
+
+✅ **Medidas Recomendadas:**
+• MIGRACIÓN INMEDIATA a AES-256 como mínimo
+• Implementar agilidad criptográfica en sistemas
+• "Defensa en profundidad": AES-256 + preparación para algoritmos PQC simétricos`;
+    } else {
+        title = '✅ AES-256 Resistente a Amenaza Cuántica';
+        content = `Evaluación de AES-256 bajo el impacto del Algoritmo de Grover.
+
+🛡️ **Seguridad Mantenida:**
+• Seguridad original: 256 bits
+• Seguridad efectiva post-cuántica: ~128 bits
+• 128 bits: EXTREMADAMENTE ROBUSTO y seguro para futuro previsible
+
+📈 **Análisis de Viabilidad de Ataque:**
+• Recursos necesarios para romper AES-256: mucho más allá de capacidades tecnológicas previstas
+• Tiempo de ataque: computacionalmente INVIABLE durante décadas
+• Estado de seguridad: ROBUSTO contra amenaza cuántica
+
+✨ **Ventajas Estratégicas:**
+• Sin necesidad de migración inmediata urgente
+• Compatible con infraestructura actual
+• Medida de "defensa en profundidad" efectiva
+• Recomendación oficial de estándares post-cuánticos
+
+📊 **Recomendación de Estándares:**
+• NIST: AES-256 como mínimo para nueva infraestructura
+• Degradación de 256→128 bits: suficientemente significativa para justificar migración preventiva
+• Pero amenaza práctica: mucho menor que para AES-128`;
+    }
+    
+    const modal = createModal(title, content, 'security');
+    document.body.appendChild(modal);
+}
+
+function showHybridStrategyDetails() {
+    const title = '🔄 Estrategia de Criptografía Híbrida';
+    const content = `Enfoque conservador recomendado por NIST/ANSSI para transición segura a PQC.
+
+🛡️ **Principio de Funcionamiento:**
+• Combinar algoritmo clásico bien establecido + nuevo algoritmo PQC
+• Derivación criptográfica de ambas salidas para clave de sesión final
+• Garantía de seguridad: comunicación segura si AL MENOS UNO no está comprometido
+
+📋 **Implementación Práctica Típica:**
+• KEMs: X25519 (curva elíptica) + Kyber768 (PQC) → clave híbrida
+• Firmas: ECDSA (clásico) + Dilithium (PQC) en paralelo
+• TLS 1.3: grupos híbridos x25519_kyber768
+
+✅ **Garantías de Seguridad Dual:**
+• Protección contra amenaza HNDL → componente PQC resiste Shor
+• Protección contra vulnerabilidades desconocidas en PQC → componente clásico como salvaguarda
+• Compatibilidad retroactiva durante período de transición
+
+🏢 **Adopción Industrial Actual:**
+• Meta: implementación híbrida en infraestructura de producción
+• Google: despliegue gradual en servicios principales
+• Amazon Web Services: soporte PQC híbrido disponible
+• Proceso de estandarización IETF: TLS 1.3 híbrido en desarrollo activo
+
+🔬 **Justificación Técnica:**
+• Nuevos algoritmos PQC: no han sido sometidos a décadas de escrutinio como predecesores clásicos
+• Diversidad algorítmica: diferente base matemática (retículos vs. curvas elípticas)
+• Principio de "defensa en profundidad" criptográfica`;
+    
+    const modal = createModal(title, content, 'strategy');
+    document.body.appendChild(modal);
+}
+
 // Función para crear modales
 function createModal(title, content, type) {
     const modal = document.createElement('div');
@@ -381,6 +563,10 @@ function createModal(title, content, type) {
         case 'algorithm': headerColor = '#e74c3c'; break;
         case 'standard': headerColor = '#3498db'; break;
         case 'component': headerColor = '#9b59b6'; break;
+        case 'threat': headerColor = '#e67e22'; break;
+        case 'urgent': headerColor = '#c0392b'; break;
+        case 'security': headerColor = '#27ae60'; break;
+        case 'strategy': headerColor = '#2980b9'; break;
         default: headerColor = '#f39c12';
     }
     
