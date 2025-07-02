@@ -76,8 +76,9 @@ body {
 /* Phases Section */
 .phases-section {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 /* Grid de Fases en el Header */
@@ -631,6 +632,24 @@ body {
     width: 100%;
 }
 
+/* Academic References Inline (dentro de la columna derecha) */
+.academic-references-inline {
+    margin-top: 30px;
+    padding: 25px;
+    text-align: center;
+    border-top: 2px solid var(--light-gray);
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 12px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.1);
+    transition: all 0.8s ease, box-shadow 0.3s ease;
+}
+
+.academic-references-inline:hover {
+    box-shadow: 0 12px 30px rgba(30, 58, 138, 0.15);
+    transform: translateY(-2px) !important;
+}
+
 /* Academic Navigation Styles */
 .academic-nav {
     display: flex;
@@ -718,6 +737,11 @@ body {
         width: 140px;
         height: 140px;
     }
+    
+    .academic-references-inline {
+        margin-top: 25px;
+        padding: 20px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -767,6 +791,11 @@ body {
     
     .footer-content {
         text-align: center;
+    }
+    
+    .academic-references-inline {
+        margin-top: 20px;
+        padding: 15px;
     }
     
     .quantum-visual {

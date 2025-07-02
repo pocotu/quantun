@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar el botón de referencias
     setupReferencesButton();
     
-    // Animación de entrada para las tarjetas
+    // Animación de entrada para las tarjetas y referencias
     const phaseCards = document.querySelectorAll('.phase-card-mini');
+    const referencesContainer = document.querySelector('.academic-references-inline');
     
     // Observer para animaciones
     const observerOptions = {
@@ -18,21 +19,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 200);
+                // Delay especial para el contenedor de referencias (aparece al final)
+                if (entry.target.classList.contains('academic-references-inline')) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, phaseCards.length * 200 + 400); // Aparece después de todas las fases + 400ms extra
+                } else {
+                    // Animación normal para las tarjetas de fases
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 200);
+                }
             }
         });
     }, observerOptions);
     
-    // Inicializar animaciones
+    // Inicializar animaciones para las tarjetas de fases
     phaseCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+    
+    // Inicializar animación para el contenedor de referencias
+    if (referencesContainer) {
+        referencesContainer.style.opacity = '0';
+        referencesContainer.style.transform = 'translateY(30px)';
+        referencesContainer.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(referencesContainer);
+    }
     
     // Agregar eventos de clic
     phaseCards.forEach(card => {
